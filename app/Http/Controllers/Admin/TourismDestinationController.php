@@ -9,7 +9,6 @@ use App\Http\Requests\StoreTourismDestinationRequest;
 use App\Http\Requests\UpdateTourismDestinationRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 
 class TourismDestinationController extends Controller
@@ -18,7 +17,6 @@ class TourismDestinationController extends Controller
 
     public function __construct(UploadApi $uploadApi)
     {
-        Configuration::instance(env('CLOUDINARY_URL'));
         $this->uploadApi = $uploadApi;
     }
 
@@ -50,11 +48,14 @@ class TourismDestinationController extends Controller
         $validated = $request->validated();
 
         // Cloudinary Upload
-        $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
-            'folder' => 'disparbud_karawang/tourism'
-        ]);
-
-        $validated['cover_image'] = $response['secure_url'];
+        try {
+            $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
+                'folder' => 'disparbud_karawang/tourism'
+            ]);
+            $validated['cover_image'] = $response['secure_url'];
+        } catch (\Exception $e) {
+            return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
+        }
 
         TourismDestination::create($validated);
 
@@ -76,10 +77,14 @@ class TourismDestinationController extends Controller
 
         if ($request->hasFile('cover_image')) {
             // Cloudinary Upload
-            $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
-                'folder' => 'disparbud_karawang/tourism'
-            ]);
-            $validated['cover_image'] = $response['secure_url'];
+            try {
+                $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
+                    'folder' => 'disparbud_karawang/tourism'
+                ]);
+                $validated['cover_image'] = $response['secure_url'];
+            } catch (\Exception $e) {
+                return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
+            }
         }
 
         // Handle Slug update on name change

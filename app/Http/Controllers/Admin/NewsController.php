@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateNewsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 
 class NewsController extends Controller
@@ -19,7 +18,6 @@ class NewsController extends Controller
 
     public function __construct(UploadApi $uploadApi)
     {
-        Configuration::instance(env('CLOUDINARY_URL'));
         $this->uploadApi = $uploadApi;
     }
 
@@ -51,11 +49,14 @@ class NewsController extends Controller
         $validated = $request->validated();
 
         // Cloudinary Upload
-        $response = $this->uploadApi->upload($request->file('thumbnail')->getRealPath(), [
-            'folder' => 'disparbud_karawang/news'
-        ]);
-
-        $validated['thumbnail'] = $response['secure_url'];
+        try {
+            $response = $this->uploadApi->upload($request->file('thumbnail')->getRealPath(), [
+                'folder' => 'disparbud_karawang/news'
+            ]);
+            $validated['thumbnail'] = $response['secure_url'];
+        } catch (\Exception $e) {
+            return back()->withErrors(['thumbnail' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
+        }
         $validated['user_id'] = Auth::id();
         
         if ($validated['status'] === 'published') {
@@ -82,10 +83,14 @@ class NewsController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             // Cloudinary Upload
-            $response = $this->uploadApi->upload($request->file('thumbnail')->getRealPath(), [
-                'folder' => 'disparbud_karawang/news'
-            ]);
-            $validated['thumbnail'] = $response['secure_url'];
+            try {
+                $response = $this->uploadApi->upload($request->file('thumbnail')->getRealPath(), [
+                    'folder' => 'disparbud_karawang/news'
+                ]);
+                $validated['thumbnail'] = $response['secure_url'];
+            } catch (\Exception $e) {
+                return back()->withErrors(['thumbnail' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
+            }
         }
 
         if ($validated['status'] === 'published' && !$news->published_at) {
