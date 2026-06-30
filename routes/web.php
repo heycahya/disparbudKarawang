@@ -14,14 +14,38 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Grup Public
+    Route::middleware('role:public')->group(function () {
+        Route::get('/dashboard/{alias?}', function () {
+            return Inertia::render('Public/UserDashboard');
+        })->name('public.dashboard');
+
+        Route::get('/dashboard', function () {
+            return Inertia::render('Public/UserDashboard');
+        })->name('dashboard');
+    });
+
+    // Grup Admin & Super Admin
+    Route::middleware('role:super_admin,admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', function () {
+            return Inertia::render('Admin/DashboardOverview');
+        })->name('dashboard');
+
+        Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+        Route::resource('tourism-destinations', \App\Http\Controllers\Admin\TourismDestinationController::class);
+
+        // Grup Eksklusif Super Admin
+        Route::middleware('role:super_admin')->group(function () {
+            Route::get('/manajemen-akun', function () {
+                return Inertia::render('Admin/ManajemenAkun');
+            })->name('manajemen-akun');
+        });
+    });
 });
 
 require __DIR__.'/auth.php';
