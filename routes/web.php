@@ -1,17 +1,25 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPortalController;
+use App\Http\Controllers\ServiceRakyatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+// Guest Routes - Portal Publik (Katalog Informasi)
+Route::name('public.')->group(function () {
+    Route::get('/', [PublicPortalController::class, 'home'])->name('home');
+    
+    Route::prefix('news')->name('news.')->group(function () {
+        Route::get('/', [PublicPortalController::class, 'newsIndex'])->name('index');
+        Route::get('/{slug}', [PublicPortalController::class, 'newsShow'])->name('show');
+    });
+
+    Route::prefix('tourism')->name('tourism.')->group(function () {
+        Route::get('/', [PublicPortalController::class, 'tourismIndex'])->name('index');
+        Route::get('/{slug}', [PublicPortalController::class, 'tourismShow'])->name('show');
+    });
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -28,6 +36,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', function () {
             return Inertia::render('Public/UserDashboard');
         })->name('dashboard');
+
+        // Auth & Role:public Routes - Service Rakyat
+        Route::prefix('service-rakyat')->name('service-rakyat.')->group(function () {
+            // Pengaduan Masyarakat (Complaints)
+            Route::get('/complaints/create', [ServiceRakyatController::class, 'createComplaint'])->name('complaints.create');
+            Route::post('/complaints', [ServiceRakyatController::class, 'storeComplaint'])->name('complaints.store');
+            
+            // Usulan Wisata (Tourism Submissions)
+            Route::get('/tourism-submissions/create', [ServiceRakyatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
+            Route::post('/tourism-submissions', [ServiceRakyatController::class, 'storeTourismSubmission'])->name('tourism-submissions.store');
+            
+            // Permohonan Siaran Acara (Event Broadcast Requests)
+            Route::get('/event-broadcasts/create', [ServiceRakyatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
+            Route::post('/event-broadcasts', [ServiceRakyatController::class, 'storeEventBroadcast'])->name('event-broadcasts.store');
+        });
     });
 
     // Grup Admin & Super Admin
