@@ -36,6 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return Inertia::render('Admin/DashboardOverview');
         })->name('dashboard');
 
+        Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+        Route::resource('tourism-destinations', \App\Http\Controllers\Admin\TourismDestinationController::class);
+
         // Grup Eksklusif Super Admin
         Route::middleware('role:super_admin')->group(function () {
             Route::get('/manajemen-akun', function () {
