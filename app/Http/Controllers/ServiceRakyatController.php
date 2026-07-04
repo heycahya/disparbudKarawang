@@ -51,7 +51,7 @@ class ServiceRakyatController extends Controller
             'status' => 'masuk'
         ]);
 
-        return redirect()->route('public.home')
+        return redirect()->route('public.history.index')
             ->with('success', 'Pengaduan Anda berhasil dikirim.');
     }
 
@@ -90,7 +90,7 @@ class ServiceRakyatController extends Controller
             'status' => 'masuk'
         ]);
 
-        return redirect()->route('public.home')
+        return redirect()->route('public.history.index')
             ->with('success', 'Usulan destinasi wisata berhasil dikirim.');
     }
 
@@ -127,7 +127,7 @@ class ServiceRakyatController extends Controller
             'status' => 'masuk'
         ]);
 
-        return redirect()->route('public.home')
+        return redirect()->route('public.history.index')
             ->with('success', 'Permohonan siaran acara berhasil dikirim.');
     }
 }

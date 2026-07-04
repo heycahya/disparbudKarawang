@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return Inertia::render('Public/UserDashboard');
         })->name('dashboard');
 
+        Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('public.history.index');
+
         // Auth & Role:public Routes - Service Rakyat
         Route::prefix('service-rakyat')->name('service-rakyat.')->group(function () {
             // Pengaduan Masyarakat (Complaints)
