@@ -118,7 +118,7 @@ test('public user can submit a complaint (happy path)', function () {
     $response = $this->actingAs($user)
         ->post(route('service-rakyat.complaints.store'), $payload);
 
-    $response->assertRedirect(route('public.home'));
+    $response->assertRedirect(route('public.history.index'));
 
     $this->assertDatabaseHas('complaints', [
         'user_id' => $user->id,
@@ -184,7 +184,7 @@ test('public user can submit a tourism destination suggestion', function () {
 
     $this->actingAs($user)
         ->post(route('service-rakyat.tourism-submissions.store'), $payload)
-        ->assertRedirect(route('public.home'));
+        ->assertRedirect(route('public.history.index'));
 
     $this->assertDatabaseHas('tourism_submissions', [
         'user_id' => $user->id,
@@ -242,7 +242,7 @@ test('public user can submit an event broadcast request', function () {
 
     $this->actingAs($user)
         ->post(route('service-rakyat.event-broadcasts.store'), $payload)
-        ->assertRedirect(route('public.home'));
+        ->assertRedirect(route('public.history.index'));
 
     $this->assertDatabaseHas('event_broadcast_requests', [
         'user_id' => $user->id,

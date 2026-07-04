@@ -2,12 +2,20 @@
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
-    news: Object
+    news: Object,
+    seo: Object
 });
 </script>
 
 <template>
-    <Head :title="news.title" />
+    <Head>
+        <title>{{ seo.title }} | Disparbud Karawang</title>
+        <meta name="description" :content="seo.description" />
+        <meta property="og:title" :content="seo.title" />
+        <meta property="og:description" :content="seo.description" />
+        <meta property="og:image" v-if="seo.image" :content="seo.image" />
+        <meta property="og:type" :content="seo.type || 'article'" />
+    </Head>
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <!-- Navigation bar -->

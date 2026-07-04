@@ -52,6 +52,12 @@ class PublicPortalController extends Controller
 
         return Inertia::render('Public/News/Show', [
             'news' => $news,
+            'seo' => [
+                'title' => $news->title,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($news->content), 150),
+                'image' => $news->thumbnail,
+                'type' => 'article',
+            ]
         ]);
     }
 
@@ -110,6 +116,12 @@ class PublicPortalController extends Controller
 
         return Inertia::render('Public/Tourism/Show', [
             'destination' => $destination,
+            'seo' => [
+                'title' => $destination->name,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($destination->description), 150),
+                'image' => $destination->cover_image,
+                'type' => 'website',
+            ]
         ]);
     }
 }
