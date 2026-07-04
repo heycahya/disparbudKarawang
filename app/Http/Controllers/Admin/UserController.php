@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+use Inertia\Inertia;
+use App\Models\User;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $users = User::whereIn('role', ['admin', 'super_admin'])->latest()->paginate(10);
+        return Inertia::render('Admin/Users/Index', [
+            'users' => $users
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Admin/Users/Create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => 'required|in:admin,super_admin',
+        ]);
+
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'],
+        ]);
+
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        // Not used, as excluded in routes
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        return Inertia::render('Admin/Users/Edit', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:'.User::class.',email,'.$user->id,
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'role' => 'required|in:admin,super_admin',
+        ]);
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role = $validated['role'];
+        
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+        
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->withErrors(['error' => 'Anda tidak bisa menghapus akun Anda sendiri.']);
+        }
+        
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');
+    }
+}
