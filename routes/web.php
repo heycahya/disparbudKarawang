@@ -65,12 +65,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('creative-economies', \App\Http\Controllers\Admin\CreativeEconomyController::class);
         Route::resource('accommodations', \App\Http\Controllers\Admin\AccommodationController::class);
         Route::resource('culinary-places', \App\Http\Controllers\Admin\CulinaryPlaceController::class);
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
 
         // Grup Eksklusif Super Admin
         Route::middleware('role:super_admin')->group(function () {
             Route::get('/manajemen-akun', function () {
                 return Inertia::render('Admin/ManajemenAkun');
             })->name('manajemen-akun');
+            
+            Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
         });
     });
 });
