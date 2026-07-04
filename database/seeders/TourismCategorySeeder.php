@@ -13,15 +13,23 @@ class TourismCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Wisata Alam', 'Wisata Kuliner', 'Wisata Budaya', 'Wisata Sejarah', 'Wisata Religi', 'Wisata Buatan'];
+        $categories = [
+            'Alam',
+            'Sejarah/Cagar Budaya',
+            'Religi',
+            'Buatan/Rekreasi',
+            'Industri',
+        ];
 
         foreach ($categories as $category) {
-            DB::table('tourism_categories')->insert([
-                'name' => $category,
-                'slug' => Str::slug($category),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('tourism_categories')->updateOrInsert(
+                ['slug' => Str::slug($category)],
+                [
+                    'name' => $category,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
         }
     }
 }
