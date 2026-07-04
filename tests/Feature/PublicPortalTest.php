@@ -8,6 +8,10 @@ use App\Models\TourismCategory;
 use App\Models\Complaint;
 use App\Models\TourismSubmission;
 use App\Models\EventBroadcastRequest;
+use App\Models\Culture;
+use App\Models\CreativeEconomy;
+use App\Models\Accommodation;
+use App\Models\CulinaryPlace;
 use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +25,10 @@ beforeEach(function () {
     Complaint::query()->delete();
     TourismSubmission::query()->delete();
     EventBroadcastRequest::query()->delete();
+    Culture::query()->delete();
+    CreativeEconomy::query()->delete();
+    Accommodation::query()->delete();
+    CulinaryPlace::query()->delete();
     User::query()->delete();
 
     // Mock Cloudinary UploadApi
@@ -40,6 +48,14 @@ test('guest can access public home, news catalog, and tourism catalog', function
     $this->get(route('public.home'))->assertStatus(200);
     $this->get(route('public.news.index'))->assertStatus(200);
     $this->get(route('public.tourism.index'))->assertStatus(200);
+});
+
+test('guest can access all directory tabs in public catalog', function () {
+    $this->get(route('public.tourism.index', ['tab' => 'tourism']))->assertStatus(200);
+    $this->get(route('public.tourism.index', ['tab' => 'culture']))->assertStatus(200);
+    $this->get(route('public.tourism.index', ['tab' => 'ekraf']))->assertStatus(200);
+    $this->get(route('public.tourism.index', ['tab' => 'accommodation']))->assertStatus(200);
+    $this->get(route('public.tourism.index', ['tab' => 'culinary']))->assertStatus(200);
 });
 
 test('guest can access news show and tourism show', function () {

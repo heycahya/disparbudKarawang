@@ -39,6 +39,51 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <template v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'super_admin'">
+                                    <NavLink
+                                        :href="route('admin.news.index')"
+                                        :active="route().current('admin.news.*')"
+                                    >
+                                        Berita
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('admin.tourism-destinations.index')"
+                                        :active="route().current('admin.tourism-destinations.*')"
+                                    >
+                                        Destinasi
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('admin.cultures.index')"
+                                        :active="route().current('admin.cultures.*')"
+                                    >
+                                        Kebudayaan
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('admin.creative-economies.index')"
+                                        :active="route().current('admin.creative-economies.*')"
+                                    >
+                                        Ekraf
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('admin.accommodations.index')"
+                                        :active="route().current('admin.accommodations.*')"
+                                    >
+                                        Akomodasi
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('admin.culinary-places.index')"
+                                        :active="route().current('admin.culinary-places.*')"
+                                    >
+                                        Kuliner
+                                    </NavLink>
+                                    <NavLink
+                                        v-if="$page.props.auth.user.role === 'super_admin'"
+                                        :href="route('admin.manajemen-akun')"
+                                        :active="route().current('admin.manajemen-akun')"
+                                    >
+                                        Akun
+                                    </NavLink>
+                                </template>
                             </div>
                         </div>
 
@@ -146,6 +191,51 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <template v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'super_admin'">
+                            <ResponsiveNavLink
+                                :href="route('admin.news.index')"
+                                :active="route().current('admin.news.*')"
+                            >
+                                Berita
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('admin.tourism-destinations.index')"
+                                :active="route().current('admin.tourism-destinations.*')"
+                            >
+                                Destinasi
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('admin.cultures.index')"
+                                :active="route().current('admin.cultures.*')"
+                            >
+                                Kebudayaan
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('admin.creative-economies.index')"
+                                :active="route().current('admin.creative-economies.*')"
+                            >
+                                Ekraf
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('admin.accommodations.index')"
+                                :active="route().current('admin.accommodations.*')"
+                            >
+                                Akomodasi
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('admin.culinary-places.index')"
+                                :active="route().current('admin.culinary-places.*')"
+                            >
+                                Kuliner
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                v-if="$page.props.auth.user.role === 'super_admin'"
+                                :href="route('admin.manajemen-akun')"
+                                :active="route().current('admin.manajemen-akun')"
+                            >
+                                Akun
+                            </ResponsiveNavLink>
+                        </template>
                     </div>
 
                     <!-- Responsive Settings Options -->

@@ -57,13 +57,48 @@ class PublicPortalController extends Controller
 
     public function tourismIndex(Request $request)
     {
-        $destinations = TourismDestination::with('category')
-            ->latest()
-            ->paginate(9)
-            ->withQueryString();
+        $tab = $request->query('tab', 'tourism');
+        $data = null;
+
+        switch ($tab) {
+            case 'culture':
+                $data = \App\Models\Culture::where('status', 'published')
+                    ->latest()
+                    ->paginate(9)
+                    ->withQueryString();
+                break;
+            case 'ekraf':
+                $data = \App\Models\CreativeEconomy::where('status', 'published')
+                    ->latest()
+                    ->paginate(9)
+                    ->withQueryString();
+                break;
+            case 'accommodation':
+                $data = \App\Models\Accommodation::where('status', 'published')
+                    ->latest()
+                    ->paginate(9)
+                    ->withQueryString();
+                break;
+            case 'culinary':
+                $data = \App\Models\CulinaryPlace::where('status', 'published')
+                    ->latest()
+                    ->paginate(9)
+                    ->withQueryString();
+                break;
+            case 'tourism':
+            default:
+                $data = TourismDestination::with('category')
+                    ->where('status', 'published')
+                    ->latest()
+                    ->paginate(9)
+                    ->withQueryString();
+                $tab = 'tourism';
+                break;
+        }
 
         return Inertia::render('Public/Tourism/Index', [
-            'destinations' => $destinations,
+            'data' => $data,
+            'activeTab' => $tab,
         ]);
     }
 

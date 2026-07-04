@@ -61,6 +61,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
         Route::resource('tourism-destinations', \App\Http\Controllers\Admin\TourismDestinationController::class);
+        Route::resource('cultures', \App\Http\Controllers\Admin\CultureController::class);
+        Route::resource('creative-economies', \App\Http\Controllers\Admin\CreativeEconomyController::class);
+        Route::resource('accommodations', \App\Http\Controllers\Admin\AccommodationController::class);
+        Route::resource('culinary-places', \App\Http\Controllers\Admin\CulinaryPlaceController::class);
 
         // Grup Eksklusif Super Admin
         Route::middleware('role:super_admin')->group(function () {
