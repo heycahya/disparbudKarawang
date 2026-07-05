@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import PublicNavbar from '@/Components/PublicNavbar.vue';
+import FooterGlobal from '@/Components/FooterGlobal.vue';
 
 defineProps({
     news: Object,
@@ -128,8 +129,6 @@ defineProps({
             </div>
         </main>
 
-        <footer class="bg-[#0C4E5B] text-white py-8 mt-auto border-t border-teal-900 text-center text-xs text-teal-200/60">
-            &copy; 2026 Pemerintah Kabupaten Karawang - Dinas Pariwisata dan Kebudayaan.
-        </footer>
+        <FooterGlobal />
     </div>
 </template>

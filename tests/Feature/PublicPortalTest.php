@@ -15,6 +15,7 @@ use App\Models\CulinaryPlace;
 use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
     // State cleanup
@@ -255,3 +256,54 @@ test('public user can submit an event broadcast request', function () {
         'status' => 'masuk'
     ]);
 });
+
+test('public pages render successfully with global footer component', function () {
+    $this->get(route('public.home'))->assertStatus(200);
+    $this->get(route('public.profile'))->assertStatus(200);
+    $this->get(route('public.gallery.index'))->assertStatus(200);
+    $this->get(route('public.news.index'))->assertStatus(200);
+    $this->get(route('public.destinasi'))->assertStatus(200);
+});
+
+test('authenticated user accessing dashboard receives service_requests prop for summary table', function () {
+    $user = User::create([
+        'name' => 'Warga Karawang',
+        'email' => 'warga@example.com',
+        'password' => bcrypt('password'),
+        'role' => 'public'
+    ]);
+
+    Complaint::create([
+        'user_id' => $user->id,
+        'subject' => 'Keluhan Fasilitas Wisata',
+        'description' => 'Fasilitas umum butuh perbaikan.',
+        'status' => 'masuk'
+    ]);
+
+    TourismSubmission::create([
+        'user_id' => $user->id,
+        'name' => 'Usulan Spot Foto Citarum',
+        'description' => 'Spot keindahan tepi sungai',
+        'address' => 'Karawang Barat',
+        'status' => 'ditinjau'
+    ]);
+
+    EventBroadcastRequest::create([
+        'user_id' => $user->id,
+        'organization' => 'Komunitas Budaya',
+        'event_name' => 'Pentas Jaipong',
+        'event_location' => 'Gedung Kesenian',
+        'event_date' => now()->addDays(3),
+        'description' => 'Acara seni tahunan',
+        'status' => 'disetujui'
+    ]);
+
+    $response = $this->actingAs($user)->get(route('dashboard'));
+
+    $response->assertStatus(200);
+    $response->assertInertia(fn (Assert $page) => $page
+        ->component('Public/UserDashboard')
+        ->has('service_requests', 3)
+    );
+});
+

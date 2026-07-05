@@ -32,13 +32,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Grup Public
     Route::middleware('role:public')->group(function () {
-        Route::get('/dashboard/{alias?}', function () {
-            return Inertia::render('Public/UserDashboard');
-        })->name('public.dashboard');
+        Route::get('/dashboard/{alias?}', [\App\Http\Controllers\UserDashboardController::class, 'index'])->name('public.dashboard');
 
-        Route::get('/dashboard', function () {
-            return Inertia::render('Public/UserDashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\UserDashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('public.history.index');
 
