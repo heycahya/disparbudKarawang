@@ -35,7 +35,7 @@ const submit = () => {
 
         <div class="py-12">
             <div class="mx-auto max-w-2xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800 p-8 border-t-4 border-[#0F5E3D]">
+                <div class="overflow-hidden bg-white shadow-xl rounded-asymmetric dark:bg-gray-800 p-8 border-l-8 border-[#0F5E3D]">
                     <h3 class="text-lg font-bold mb-6 text-gray-900 dark:text-white">Pengajuan Siaran Acara / Event</h3>
 
                     <form @submit.prevent="submit" class="space-y-6">
@@ -106,7 +106,7 @@ const submit = () => {
                             <InputLabel for="description" value="Deskripsi Detail Acara" />
                             <textarea
                                 id="description"
-                                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-karawang-emerald dark:focus:border-emerald-500 focus:ring-karawang-emerald dark:focus:ring-emerald-500 rounded-asymmetric-sm shadow-sm"
                                 rows="5"
                                 v-model="form.description"
                                 required

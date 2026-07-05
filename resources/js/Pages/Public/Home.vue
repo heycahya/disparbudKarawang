@@ -32,7 +32,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
 <template>
     <Head title="Beranda - Portal Resmi Disparbud Karawang" />
 
-    <div class="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
+    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
         <!-- Navigation Bar -->
         <PublicNavbar />
 

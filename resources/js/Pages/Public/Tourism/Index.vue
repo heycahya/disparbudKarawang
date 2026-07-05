@@ -44,7 +44,7 @@ const getCulinaryTypeLabel = (type) => {
 <template>
     <Head title="Katalog Direktori Wisata & Budaya" />
 
-    <div class="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
+    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
         <!-- Navigation bar -->
         <PublicNavbar />
 
@@ -116,7 +116,7 @@ const getCulinaryTypeLabel = (type) => {
                 <div 
                     v-for="item in data.data" 
                     :key="item.id" 
-                    class="bg-white dark:bg-gray-900 rounded-tr-2xl rounded-bl-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-lg transition duration-200"
+                    class="bg-white dark:bg-gray-900 rounded-asymmetric shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                     <!-- Image -->
                     <img v-if="item.cover_image" :src="item.cover_image" alt="cover" class="w-full h-48 object-cover">
