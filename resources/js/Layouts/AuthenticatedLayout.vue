@@ -37,7 +37,7 @@ watch(
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
+                class="border-b border-karawang-emerald/15 bg-white dark:border-teal-800/40 dark:bg-gray-800 shadow-sm"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

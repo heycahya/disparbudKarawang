@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import PublicNavbar from '@/Components/PublicNavbar.vue';
 
 defineProps({
     news: Object,
@@ -17,36 +18,35 @@ defineProps({
         <meta property="og:type" :content="seo.type || 'article'" />
     </Head>
 
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        <!-- Navigation bar -->
-        <nav class="bg-white dark:bg-gray-800 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center space-x-6">
-                        <Link :href="route('public.home')" class="text-xl font-bold text-[#0F5E3D]">Disparbud Karawang</Link>
-                        <Link :href="route('public.news.index')" class="text-sm font-medium text-[#0F5E3D]">Berita</Link>
-                        <Link :href="route('public.tourism.index')" class="text-sm font-medium hover:text-[#0F5E3D]">Wisata</Link>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
+        <PublicNavbar />
 
-        <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <article class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden p-8">
-                <header class="mb-6">
-                    <span v-if="news.category" class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-0.5 rounded-full">{{ news.category.name }}</span>
-                    <h1 class="text-3xl font-extrabold mt-2 mb-4 text-gray-900 dark:text-white">{{ news.title }}</h1>
-                    <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-4">
-                        <span v-if="news.user">Penulis: {{ news.user.name }}</span>
-                        <span>Dilihat: {{ news.views }} kali</span>
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+            <article class="bg-white dark:bg-gray-900 rounded-asymmetric shadow-xl overflow-hidden p-8 sm:p-12 border border-slate-200/80 dark:border-gray-800">
+                <header class="mb-8">
+                    <span v-if="news.category" class="text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full uppercase tracking-wider">
+                        {{ news.category.name }}
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold mt-4 mb-4 text-gray-900 dark:text-white leading-tight">
+                        {{ news.title }}
+                    </h1>
+                    <div class="flex items-center text-xs sm:text-sm text-gray-500 dark:text-gray-400 space-x-4 border-b border-gray-100 dark:border-gray-800 pb-4">
+                        <span v-if="news.user" class="font-medium">✍️ {{ news.user.name }}</span>
+                        <span>👁️ {{ news.views }} kali dilihat</span>
                     </div>
                 </header>
 
-                <img v-if="news.thumbnail" :src="news.thumbnail" alt="thumbnail" class="w-full h-96 object-cover rounded-lg mb-6">
+                <div v-if="news.thumbnail" class="mb-8 overflow-hidden rounded-asymmetric-sm shadow-md">
+                    <img :src="news.thumbnail" :alt="news.title" class="w-full max-h-[480px] object-cover">
+                </div>
 
-                <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200" v-html="news.content">
+                <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200 leading-relaxed text-base sm:text-lg" v-html="news.content">
                 </div>
             </article>
         </main>
+
+        <footer class="bg-[#0C4E5B] text-white py-8 mt-auto border-t border-teal-900 text-center text-xs text-teal-200/60">
+            &copy; 2026 Pemerintah Kabupaten Karawang - Dinas Pariwisata dan Kebudayaan.
+        </footer>
     </div>
 </template>

@@ -32,7 +32,7 @@ const getCategoryLabel = (cat) => {
 <template>
     <Head title="Galeri Dokumentasi - Disparbud Karawang" />
 
-    <div class="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
+    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
         <PublicNavbar />
 
         <header class="bg-gradient-to-r from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 py-16 text-white relative overflow-hidden">

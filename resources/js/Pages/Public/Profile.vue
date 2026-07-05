@@ -19,7 +19,7 @@ defineProps({
 <template>
     <Head title="Profil Lembaga - Disparbud Karawang" />
 
-    <div class="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
+    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
         <PublicNavbar />
 
         <!-- Profile Header Banner -->
