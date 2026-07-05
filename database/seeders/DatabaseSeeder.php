@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CulinaryPlaceSeeder::class,
             NewsCategorySeeder::class,
             NewsSeeder::class,
+            GallerySeeder::class,
             SocialMediaLinkSeeder::class,
         ]);
     }

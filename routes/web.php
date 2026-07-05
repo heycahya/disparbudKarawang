@@ -10,6 +10,9 @@ use Inertia\Inertia;
 // Guest Routes - Portal Publik (Katalog Informasi)
 Route::name('public.')->group(function () {
     Route::get('/', [PublicPortalController::class, 'home'])->name('home');
+    Route::get('/profil', [PublicPortalController::class, 'profile'])->name('profile');
+    Route::get('/galeri', [PublicPortalController::class, 'galleryIndex'])->name('gallery.index');
+    Route::get('/destinasi', [PublicPortalController::class, 'tourismIndex'])->name('destinasi');
     
     Route::prefix('news')->name('news.')->group(function () {
         Route::get('/', [PublicPortalController::class, 'newsIndex'])->name('index');
