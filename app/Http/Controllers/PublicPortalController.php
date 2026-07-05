@@ -114,6 +114,8 @@ class PublicPortalController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
+        $destination->increment('views');
+
         return Inertia::render('Public/Tourism/Show', [
             'destination' => $destination,
             'seo' => [

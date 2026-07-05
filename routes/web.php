@@ -57,9 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Grup Admin & Super Admin
     Route::middleware('role:super_admin,admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', function () {
-            return Inertia::render('Admin/DashboardOverview');
-        })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
         Route::resource('tourism-destinations', \App\Http\Controllers\Admin\TourismDestinationController::class);
