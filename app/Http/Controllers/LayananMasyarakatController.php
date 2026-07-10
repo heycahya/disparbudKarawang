@@ -12,7 +12,7 @@ use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ServiceRakyatController extends Controller
+class LayananMasyarakatController extends Controller
 {
     protected $uploadApi;
 
@@ -24,7 +24,7 @@ class ServiceRakyatController extends Controller
     // 1. Pengaduan Masyarakat
     public function createComplaint()
     {
-        return Inertia::render('Public/ServiceRakyat/ComplaintForm');
+        return Inertia::render('Public/LayananMasyarakat/ComplaintForm');
     }
 
     public function storeComplaint(StoreComplaintRequest $request)
@@ -58,7 +58,7 @@ class ServiceRakyatController extends Controller
     // 2. Usulan Wisata
     public function createTourismSubmission()
     {
-        return Inertia::render('Public/ServiceRakyat/TourismSubmissionForm');
+        return Inertia::render('Public/LayananMasyarakat/TourismSubmissionForm');
     }
 
     public function storeTourismSubmission(StoreTourismSubmissionRequest $request)
@@ -97,7 +97,7 @@ class ServiceRakyatController extends Controller
     // 3. Permohonan Siaran Acara
     public function createEventBroadcast()
     {
-        return Inertia::render('Public/ServiceRakyat/EventBroadcastForm');
+        return Inertia::render('Public/LayananMasyarakat/EventBroadcastForm');
     }
 
     public function storeEventBroadcast(StoreEventBroadcastRequest $request)

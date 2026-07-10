@@ -10,6 +10,15 @@ class EventBroadcastRequest extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::addGlobalScope('user_limit', function ($builder) {
+            if (auth()->check() && auth()->user()->role === 'public') {
+                $builder->where('user_id', auth()->id());
+            }
+        });
+    }
+
     protected $fillable = [
         'user_id',
         'organization',

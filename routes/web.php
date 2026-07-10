@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPortalController;
-use App\Http\Controllers\ServiceRakyatController;
+use App\Http\Controllers\LayananMasyarakatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,19 +38,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('public.history.index');
 
-        // Auth & Role:public Routes - Service Rakyat
-        Route::prefix('service-rakyat')->name('service-rakyat.')->group(function () {
+        // Auth & Role:public Routes - Layanan Masyarakat
+        Route::prefix('layanan-masyarakat')->name('layanan-masyarakat.')->group(function () {
             // Pengaduan Masyarakat (Complaints)
-            Route::get('/complaints/create', [ServiceRakyatController::class, 'createComplaint'])->name('complaints.create');
-            Route::post('/complaints', [ServiceRakyatController::class, 'storeComplaint'])->name('complaints.store');
+            Route::get('/complaints/create', [LayananMasyarakatController::class, 'createComplaint'])->name('complaints.create');
+            Route::post('/complaints', [LayananMasyarakatController::class, 'storeComplaint'])->name('complaints.store');
             
             // Usulan Wisata (Tourism Submissions)
-            Route::get('/tourism-submissions/create', [ServiceRakyatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
-            Route::post('/tourism-submissions', [ServiceRakyatController::class, 'storeTourismSubmission'])->name('tourism-submissions.store');
+            Route::get('/tourism-submissions/create', [LayananMasyarakatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
+            Route::post('/tourism-submissions', [LayananMasyarakatController::class, 'storeTourismSubmission'])->name('tourism-submissions.store');
             
             // Permohonan Siaran Acara (Event Broadcast Requests)
-            Route::get('/event-broadcasts/create', [ServiceRakyatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
-            Route::post('/event-broadcasts', [ServiceRakyatController::class, 'storeEventBroadcast'])->name('event-broadcasts.store');
+            Route::get('/event-broadcasts/create', [LayananMasyarakatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
+            Route::post('/event-broadcasts', [LayananMasyarakatController::class, 'storeEventBroadcast'])->name('event-broadcasts.store');
         });
     });
 

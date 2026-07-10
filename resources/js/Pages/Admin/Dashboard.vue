@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
                                 Selamat datang kembali, <span class="text-[#0F5E3D] dark:text-[#10B981] font-extrabold">{{ user.name }}</span>!
                             </h1>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                Pantau dan kelola layanan Service Rakyat Disparbud Kabupaten Karawang secara real-time.
+                                Pantau dan kelola Layanan Masyarakat Disparbud Kabupaten Karawang secara real-time.
                             </p>
                         </div>
                         <div class="inline-flex self-start md:self-auto items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#0F5E3D]/10 text-[#0F5E3D] dark:bg-[#10B981]/10 dark:text-[#10B981]">
@@ -293,7 +293,7 @@ onBeforeUnmount(() => {
                     >
                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 flex items-center gap-2">
                             <span class="h-4 w-1 bg-[#0C4E5B] rounded"></span>
-                            Tren Pengajuan Layanan Service Rakyat (6 Bulan Terakhir)
+                            Tren Pengajuan Layanan Masyarakat (6 Bulan Terakhir)
                         </h3>
                         <p class="text-xs text-gray-400 mb-6">Agregasi data bulanan dari Aduan, Usulan Destinasi, dan Permohonan Siaran Acara.</p>
                         <div class="relative h-80">
@@ -310,7 +310,7 @@ onBeforeUnmount(() => {
                             <span class="h-4 w-1 bg-[#0F5E3D] rounded"></span>
                             Distribusi Progres Status
                         </h3>
-                        <p class="text-xs text-gray-400 mb-6">Persentase progress gabungan seluruh pengajuan Service Rakyat.</p>
+                        <p class="text-xs text-gray-400 mb-6">Persentase progress gabungan seluruh pengajuan Layanan Masyarakat.</p>
                         <div class="relative h-80 flex items-center justify-center">
                             <canvas ref="distributionChartCanvas"></canvas>
                         </div>
