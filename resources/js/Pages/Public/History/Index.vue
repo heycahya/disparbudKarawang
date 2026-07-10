@@ -263,10 +263,10 @@ const getStepStatus = (currentStatus, stepName) => {
                     <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-white">Belum ada pengajuan</h3>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Anda belum membuat pengajuan layanan apapun saat ini.</p>
                     <div class="mt-6 flex justify-center gap-4">
-                        <Link :href="route('service-rakyat.complaints.create')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#0F5E3D] hover:bg-emerald-700">
+                        <Link :href="route('layanan-masyarakat.complaints.create')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#0F5E3D] hover:bg-emerald-700">
                             Buat Pengaduan
                         </Link>
-                        <Link :href="route('service-rakyat.tourism-submissions.create')" class="inline-flex items-center px-4 py-2 border border-[#0F5E3D] text-sm font-medium rounded-md text-[#0F5E3D] bg-white hover:bg-emerald-50 dark:bg-gray-900 dark:text-emerald-400 dark:border-emerald-600 dark:hover:bg-gray-850">
+                        <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="inline-flex items-center px-4 py-2 border border-[#0F5E3D] text-sm font-medium rounded-md text-[#0F5E3D] bg-white hover:bg-emerald-50 dark:bg-gray-900 dark:text-emerald-400 dark:border-emerald-600 dark:hover:bg-gray-850">
                             Usul Wisata Baru
                         </Link>
                     </div>

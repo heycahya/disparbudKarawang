@@ -13,7 +13,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('service-rakyat.complaints.store'), {
+    form.post(route('layanan-masyarakat.complaints.store'), {
         onSuccess: () => form.reset()
     });
 };

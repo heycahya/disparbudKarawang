@@ -85,7 +85,7 @@ const formatDate = (dateString) => {
                         
                         <!-- Quick Action CTAs -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <Link :href="route('service-rakyat.complaints.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
+                            <Link :href="route('layanan-masyarakat.complaints.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
                                 <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-[#0F5E3D] dark:text-emerald-400 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-110 transition-transform">
                                     📢
                                 </div>
@@ -93,7 +93,7 @@ const formatDate = (dateString) => {
                                 <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Laporkan keluhan atau masukan terkait destinasi wisata dan budaya Karawang.</p>
                             </Link>
 
-                            <Link :href="route('service-rakyat.tourism-submissions.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
+                            <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
                                 <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-950 text-[#D97706] dark:text-amber-400 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-110 transition-transform">
                                     🗺️
                                 </div>
@@ -101,7 +101,7 @@ const formatDate = (dateString) => {
                                 <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Ajukan objek wisata baru di Karawang untuk dipublikasikan di katalog.</p>
                             </Link>
 
-                            <Link :href="route('service-rakyat.event-broadcasts.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
+                            <Link :href="route('layanan-masyarakat.event-broadcasts.create')" class="p-6 border border-slate-200/80 rounded-asymmetric-sm bg-white dark:bg-gray-900 hover:border-karawang-emerald shadow-sm hover:shadow-md transition-all duration-300 group">
                                 <div class="w-10 h-10 rounded-lg bg-teal-50 dark:bg-teal-950 text-[#0C4E5B] dark:text-teal-400 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-110 transition-transform">
                                     🎉
                                 </div>
@@ -110,12 +110,12 @@ const formatDate = (dateString) => {
                             </Link>
                         </div>
 
-                        <!-- Ringkasan Status Pengajuan Service Rakyat -->
+                        <!-- Ringkasan Status Pengajuan Layanan Masyarakat -->
                         <div class="space-y-4 pt-6 border-t border-gray-100 dark:border-gray-700">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                                        📋 <span>Pelacakan Status Pengajuan Service Rakyat</span>
+                                        📋 <span>Pelacakan Status Pengajuan Layanan Masyarakat</span>
                                     </h3>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">Ringkasan status terkini permohonan dan pengaduan Anda.</p>
                                 </div>
