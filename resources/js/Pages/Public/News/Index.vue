@@ -40,8 +40,8 @@ defineProps({
                     :href="route('public.news.index', { category: 'all' })"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === 'all' 
-                        ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     Semua Berita
                 </Link>
@@ -52,8 +52,8 @@ defineProps({
                     :href="route('public.news.index', { category: cat.slug })"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === cat.slug 
-                        ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     {{ cat.name }}
                 </Link>

@@ -171,7 +171,7 @@ watch(
                                 </Link>
                                 <Link
                                     :href="route('register')"
-                                    class="px-4 py-2 text-sm font-bold text-white bg-[#0F5E3D] rounded-tr-xl rounded-bl-xl hover:bg-[#0C4E5B] shadow-md hover:shadow-lg transition duration-200"
+                                    class="px-5 py-2.5 text-sm font-medium text-white bg-emerald-700 rounded-md hover:bg-emerald-800 shadow-sm transition-colors duration-200"
                                 >
                                     Daftar
                                 </Link>

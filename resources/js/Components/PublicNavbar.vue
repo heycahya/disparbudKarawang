@@ -65,7 +65,7 @@ const page = usePage();
                     <template v-if="page.props.auth?.user">
                         <Link 
                             :href="route('dashboard')" 
-                            class="px-4 py-2 text-sm font-bold text-white bg-[#0F5E3D] rounded-tr-xl rounded-bl-xl hover:bg-[#0C4E5B] shadow-md hover:shadow-lg transition duration-200"
+                            class="px-5 py-2.5 text-sm font-medium text-white bg-emerald-700 rounded-md hover:bg-emerald-800 shadow-sm transition-colors duration-200"
                         >
                             Dashboard
                         </Link>
@@ -73,13 +73,13 @@ const page = usePage();
                     <template v-else>
                         <Link 
                             :href="route('login')" 
-                            class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-[#0F5E3D] dark:hover:text-emerald-400 transition"
+                            class="px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
                         >
                             Masuk
                         </Link>
                         <Link 
                             :href="route('register')" 
-                            class="px-4 py-2 text-sm font-bold text-white bg-[#0F5E3D] rounded-tr-xl rounded-bl-xl hover:bg-[#0C4E5B] shadow-md hover:shadow-lg transition duration-200"
+                            class="px-5 py-2.5 text-sm font-medium text-white bg-emerald-700 rounded-md hover:bg-emerald-800 shadow-sm transition-colors duration-200"
                         >
                             Daftar
                         </Link>

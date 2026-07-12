@@ -66,8 +66,8 @@ const getCulinaryTypeLabel = (type) => {
                     :href="route('public.tourism.index', { tab: 'tourism' })"
                     class="px-5 py-2.5 text-sm font-semibold transition duration-150 ease-in-out border border-transparent"
                     :class="activeTab === 'tourism' 
-                        ? 'bg-[#0F5E3D] text-white rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'"
                 >
                     Destinasi Wisata
                 </Link>
@@ -75,8 +75,8 @@ const getCulinaryTypeLabel = (type) => {
                     :href="route('public.tourism.index', { tab: 'culture' })"
                     class="px-5 py-2.5 text-sm font-semibold transition duration-150 ease-in-out border border-transparent"
                     :class="activeTab === 'culture' 
-                        ? 'bg-[#0F5E3D] text-white rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'"
                 >
                     Kebudayaan & Seni
                 </Link>
@@ -84,8 +84,8 @@ const getCulinaryTypeLabel = (type) => {
                     :href="route('public.tourism.index', { tab: 'ekraf' })"
                     class="px-5 py-2.5 text-sm font-semibold transition duration-150 ease-in-out border border-transparent"
                     :class="activeTab === 'ekraf' 
-                        ? 'bg-[#0F5E3D] text-white rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'"
                 >
                     Ekonomi Kreatif
                 </Link>
@@ -93,8 +93,8 @@ const getCulinaryTypeLabel = (type) => {
                     :href="route('public.tourism.index', { tab: 'accommodation' })"
                     class="px-5 py-2.5 text-sm font-semibold transition duration-150 ease-in-out border border-transparent"
                     :class="activeTab === 'accommodation' 
-                        ? 'bg-[#0F5E3D] text-white rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'"
                 >
                     Akomodasi & Hotel
                 </Link>
@@ -102,8 +102,8 @@ const getCulinaryTypeLabel = (type) => {
                     :href="route('public.tourism.index', { tab: 'culinary' })"
                     class="px-5 py-2.5 text-sm font-semibold transition duration-150 ease-in-out border border-transparent"
                     :class="activeTab === 'culinary' 
-                        ? 'bg-[#0F5E3D] text-white rounded-tr-xl rounded-bl-xl shadow-md' 
-                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl rounded-bl-xl'"
+                        ? 'bg-[#0F5E3D] text-white rounded-md shadow-md' 
+                        : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'"
                 >
                     Kuliner Lokal
                 </Link>
