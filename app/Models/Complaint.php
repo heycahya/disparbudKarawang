@@ -39,7 +39,7 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewer(): BelongsTo
+    public function reviewedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }
