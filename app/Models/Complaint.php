@@ -10,6 +10,14 @@ class Complaint extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::addGlobalScope('user_limit', function ($builder) {
+            if (auth()->check() && auth()->user()->role === 'public') {
+                $builder->where('user_id', auth()->id());
+            }
+        });
+    }
     protected $fillable = [
         'user_id',
         'subject',
@@ -18,11 +26,12 @@ class Complaint extends Model
         'status',
         'admin_note',
         'reviewed_by',
-        'reviewed_at'
+        'reviewed_at',
     ];
 
     protected $casts = [
         'reviewed_at' => 'datetime',
+        'status' => 'string',
     ];
 
     public function user(): BelongsTo
@@ -30,7 +39,7 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewedBy(): BelongsTo
+    public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }

@@ -10,6 +10,14 @@ class TourismSubmission extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::addGlobalScope('user_limit', function ($builder) {
+            if (auth()->check() && auth()->user()->role === 'public') {
+                $builder->where('user_id', auth()->id());
+            }
+        });
+    }
     protected $fillable = [
         'user_id',
         'name',
@@ -22,13 +30,14 @@ class TourismSubmission extends Model
         'admin_note',
         'reviewed_by',
         'reviewed_at',
-        'converted_destination_id'
+        'converted_destination_id',
     ];
 
     protected $casts = [
-        'reviewed_at' => 'datetime',
         'latitude' => 'decimal:7',
-        'longitude' => 'decimal:7'
+        'longitude' => 'decimal:7',
+        'reviewed_at' => 'datetime',
+        'status' => 'string',
     ];
 
     public function user(): BelongsTo
@@ -36,7 +45,7 @@ class TourismSubmission extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewedBy(): BelongsTo
+    public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }

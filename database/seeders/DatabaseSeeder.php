@@ -13,8 +13,19 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            NewsCategorySeeder::class,
+            OrganizationProfileSeeder::class,
+            OrganizationFunctionSeeder::class,
+            OrganizationStructureSeeder::class,
             TourismCategorySeeder::class,
+            TourismDestinationSeeder::class,
+            CultureSeeder::class,
+            CreativeEconomySeeder::class,
+            AccommodationSeeder::class,
+            CulinaryPlaceSeeder::class,
+            NewsCategorySeeder::class,
+            NewsSeeder::class,
+            GallerySeeder::class,
+            SocialMediaLinkSeeder::class,
         ]);
     }
 }

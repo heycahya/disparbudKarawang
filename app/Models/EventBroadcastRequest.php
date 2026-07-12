@@ -10,6 +10,14 @@ class EventBroadcastRequest extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::addGlobalScope('user_limit', function ($builder) {
+            if (auth()->check() && auth()->user()->role === 'public') {
+                $builder->where('user_id', auth()->id());
+            }
+        });
+    }
     protected $fillable = [
         'user_id',
         'organization',
@@ -22,12 +30,13 @@ class EventBroadcastRequest extends Model
         'admin_note',
         'reviewed_by',
         'reviewed_at',
-        'converted_news_id'
+        'converted_news_id',
     ];
 
     protected $casts = [
         'event_date' => 'date',
-        'reviewed_at' => 'datetime'
+        'reviewed_at' => 'datetime',
+        'status' => 'string',
     ];
 
     public function user(): BelongsTo
@@ -35,7 +44,7 @@ class EventBroadcastRequest extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewedBy(): BelongsTo
+    public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }

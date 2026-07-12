@@ -13,15 +13,22 @@ class NewsCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Pariwisata', 'Kebudayaan', 'Ekonomi Kreatif', 'Pengumuman', 'Event'];
+        $categories = [
+            'Event/Olahraga & Pariwisata',
+            'Kebijakan Daerah',
+            'Destinasi/Desa Wisata',
+            'Inovasi Teknologi',
+        ];
 
         foreach ($categories as $category) {
-            DB::table('news_categories')->insert([
-                'name' => $category,
-                'slug' => Str::slug($category),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('news_categories')->updateOrInsert(
+                ['slug' => Str::slug($category)],
+                [
+                    'name' => $category,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
         }
     }
 }
