@@ -1,10 +1,12 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, usePage, router } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const form = useForm({
     name: '',
@@ -14,6 +16,13 @@ const form = useForm({
 });
 
 const submit = () => {
+    if (!page.props.auth.user) {
+        router.visit(route('login'), {
+            data: { intended: window.location.pathname }
+        });
+        return;
+    }
+
     form.post(route('layanan-masyarakat.tourism-submissions.store'), {
         onSuccess: () => form.reset()
     });
@@ -23,7 +32,7 @@ const submit = () => {
 <template>
     <Head title="Form Usulan Wisata Baru" />
 
-    <AuthenticatedLayout>
+    <PublicLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                 Pengajuan Usulan Wisata Baru
@@ -98,5 +107,5 @@ const submit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </PublicLayout>
 </template>

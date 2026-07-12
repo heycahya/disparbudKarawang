@@ -25,6 +25,13 @@ Route::name('public.')->group(function () {
     });
 });
 
+// Public Layanan Masyarakat GET routes
+Route::prefix('layanan-masyarakat')->name('layanan-masyarakat.')->group(function () {
+    Route::get('/complaints/create', [LayananMasyarakatController::class, 'createComplaint'])->name('complaints.create');
+    Route::get('/tourism-submissions/create', [LayananMasyarakatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
+    Route::get('/event-broadcasts/create', [LayananMasyarakatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -38,18 +45,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('public.history.index');
 
-        // Auth & Role:public Routes - Layanan Masyarakat
+        // Auth & Role:public Routes - Layanan Masyarakat (POST only)
         Route::prefix('layanan-masyarakat')->name('layanan-masyarakat.')->group(function () {
             // Pengaduan Masyarakat (Complaints)
-            Route::get('/complaints/create', [LayananMasyarakatController::class, 'createComplaint'])->name('complaints.create');
             Route::post('/complaints', [LayananMasyarakatController::class, 'storeComplaint'])->name('complaints.store');
             
             // Usulan Wisata (Tourism Submissions)
-            Route::get('/tourism-submissions/create', [LayananMasyarakatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
             Route::post('/tourism-submissions', [LayananMasyarakatController::class, 'storeTourismSubmission'])->name('tourism-submissions.store');
             
             // Permohonan Siaran Acara (Event Broadcast Requests)
-            Route::get('/event-broadcasts/create', [LayananMasyarakatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
             Route::post('/event-broadcasts', [LayananMasyarakatController::class, 'storeEventBroadcast'])->name('event-broadcasts.store');
         });
     });
@@ -65,6 +69,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('accommodations', \App\Http\Controllers\Admin\AccommodationController::class);
         Route::resource('culinary-places', \App\Http\Controllers\Admin\CulinaryPlaceController::class);
         Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
+
+        // Service Rakyat Inbox
+        Route::prefix('service-rakyat')->name('service-rakyat.')->group(function () {
+            // Complaints
+            Route::resource('complaints', \App\Http\Controllers\Admin\ComplaintReviewController::class)->only(['index', 'show']);
+            Route::patch('complaints/{complaint}/status', [\App\Http\Controllers\Admin\ComplaintReviewController::class, 'updateStatus'])->name('complaints.status');
+
+            // Tourism Submissions
+            Route::resource('tourism-submissions', \App\Http\Controllers\Admin\TourismSubmissionReviewController::class)->only(['index', 'show']);
+            Route::patch('tourism-submissions/{tourism_submission}/status', [\App\Http\Controllers\Admin\TourismSubmissionReviewController::class, 'updateStatus'])->name('tourism-submissions.status');
+
+            // Event Broadcast Requests
+            Route::resource('event-broadcasts', \App\Http\Controllers\Admin\EventBroadcastReviewController::class)->only(['index', 'show']);
+            Route::patch('event-broadcasts/{event_broadcast}/status', [\App\Http\Controllers\Admin\EventBroadcastReviewController::class, 'updateStatus'])->name('event-broadcasts.status');
+        });
 
         // Grup Eksklusif Super Admin
         Route::middleware('role:super_admin')->group(function () {

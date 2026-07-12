@@ -18,7 +18,6 @@ class TourismSubmission extends Model
             }
         });
     }
-
     protected $fillable = [
         'user_id',
         'name',
@@ -46,7 +45,7 @@ class TourismSubmission extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewer(): BelongsTo
+    public function reviewedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }

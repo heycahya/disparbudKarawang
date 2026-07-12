@@ -1,10 +1,12 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, usePage, router } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const form = useForm({
     organization: '',
@@ -17,6 +19,13 @@ const form = useForm({
 });
 
 const submit = () => {
+    if (!page.props.auth.user) {
+        router.visit(route('login'), {
+            data: { intended: window.location.pathname }
+        });
+        return;
+    }
+
     form.post(route('layanan-masyarakat.event-broadcasts.store'), {
         onSuccess: () => form.reset()
     });
@@ -26,7 +35,7 @@ const submit = () => {
 <template>
     <Head title="Form Permohonan Siaran Acara" />
 
-    <AuthenticatedLayout>
+    <PublicLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                 Permohonan Siaran Acara
@@ -139,5 +148,5 @@ const submit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </PublicLayout>
 </template>

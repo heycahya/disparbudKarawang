@@ -62,7 +62,7 @@ watch(
                                 >
                                     Dashboard
                                 </NavLink>
-                                <template v-if="$page.props.auth.user.role === 'public'">
+                                <template v-if="$page.props.auth.user?.role === 'public'">
                                     <NavLink
                                         :href="route('public.history.index')"
                                         :active="route().current('public.history.index')"
@@ -70,7 +70,7 @@ watch(
                                         Riwayat Pengajuan
                                     </NavLink>
                                 </template>
-                                <template v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'super_admin'">
+                                <template v-if="$page.props.auth.user?.role === 'admin' || $page.props.auth.user?.role === 'super_admin'">
                                     <NavLink
                                         :href="route('admin.news.index')"
                                         :active="route().current('admin.news.*')"
@@ -108,7 +108,7 @@ watch(
                                         Kuliner
                                     </NavLink>
                                     <NavLink
-                                        v-if="$page.props.auth.user.role === 'super_admin'"
+                                        v-if="$page.props.auth.user?.role === 'super_admin'"
                                         :href="route('admin.manajemen-akun')"
                                         :active="route().current('admin.manajemen-akun')"
                                     >
@@ -119,8 +119,8 @@ watch(
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
-                            <div class="relative ms-3">
+                            <!-- Settings Dropdown / Auth Actions -->
+                            <div class="relative ms-3" v-if="$page.props.auth.user">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -161,6 +161,20 @@ watch(
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
+                            </div>
+                            <div class="relative ms-3 flex items-center space-x-3" v-else>
+                                <Link
+                                    :href="route('login')"
+                                    class="text-sm font-semibold text-gray-600 hover:text-[#0F5E3D] dark:text-gray-300 dark:hover:text-emerald-400 transition"
+                                >
+                                    Masuk
+                                </Link>
+                                <Link
+                                    :href="route('register')"
+                                    class="px-4 py-2 text-sm font-bold text-white bg-[#0F5E3D] rounded-tr-xl rounded-bl-xl hover:bg-[#0C4E5B] shadow-md hover:shadow-lg transition duration-200"
+                                >
+                                    Daftar
+                                </Link>
                             </div>
                         </div>
 
@@ -222,7 +236,7 @@ watch(
                         >
                             Dashboard
                         </ResponsiveNavLink>
-                        <template v-if="$page.props.auth.user.role === 'public'">
+                        <template v-if="$page.props.auth.user?.role === 'public'">
                             <ResponsiveNavLink
                                 :href="route('public.history.index')"
                                 :active="route().current('public.history.index')"
@@ -230,7 +244,7 @@ watch(
                                 Riwayat Pengajuan
                             </ResponsiveNavLink>
                         </template>
-                        <template v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'super_admin'">
+                        <template v-if="$page.props.auth.user?.role === 'admin' || $page.props.auth.user?.role === 'super_admin'">
                             <ResponsiveNavLink
                                 :href="route('admin.news.index')"
                                 :active="route().current('admin.news.*')"
@@ -268,7 +282,7 @@ watch(
                                 Kuliner
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
-                                v-if="$page.props.auth.user.role === 'super_admin'"
+                                v-if="$page.props.auth.user?.role === 'super_admin'"
                                 :href="route('admin.manajemen-akun')"
                                 :active="route().current('admin.manajemen-akun')"
                             >
@@ -279,6 +293,7 @@ watch(
 
                     <!-- Responsive Settings Options -->
                     <div
+                        v-if="$page.props.auth.user"
                         class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600"
                     >
                         <div class="px-4">
@@ -304,6 +319,10 @@ watch(
                                 Log Out
                             </ResponsiveNavLink>
                         </div>
+                    </div>
+                    <div v-else class="border-t border-gray-200 py-4 px-4 dark:border-gray-600 space-y-2">
+                        <Link :href="route('login')" class="block text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">Masuk</Link>
+                        <Link :href="route('register')" class="block text-sm font-bold text-[#0F5E3D] hover:text-[#0C4E5B]">Daftar</Link>
                     </div>
                 </div>
             </nav>

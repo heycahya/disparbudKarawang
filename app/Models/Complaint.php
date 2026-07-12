@@ -18,7 +18,6 @@ class Complaint extends Model
             }
         });
     }
-
     protected $fillable = [
         'user_id',
         'subject',
@@ -40,7 +39,7 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviewer(): BelongsTo
+    public function reviewedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }
