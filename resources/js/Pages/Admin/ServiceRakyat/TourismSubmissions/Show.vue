@@ -33,7 +33,7 @@ const submitReview = () => {
           
           <!-- Detail Content -->
           <div class="md:col-span-2 space-y-6">
-            <div class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100 p-6">
+            <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100 p-6">
               
               <div v-if="submission.photo" class="mb-6 rounded-xl overflow-hidden max-h-80 border border-slate-200">
                 <img :src="submission.photo" class="w-full h-full object-cover" alt="Foto Wisata" />
@@ -82,7 +82,7 @@ const submitReview = () => {
             </div>
 
             <!-- Conversion Details if Approved -->
-            <div v-if="submission.converted_destination_id" class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-emerald-200 p-6 bg-emerald-50/20">
+            <div v-if="submission.converted_destination_id" class="bg-white overflow-hidden shadow-sm rounded-2xl border border-emerald-200 p-6 bg-emerald-50/20">
               <div class="flex items-center justify-between">
                 <div>
                   <h4 class="text-sm font-bold text-emerald-800">✅ Terkonversi Ke Katalog Utama</h4>
@@ -98,7 +98,7 @@ const submitReview = () => {
             </div>
 
             <!-- Review History -->
-            <div v-if="submission.reviewed_by" class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100 p-6">
+            <div v-if="submission.reviewed_by" class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100 p-6">
               <h4 class="text-sm font-semibold text-slate-800 mb-3 border-b border-slate-100 pb-2">Informasi Peninjauan</h4>
               <div class="grid grid-cols-2 gap-4 text-xs">
                 <div>
@@ -114,7 +114,7 @@ const submitReview = () => {
           </div>
 
           <!-- Review Form Panel -->
-          <div class="bg-white shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100 p-6 h-fit">
+          <div class="bg-white shadow-sm rounded-2xl border border-slate-100 p-6 h-fit">
             <h4 class="font-bold text-slate-800 text-sm mb-4 border-b border-slate-100 pb-2">Panel Review Admin</h4>
             
             <form @submit.prevent="submitReview" class="space-y-4">
@@ -146,7 +146,7 @@ const submitReview = () => {
               <button 
                 type="submit"
                 :disabled="form.processing"
-                class="w-full py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white font-medium text-sm rounded-tr-xl rounded-bl-xl shadow transition duration-150"
+                class="w-full py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white font-medium text-sm rounded-md shadow transition duration-150"
               >
                 {{ form.processing ? 'Menyimpan...' : 'Simpan Keputusan' }}
               </button>

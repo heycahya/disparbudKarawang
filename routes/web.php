@@ -23,6 +23,12 @@ Route::name('public.')->group(function () {
         Route::get('/', [PublicPortalController::class, 'tourismIndex'])->name('index');
         Route::get('/{slug}', [PublicPortalController::class, 'tourismShow'])->name('show');
     });
+
+    // Detail pages per category
+    Route::get('/budaya/{slug}', [PublicPortalController::class, 'cultureShow'])->name('culture.show');
+    Route::get('/ekraf/{slug}', [PublicPortalController::class, 'ekrafShow'])->name('ekraf.show');
+    Route::get('/akomodasi/{slug}', [PublicPortalController::class, 'accommodationShow'])->name('accommodation.show');
+    Route::get('/kuliner/{slug}', [PublicPortalController::class, 'culinaryShow'])->name('culinary.show');
 });
 
 // Public Layanan Masyarakat GET routes

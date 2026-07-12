@@ -37,7 +37,7 @@ const handleCoverImageChange = (e) => {
 
     <div class="py-12 bg-slate-50 min-h-screen">
       <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100">
+        <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100">
           <div class="p-6 text-slate-900">
             <form @submit.prevent="submit" class="space-y-6">
               <!-- Name -->
@@ -141,7 +141,7 @@ const handleCoverImageChange = (e) => {
                 <button 
                   type="submit" 
                   :disabled="form.processing"
-                  class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-tr-xl rounded-bl-xl font-medium text-sm shadow transition duration-150 ease-in-out disabled:opacity-50"
+                  class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-md font-medium text-sm shadow transition duration-150 ease-in-out disabled:opacity-50"
                 >
                   {{ form.processing ? 'Memperbarui...' : 'Perbarui Pelaku Ekraf' }}
                 </button>

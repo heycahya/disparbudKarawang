@@ -42,7 +42,7 @@ const getTypeLabel = (type) => {
 
     <div class="py-12 bg-slate-50 min-h-screen">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100">
+        <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100">
           <div class="p-6 text-slate-900">
             <!-- Header Actions -->
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
@@ -60,7 +60,7 @@ const getTypeLabel = (type) => {
               
               <Link 
                 :href="route('admin.accommodations.create')" 
-                class="w-full sm:w-auto px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-tr-xl rounded-bl-xl font-medium text-sm text-center shadow transition duration-150 ease-in-out"
+                class="w-full sm:w-auto px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-md font-medium text-sm text-center shadow transition duration-150 ease-in-out"
               >
                 + Tambah Akomodasi
               </Link>
@@ -69,7 +69,7 @@ const getTypeLabel = (type) => {
             <!-- Table -->
             <div class="overflow-x-auto">
               <table class="min-w-full divide-y divide-slate-200">
-                <thead class="bg-slate-50 rounded-tr-xl rounded-bl-xl">
+                <thead class="bg-slate-50 rounded-md">
                   <tr>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Gambar Cover</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Nama Akomodasi</th>

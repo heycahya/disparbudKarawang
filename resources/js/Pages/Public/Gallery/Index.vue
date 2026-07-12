@@ -79,7 +79,7 @@ const getCategoryLabel = (cat) => {
                     v-for="item in galleries.data" 
                     :key="item.id"
                     @click="selectedImage = item"
-                    class="group bg-white dark:bg-gray-900 rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-lg rounded-br-lg shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+                    class="group bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
                 >
                     <div class="relative overflow-hidden h-64 bg-slate-200 dark:bg-gray-800">
                         <img 
@@ -104,7 +104,7 @@ const getCategoryLabel = (cat) => {
             </div>
 
             <!-- Empty State -->
-            <div v-else class="bg-white dark:bg-gray-900 rounded-tr-2xl rounded-bl-2xl p-12 text-center border border-gray-100 dark:border-gray-800 shadow-sm">
+            <div v-else class="bg-white dark:bg-gray-900 rounded-2xl p-12 text-center border border-gray-100 dark:border-gray-800 shadow-sm">
                 <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada koleksi foto untuk kategori ini.</p>
             </div>
 

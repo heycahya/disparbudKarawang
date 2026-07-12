@@ -7,6 +7,8 @@ use App\Models\NewsCategory;
 use App\Models\TourismDestination;
 use App\Models\Culture;
 use App\Models\CreativeEconomy;
+use App\Models\Accommodation;
+use App\Models\CulinaryPlace;
 use App\Models\Gallery;
 use App\Models\OrganizationProfile;
 use App\Models\OrganizationFunction;
@@ -219,18 +221,107 @@ class PublicPortalController extends Controller
 
     public function tourismShow(string $slug)
     {
-        $destination = TourismDestination::with('category')
+        $destination = TourismDestination::with(['category', 'photos'])
             ->where('slug', $slug)
             ->firstOrFail();
 
         $destination->increment('views');
 
+        // Build photos array: cover_image first, then gallery photos
+        $photos = collect();
+        if ($destination->cover_image) {
+            $photos->push(['url' => $destination->cover_image, 'caption' => $destination->name]);
+        }
+        foreach ($destination->photos as $p) {
+            $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
+        }
+
         return Inertia::render('Public/Tourism/Show', [
-            'destination' => $destination,
+            'type' => 'tourism',
+            'item' => $destination,
+            'photos' => $photos->values(),
             'seo' => [
                 'title' => $destination->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($destination->description), 150),
                 'image' => $destination->cover_image,
+                'type' => 'website',
+            ]
+        ]);
+    }
+
+    public function cultureShow(string $slug)
+    {
+        $culture = Culture::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        $culture->increment('views');
+
+        return Inertia::render('Public/Tourism/Show', [
+            'type' => 'culture',
+            'item' => $culture,
+            'seo' => [
+                'title' => $culture->name,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($culture->description), 150),
+                'image' => $culture->cover_image,
+                'type' => 'website',
+            ]
+        ]);
+    }
+
+    public function ekrafShow(string $slug)
+    {
+        $ekraf = CreativeEconomy::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        return Inertia::render('Public/Tourism/Show', [
+            'type' => 'ekraf',
+            'item' => $ekraf,
+            'seo' => [
+                'title' => $ekraf->name,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($ekraf->description), 150),
+                'image' => $ekraf->cover_image,
+                'type' => 'website',
+            ]
+        ]);
+    }
+
+    public function accommodationShow(string $slug)
+    {
+        $accommodation = Accommodation::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        $accommodation->increment('views');
+
+        return Inertia::render('Public/Tourism/Show', [
+            'type' => 'accommodation',
+            'item' => $accommodation,
+            'seo' => [
+                'title' => $accommodation->name,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($accommodation->description), 150),
+                'image' => $accommodation->cover_image,
+                'type' => 'website',
+            ]
+        ]);
+    }
+
+    public function culinaryShow(string $slug)
+    {
+        $culinary = CulinaryPlace::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        $culinary->increment('views');
+
+        return Inertia::render('Public/Tourism/Show', [
+            'type' => 'culinary',
+            'item' => $culinary,
+            'seo' => [
+                'title' => $culinary->name,
+                'description' => \Illuminate\Support\Str::limit(strip_tags($culinary->description), 150),
+                'image' => $culinary->cover_image,
                 'type' => 'website',
             ]
         ]);

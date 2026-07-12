@@ -145,8 +145,19 @@ const getCulinaryTypeLabel = (type) => {
 
                         <!-- Name -->
                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 line-clamp-2">
-                            <!-- Link to detail only for tourism, other show descriptively -->
                             <Link v-if="activeTab === 'tourism'" :href="route('public.tourism.show', item.slug)" class="hover:text-[#0F5E3D] transition">
+                                {{ item.name }}
+                            </Link>
+                            <Link v-else-if="activeTab === 'culture'" :href="route('public.culture.show', item.slug)" class="hover:text-sky-700 transition">
+                                {{ item.name }}
+                            </Link>
+                            <Link v-else-if="activeTab === 'ekraf'" :href="route('public.ekraf.show', item.slug)" class="hover:text-purple-700 transition">
+                                {{ item.name }}
+                            </Link>
+                            <Link v-else-if="activeTab === 'accommodation'" :href="route('public.accommodation.show', item.slug)" class="hover:text-indigo-700 transition">
+                                {{ item.name }}
+                            </Link>
+                            <Link v-else-if="activeTab === 'culinary'" :href="route('public.culinary.show', item.slug)" class="hover:text-amber-700 transition">
                                 {{ item.name }}
                             </Link>
                             <span v-else>{{ item.name }}</span>
@@ -181,7 +192,7 @@ const getCulinaryTypeLabel = (type) => {
             </div>
 
             <!-- Empty State -->
-            <div v-else class="bg-white dark:bg-gray-900 rounded-tr-2xl rounded-bl-2xl p-12 text-center border border-gray-100 dark:border-gray-800 shadow-sm">
+            <div v-else class="bg-white dark:bg-gray-900 rounded-2xl p-12 text-center border border-gray-100 dark:border-gray-800 shadow-sm">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>

@@ -56,8 +56,12 @@ onMounted(() => {
     fixLeafletIcons();
 
     if (mapContainer.value) {
-        // Initializing Leaflet map with shallowRef to avoid reactivity overhead
-        mapInstance.value = L.map(mapContainer.value).setView([-6.3084, 107.3047], 10);
+        // Center the map on the first destination if only one is provided, otherwise default to Karawang
+        const hasSingleDest = props.destinations && props.destinations.length === 1 && props.destinations[0].latitude && props.destinations[0].longitude;
+        const centerCoords = hasSingleDest ? [props.destinations[0].latitude, props.destinations[0].longitude] : [-6.3084, 107.3047];
+        const initialZoom = hasSingleDest ? 14 : 10;
+
+        mapInstance.value = L.map(mapContainer.value).setView(centerCoords, initialZoom);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -84,7 +88,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="relative w-full overflow-hidden rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-lg rounded-br-lg shadow-lg border border-emerald-900/10">
+    <div class="relative w-full overflow-hidden rounded-2xl shadow-lg border border-emerald-900/10">
         <div ref="mapContainer" :style="{ height: height, width: '100%' }" class="z-0"></div>
     </div>
 </template>

@@ -34,7 +34,7 @@ watch([search, status], () => {
 
     <div class="py-12 bg-slate-50 min-h-screen">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm rounded-tr-2xl rounded-bl-2xl border border-slate-100">
+        <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100">
           <div class="p-6 text-slate-900">
             <!-- Filters -->
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">

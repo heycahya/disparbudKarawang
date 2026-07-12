@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
-import LeafletMap from '@/Components/LeafletMap.vue';
 
 const props = defineProps({
     hero_stats: {
@@ -59,13 +58,13 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                         <div class="flex flex-wrap gap-4 pt-4">
                             <Link 
                                 :href="route('public.destinasi')" 
-                                class="px-8 py-4 bg-[#D97706] hover:bg-amber-600 text-white font-bold rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-md rounded-br-md shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
+                                class="px-8 py-4 bg-[#D97706] hover:bg-amber-600 text-white font-bold rounded-lg shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
                             >
                                 Jelajahi Destinasi
                             </Link>
                             <Link 
                                 :href="route('public.profile')" 
-                                class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold backdrop-blur-md rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-md rounded-br-md border border-white/30 transition-all duration-300"
+                                class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold backdrop-blur-md rounded-lg border border-white/30 transition-all duration-300"
                             >
                                 Profil Dinas
                             </Link>
@@ -74,7 +73,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
 
                     <!-- Glassmorphism Featured Card Overlay -->
                     <div class="lg:col-span-5">
-                        <div class="bg-white/15 dark:bg-black/30 backdrop-blur-xl p-8 rounded-tr-[3.5rem] rounded-bl-[3.5rem] rounded-tl-xl rounded-br-xl border border-white/20 shadow-2xl relative">
+                        <div class="bg-white/15 dark:bg-black/30 backdrop-blur-xl p-8 rounded-2xl border border-white/20 shadow-2xl relative">
                             <div class="absolute -top-3 -right-3 w-12 h-12 bg-[#D97706] rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
                                 ✨
                             </div>
@@ -111,7 +110,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20 w-full">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Stat 1 -->
-                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
+                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Destinasi Wisata</p>
@@ -124,7 +123,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                 </div>
 
                 <!-- Stat 2 -->
-                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
+                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Warta & Berita</p>
@@ -137,7 +136,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                 </div>
 
                 <!-- Stat 3 -->
-                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
+                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Seni & Budaya</p>
@@ -150,7 +149,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                 </div>
 
                 <!-- Stat 4 -->
-                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
+                <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-900/10 dark:border-emerald-500/10 transition-transform duration-300 hover:-translate-y-1">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Ekonomi Kreatif</p>
@@ -167,21 +166,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
         <!-- Main Body Sections -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20 w-full">
 
-            <!-- Interactive Leaflet.js Spatial Map Section -->
-            <section class="space-y-6">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-200 dark:border-gray-800 pb-4">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-[#D97706]">Peta Spasial Interaktif</span>
-                        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">Pemetaan Objek Wisata Karawang</h2>
-                    </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 max-w-md">
-                        Eksplorasi persebaran geografis destinasi sejarah, alam, religi, dan objek vital pariwisata di seluruh wilayah Kabupaten Karawang.
-                    </p>
-                </div>
 
-                <!-- Leaflet Map Container -->
-                <LeafletMap :destinations="destinations" height="480px" />
-            </section>
 
             <!-- Featured Destinations Grid -->
             <section class="space-y-8">
@@ -202,7 +187,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                     <div 
                         v-for="item in displayTourism" 
                         :key="item.id" 
-                        class="group bg-white dark:bg-gray-900 rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-lg rounded-br-lg shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1"
+                        class="group bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1"
                     >
                         <div class="relative overflow-hidden h-52 bg-slate-200 dark:bg-gray-800">
                             <img 
@@ -261,7 +246,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
                     <div 
                         v-for="item in displayNews" 
                         :key="item.id" 
-                        class="bg-white dark:bg-gray-900 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
+                        class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
                     >
                         <div>
                             <div class="relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">

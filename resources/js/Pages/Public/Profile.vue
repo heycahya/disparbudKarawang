@@ -40,7 +40,7 @@ defineProps({
             <!-- Vision & Mission Section -->
             <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Vision Card -->
-                <div class="bg-white dark:bg-gray-900 rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-lg rounded-br-lg p-8 shadow-md border border-gray-100 dark:border-gray-800 space-y-4">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-800 space-y-4">
                     <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-950 text-[#0F5E3D] rounded-full flex items-center justify-center font-bold text-xl">
                         🎯
                     </div>
@@ -51,7 +51,7 @@ defineProps({
                 </div>
 
                 <!-- Mission Card -->
-                <div class="bg-white dark:bg-gray-900 rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-lg rounded-br-lg p-8 shadow-md border border-gray-100 dark:border-gray-800 space-y-4">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-800 space-y-4">
                     <div class="w-12 h-12 bg-amber-100 dark:bg-amber-950 text-[#D97706] rounded-full flex items-center justify-center font-bold text-xl">
                         🚀
                     </div>
@@ -73,7 +73,7 @@ defineProps({
                     <div 
                         v-for="board in organization.boards" 
                         :key="board.id || board.name" 
-                        class="bg-white dark:bg-gray-900 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg p-6 shadow-md border border-gray-100 dark:border-gray-800 text-center space-y-4 hover:shadow-lg transition duration-200 transform hover:-translate-y-1"
+                        class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-md border border-gray-100 dark:border-gray-800 text-center space-y-4 hover:shadow-lg transition duration-200 transform hover:-translate-y-1"
                     >
                         <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#0F5E3D] to-[#0C4E5B] p-1 shadow-md">
                             <img 
@@ -98,7 +98,7 @@ defineProps({
             </section>
 
             <!-- Profile & Sejarah Brief -->
-            <section class="bg-white dark:bg-gray-900 rounded-tr-[3rem] rounded-bl-[3rem] rounded-tl-lg rounded-br-lg p-8 sm:p-12 shadow-md border border-gray-100 dark:border-gray-800 space-y-6">
+            <section class="bg-white dark:bg-gray-900 rounded-2xl p-8 sm:p-12 shadow-md border border-gray-100 dark:border-gray-800 space-y-6">
                 <div class="flex items-center space-x-3">
                     <div class="w-3 h-8 bg-[#0F5E3D] rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Sejarah & Landasan Operasional</h2>
@@ -119,7 +119,7 @@ defineProps({
                     <div 
                         v-for="(fnItem, idx) in organization.tupoksi" 
                         :key="fnItem.id || idx" 
-                        class="bg-white dark:bg-gray-900 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-lg rounded-br-lg p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex gap-4 items-start"
+                        class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex gap-4 items-start"
                     >
                         <div class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950 text-[#0C4E5B] dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
                             {{ idx + 1 }}

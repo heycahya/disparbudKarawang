@@ -46,8 +46,8 @@ export default {
                 },
             },
             borderRadius: {
-                'asymmetric': '0 24px 0 24px',
-                'asymmetric-sm': '0 12px 0 12px',
+                'asymmetric': '1rem',
+                'asymmetric-sm': '0.5rem',
             },
         },
     },
