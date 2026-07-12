@@ -4,7 +4,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, usePage, router } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const form = useForm({
     organization: '',
@@ -17,6 +19,13 @@ const form = useForm({
 });
 
 const submit = () => {
+    if (!page.props.auth.user) {
+        router.visit(route('login'), {
+            data: { intended: window.location.pathname }
+        });
+        return;
+    }
+
     form.post(route('layanan-masyarakat.event-broadcasts.store'), {
         onSuccess: () => form.reset()
     });
