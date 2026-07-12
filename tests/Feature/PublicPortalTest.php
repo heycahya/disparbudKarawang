@@ -85,6 +85,12 @@ test('guest can access news show and tourism show', function () {
 test('unauthorized guest can view forms but is redirected from submitting to layanan masyarakat', function () {
     $this->get(route('layanan-masyarakat.complaints.create'))->assertStatus(200);
     $this->post(route('layanan-masyarakat.complaints.store'), [])->assertRedirect('/login');
+
+    $this->get(route('layanan-masyarakat.tourism-submissions.create'))->assertStatus(200);
+    $this->post(route('layanan-masyarakat.tourism-submissions.store'), [])->assertRedirect('/login');
+
+    $this->get(route('layanan-masyarakat.event-broadcasts.create'))->assertStatus(200);
+    $this->post(route('layanan-masyarakat.event-broadcasts.store'), [])->assertRedirect('/login');
 });
 
 test('forbidden non-public roles can view forms but are blocked from submitting to layanan masyarakat', function () {
@@ -97,7 +103,14 @@ test('forbidden non-public roles can view forms but are blocked from submitting 
 
     $this->actingAs($admin)->get(route('layanan-masyarakat.complaints.create'))->assertStatus(200);
     $this->actingAs($admin)->post(route('layanan-masyarakat.complaints.store'), [])->assertStatus(403);
+
+    $this->actingAs($admin)->get(route('layanan-masyarakat.tourism-submissions.create'))->assertStatus(200);
+    $this->actingAs($admin)->post(route('layanan-masyarakat.tourism-submissions.store'), [])->assertStatus(403);
+
+    $this->actingAs($admin)->get(route('layanan-masyarakat.event-broadcasts.create'))->assertStatus(200);
+    $this->actingAs($admin)->post(route('layanan-masyarakat.event-broadcasts.store'), [])->assertStatus(403);
 });
+
 
 test('public user can submit a complaint (happy path)', function () {
     $user = User::create([
