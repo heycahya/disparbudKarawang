@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import PublicNavbar from '@/Components/PublicNavbar.vue';
-import FooterGlobal from '@/Components/FooterGlobal.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineProps({
     destination: Object,
@@ -19,8 +18,7 @@ defineProps({
         <meta property="og:type" :content="seo.type || 'website'" />
     </Head>
 
-    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
-        <PublicNavbar />
+    <PublicLayout>
 
         <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
             <article class="bg-white dark:bg-gray-900 rounded-asymmetric shadow-xl overflow-hidden p-8 sm:p-12 border border-slate-200/80 dark:border-gray-800">
@@ -46,6 +44,5 @@ defineProps({
             </article>
         </main>
 
-        <FooterGlobal />
-    </div>
+    </PublicLayout>
 </template>

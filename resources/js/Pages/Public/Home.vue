@@ -1,8 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import PublicNavbar from '@/Components/PublicNavbar.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 import LeafletMap from '@/Components/LeafletMap.vue';
-import FooterGlobal from '@/Components/FooterGlobal.vue';
 
 const props = defineProps({
     hero_stats: {
@@ -33,9 +32,7 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
 <template>
     <Head title="Beranda - Portal Resmi Disparbud Karawang" />
 
-    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
-        <!-- Navigation Bar -->
-        <PublicNavbar />
+    <PublicLayout>
 
         <!-- Hero Section with Glassmorphism & Golok Lubuk Karawang Cut -->
         <section class="relative bg-gradient-to-br from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 text-white overflow-hidden py-24 sm:py-32">
@@ -303,7 +300,5 @@ const displayTourism = props.featured_destinations?.length ? props.featured_dest
 
         </main>
 
-        <!-- Footer -->
-        <FooterGlobal />
-    </div>
+    </PublicLayout>
 </template>

@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import PublicNavbar from '@/Components/PublicNavbar.vue';
-import FooterGlobal from '@/Components/FooterGlobal.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineProps({
     organization: {
@@ -20,8 +19,7 @@ defineProps({
 <template>
     <Head title="Profil Lembaga - Disparbud Karawang" />
 
-    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
-        <PublicNavbar />
+    <PublicLayout>
 
         <!-- Profile Header Banner -->
         <header class="bg-gradient-to-r from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 py-16 text-white relative overflow-hidden">
@@ -136,6 +134,5 @@ defineProps({
 
         </main>
 
-        <FooterGlobal />
-    </div>
+    </PublicLayout>
 </template>

@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import PublicNavbar from '@/Components/PublicNavbar.vue';
-import FooterGlobal from '@/Components/FooterGlobal.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineProps({
     news: Object,
@@ -19,8 +18,7 @@ defineProps({
 <template>
     <Head title="Warta & Berita - Disparbud Karawang" />
 
-    <div class="min-h-screen bg-rice-husk dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans">
-        <PublicNavbar />
+    <PublicLayout>
 
         <header class="bg-gradient-to-r from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 py-16 text-white relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -129,6 +127,5 @@ defineProps({
             </div>
         </main>
 
-        <FooterGlobal />
-    </div>
+    </PublicLayout>
 </template>
