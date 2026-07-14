@@ -21,6 +21,10 @@ class StoreCreativeEconomyRequest extends FormRequest
             'address' => 'nullable|string',
             'status' => 'required|in:draft,published',
             'cover_image' => 'required|image|max:2048',
+            'photos' => 'nullable|array',
+            'photos.*' => 'image|max:2048',
+            'photo_captions' => 'nullable|array',
+            'photo_captions.*' => 'nullable|string|max:255',
         ];
     }
 }

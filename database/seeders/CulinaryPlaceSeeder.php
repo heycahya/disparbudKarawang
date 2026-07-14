@@ -21,6 +21,7 @@ class CulinaryPlaceSeeder extends Seeder
                 'address' => 'Jl. Alun-Alun Selatan, Kec. Karawang Barat, Karawang',
                 'phone' => null,
                 'price_range' => null,
+                'cover_image' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Swiss-Cafe Restaurant',
@@ -29,6 +30,7 @@ class CulinaryPlaceSeeder extends Seeder
                 'address' => 'Jl. Jenderal Ahmad Yani No. 29, Tanjungpura, Kec. Karawang Barat',
                 'phone' => null,
                 'price_range' => null,
+                'cover_image' => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Zenfuku Restaurant',
@@ -37,6 +39,7 @@ class CulinaryPlaceSeeder extends Seeder
                 'address' => 'Jl. Raya Badami RT.04/RW.02, Margakaya, Kec. Telukjambe Barat',
                 'phone' => null,
                 'price_range' => null,
+                'cover_image' => 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Konter Teppanyaki (Swiss-Belhotel)',
@@ -45,6 +48,7 @@ class CulinaryPlaceSeeder extends Seeder
                 'address' => 'Jl. Jenderal Ahmad Yani No. 29, Tanjungpura, Kec. Karawang Barat',
                 'phone' => null,
                 'price_range' => null,
+                'cover_image' => 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
             ],
         ];
 
@@ -57,7 +61,7 @@ class CulinaryPlaceSeeder extends Seeder
                 'address' => $item['address'],
                 'phone' => $item['phone'],
                 'price_range' => $item['price_range'],
-                'cover_image' => null,
+                'cover_image' => $item['cover_image'],
                 'latitude' => null,
                 'longitude' => null,
                 'status' => 'published',

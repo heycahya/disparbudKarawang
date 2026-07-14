@@ -46,6 +46,9 @@ class TourismDestinationController extends Controller
     public function store(StoreTourismDestinationRequest $request)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        unset($validated['photos'], $validated['photo_captions']);
 
         // Cloudinary Upload
         try {
@@ -57,7 +60,24 @@ class TourismDestinationController extends Controller
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }
 
-        TourismDestination::create($validated);
+        $destination = TourismDestination::create($validated);
+
+        if ($photosData && is_array($photosData)) {
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/tourism/gallery'
+                    ]);
+                    $destination->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.tourism-destinations.index')
             ->with('success', 'Destinasi wisata berhasil ditambahkan.');
@@ -66,7 +86,7 @@ class TourismDestinationController extends Controller
     public function edit(TourismDestination $tourismDestination)
     {
         return Inertia::render('Admin/Content/Tourism/Edit', [
-            'destination' => $tourismDestination,
+            'destination' => $tourismDestination->load('photos'),
             'categories' => TourismCategory::orderBy('name')->get()
         ]);
     }
@@ -74,6 +94,10 @@ class TourismDestinationController extends Controller
     public function update(UpdateTourismDestinationRequest $request, TourismDestination $tourismDestination)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        $deletedPhotoIds = $validated['deleted_photo_ids'] ?? null;
+        unset($validated['photos'], $validated['photo_captions'], $validated['deleted_photo_ids']);
 
         if ($request->hasFile('cover_image')) {
             // Cloudinary Upload
@@ -85,6 +109,8 @@ class TourismDestinationController extends Controller
             } catch (\Exception $e) {
                 return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
             }
+        } else {
+            unset($validated['cover_image']);
         }
 
         // Handle Slug update on name change
@@ -93,6 +119,30 @@ class TourismDestinationController extends Controller
         }
 
         $tourismDestination->update($validated);
+
+        // Delete requested gallery photos
+        if ($deletedPhotoIds && is_array($deletedPhotoIds)) {
+            $tourismDestination->photos()->whereIn('id', $deletedPhotoIds)->delete();
+        }
+
+        // Save new gallery photos
+        if ($photosData && is_array($photosData)) {
+            $maxOrder = $tourismDestination->photos()->max('order') ?? -1;
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/tourism/gallery'
+                    ]);
+                    $tourismDestination->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $maxOrder + 1 + $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.tourism-destinations.index')
             ->with('success', 'Destinasi wisata berhasil diperbarui.');

@@ -251,15 +251,25 @@ class PublicPortalController extends Controller
 
     public function cultureShow(string $slug)
     {
-        $culture = Culture::where('slug', $slug)
+        $culture = Culture::with('photos')
+            ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
         $culture->increment('views');
 
+        $photos = collect();
+        if ($culture->cover_image) {
+            $photos->push(['url' => $culture->cover_image, 'caption' => $culture->name]);
+        }
+        foreach ($culture->photos as $p) {
+            $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
+        }
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'culture',
             'item' => $culture,
+            'photos' => $photos->values(),
             'seo' => [
                 'title' => $culture->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($culture->description), 150),
@@ -271,13 +281,23 @@ class PublicPortalController extends Controller
 
     public function ekrafShow(string $slug)
     {
-        $ekraf = CreativeEconomy::where('slug', $slug)
+        $ekraf = CreativeEconomy::with('photos')
+            ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
+
+        $photos = collect();
+        if ($ekraf->cover_image) {
+            $photos->push(['url' => $ekraf->cover_image, 'caption' => $ekraf->name]);
+        }
+        foreach ($ekraf->photos as $p) {
+            $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
+        }
 
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'ekraf',
             'item' => $ekraf,
+            'photos' => $photos->values(),
             'seo' => [
                 'title' => $ekraf->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($ekraf->description), 150),
@@ -289,15 +309,25 @@ class PublicPortalController extends Controller
 
     public function accommodationShow(string $slug)
     {
-        $accommodation = Accommodation::where('slug', $slug)
+        $accommodation = Accommodation::with('photos')
+            ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
         $accommodation->increment('views');
 
+        $photos = collect();
+        if ($accommodation->cover_image) {
+            $photos->push(['url' => $accommodation->cover_image, 'caption' => $accommodation->name]);
+        }
+        foreach ($accommodation->photos as $p) {
+            $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
+        }
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'accommodation',
             'item' => $accommodation,
+            'photos' => $photos->values(),
             'seo' => [
                 'title' => $accommodation->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($accommodation->description), 150),
@@ -309,15 +339,25 @@ class PublicPortalController extends Controller
 
     public function culinaryShow(string $slug)
     {
-        $culinary = CulinaryPlace::where('slug', $slug)
+        $culinary = CulinaryPlace::with('photos')
+            ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
         $culinary->increment('views');
 
+        $photos = collect();
+        if ($culinary->cover_image) {
+            $photos->push(['url' => $culinary->cover_image, 'caption' => $culinary->name]);
+        }
+        foreach ($culinary->photos as $p) {
+            $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
+        }
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'culinary',
             'item' => $culinary,
+            'photos' => $photos->values(),
             'seo' => [
                 'title' => $culinary->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($culinary->description), 150),

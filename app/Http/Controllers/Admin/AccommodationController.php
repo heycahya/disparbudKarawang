@@ -43,6 +43,9 @@ class AccommodationController extends Controller
     public function store(StoreAccommodationRequest $request)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        unset($validated['photos'], $validated['photo_captions']);
 
         try {
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
@@ -53,7 +56,24 @@ class AccommodationController extends Controller
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }
 
-        Accommodation::create($validated);
+        $accommodation = Accommodation::create($validated);
+
+        if ($photosData && is_array($photosData)) {
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/accommodation/gallery'
+                    ]);
+                    $accommodation->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.accommodations.index')
             ->with('success', 'Akomodasi berhasil ditambahkan.');
@@ -62,13 +82,17 @@ class AccommodationController extends Controller
     public function edit(Accommodation $accommodation)
     {
         return Inertia::render('Admin/Content/Accommodation/Edit', [
-            'item' => $accommodation
+            'item' => $accommodation->load('photos')
         ]);
     }
 
     public function update(UpdateAccommodationRequest $request, Accommodation $accommodation)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        $deletedPhotoIds = $validated['deleted_photo_ids'] ?? null;
+        unset($validated['photos'], $validated['photo_captions'], $validated['deleted_photo_ids']);
 
         if ($request->hasFile('cover_image')) {
             try {
@@ -79,6 +103,8 @@ class AccommodationController extends Controller
             } catch (\Exception $e) {
                 return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
             }
+        } else {
+            unset($validated['cover_image']);
         }
 
         if ($accommodation->name !== $validated['name']) {
@@ -86,6 +112,30 @@ class AccommodationController extends Controller
         }
 
         $accommodation->update($validated);
+
+        // Delete requested gallery photos
+        if ($deletedPhotoIds && is_array($deletedPhotoIds)) {
+            $accommodation->photos()->whereIn('id', $deletedPhotoIds)->delete();
+        }
+
+        // Save new gallery photos
+        if ($photosData && is_array($photosData)) {
+            $maxOrder = $accommodation->photos()->max('order') ?? -1;
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/accommodation/gallery'
+                    ]);
+                    $accommodation->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $maxOrder + 1 + $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.accommodations.index')
             ->with('success', 'Akomodasi berhasil diperbarui.');

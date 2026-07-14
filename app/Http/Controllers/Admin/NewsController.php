@@ -91,6 +91,8 @@ class NewsController extends Controller
             } catch (\Exception $e) {
                 return back()->withErrors(['thumbnail' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
             }
+        } else {
+            unset($validated['thumbnail']);
         }
 
         if ($validated['status'] === 'published' && !$news->published_at) {

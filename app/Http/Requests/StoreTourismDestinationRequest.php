@@ -22,6 +22,10 @@ class StoreTourismDestinationRequest extends FormRequest
             'longitude' => 'nullable|numeric|between:-180,180',
             'status' => 'required|in:draft,published',
             'cover_image' => 'required|image|max:2048', // max 2MB
+            'photos' => 'nullable|array',
+            'photos.*' => 'image|max:2048',
+            'photo_captions' => 'nullable|array',
+            'photo_captions.*' => 'nullable|string|max:255',
         ];
     }
 }

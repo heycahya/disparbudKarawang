@@ -24,6 +24,10 @@ class StoreAccommodationRequest extends FormRequest
             'longitude' => 'nullable|numeric|between:-180,180',
             'status' => 'required|in:draft,published',
             'cover_image' => 'required|image|max:2048',
+            'photos' => 'nullable|array',
+            'photos.*' => 'image|max:2048',
+            'photo_captions' => 'nullable|array',
+            'photo_captions.*' => 'nullable|string|max:255',
         ];
     }
 }

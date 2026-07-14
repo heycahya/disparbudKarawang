@@ -21,6 +21,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Resinda Raya No. 1, Purwadana, Kec. Telukjambe Timur, 41361',
                 'phone' => '(0267) 8622000',
                 'price_range' => 'Mulai Rp1.262.973',
+                'cover_image' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Mercure Karawang',
@@ -29,6 +30,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Galuh Mas Raya, Sukaharja, Kec. Telukjambe Timur, 41361',
                 'phone' => '(0267) 8638888',
                 'price_range' => 'Rp500.136–Rp569.256',
+                'cover_image' => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Brits Hotel Karawang',
@@ -37,6 +39,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Arteri Tol Karawang Barat No. 1, Kav. 8, Margakaya, Kec. Telukjambe Barat, 41361',
                 'phone' => null, // Excluded twin duplicate phone to prevent redundant data distortion
                 'price_range' => 'Rp466.301–Rp591.143',
+                'cover_image' => 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Swiss-Belhotel Karawang',
@@ -45,6 +48,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Jenderal Ahmad Yani No. 29, Tanjungpura, Kec. Karawang Barat, 41315',
                 'phone' => null,
                 'price_range' => 'Rp538.428',
+                'cover_image' => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Asialink Premier Hotel & Residence',
@@ -53,6 +57,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Raya Badami RT.04/RW.02, Margakaya, Kec. Telukjambe Barat, 41361',
                 'phone' => '(0267) 8637638',
                 'price_range' => 'Mulai Rp263.383',
+                'cover_image' => 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Novotel Karawang',
@@ -61,6 +66,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Interchange Karawang Barat, Margakaya, Kec. Telukjambe Barat, 41361',
                 'phone' => '(0267) 6483333',
                 'price_range' => 'Rp520.651–Rp637.641',
+                'cover_image' => 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'PrimeBiz Hotel Karawang',
@@ -69,6 +75,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Blok C, Kawasan Kota, Kalihurip, Kec. Cikampek, 41363',
                 'phone' => '(0264) 8371010',
                 'price_range' => 'Mulai Rp334.790',
+                'cover_image' => 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Grand Karawang Indah Hotel',
@@ -77,6 +84,7 @@ class AccommodationSeeder extends Seeder
                 'address' => 'Jl. Jenderal Ahmad Yani By Pass No. 28, Tanjungpura, Kec. Karawang Barat, 41315',
                 'phone' => '(0267) 410656',
                 'price_range' => 'Rp196.560–Rp279.400',
+                'cover_image' => 'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?auto=format&fit=crop&w=800&q=80',
             ],
         ];
 
@@ -89,7 +97,7 @@ class AccommodationSeeder extends Seeder
                 'address' => $item['address'],
                 'phone' => $item['phone'],
                 'price_range' => $item['price_range'],
-                'cover_image' => null,
+                'cover_image' => $item['cover_image'],
                 'latitude' => null,
                 'longitude' => null,
                 'status' => 'published',

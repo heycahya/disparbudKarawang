@@ -43,6 +43,9 @@ class CultureController extends Controller
     public function store(StoreCultureRequest $request)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        unset($validated['photos'], $validated['photo_captions']);
 
         try {
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
@@ -53,7 +56,24 @@ class CultureController extends Controller
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }
 
-        Culture::create($validated);
+        $culture = Culture::create($validated);
+
+        if ($photosData && is_array($photosData)) {
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/culture/gallery'
+                    ]);
+                    $culture->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.cultures.index')
             ->with('success', 'Kebudayaan berhasil ditambahkan.');
@@ -62,13 +82,17 @@ class CultureController extends Controller
     public function edit(Culture $culture)
     {
         return Inertia::render('Admin/Content/Culture/Edit', [
-            'culture' => $culture
+            'culture' => $culture->load('photos')
         ]);
     }
 
     public function update(UpdateCultureRequest $request, Culture $culture)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        $deletedPhotoIds = $validated['deleted_photo_ids'] ?? null;
+        unset($validated['photos'], $validated['photo_captions'], $validated['deleted_photo_ids']);
 
         if ($request->hasFile('cover_image')) {
             try {
@@ -79,6 +103,8 @@ class CultureController extends Controller
             } catch (\Exception $e) {
                 return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
             }
+        } else {
+            unset($validated['cover_image']);
         }
 
         if ($culture->name !== $validated['name']) {
@@ -86,6 +112,30 @@ class CultureController extends Controller
         }
 
         $culture->update($validated);
+
+        // Delete requested gallery photos
+        if ($deletedPhotoIds && is_array($deletedPhotoIds)) {
+            $culture->photos()->whereIn('id', $deletedPhotoIds)->delete();
+        }
+
+        // Save new gallery photos
+        if ($photosData && is_array($photosData)) {
+            $maxOrder = $culture->photos()->max('order') ?? -1;
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/culture/gallery'
+                    ]);
+                    $culture->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $maxOrder + 1 + $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.cultures.index')
             ->with('success', 'Kebudayaan berhasil diperbarui.');

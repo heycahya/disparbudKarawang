@@ -4,11 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Str;
 
 class CreativeEconomy extends Model
 {
     use HasFactory;
+
+    public function photos(): MorphMany
+    {
+        return $this->morphMany(GalleryPhoto::class, 'imageable')->orderBy('order');
+    }
 
     protected $table = 'creative_economies';
 

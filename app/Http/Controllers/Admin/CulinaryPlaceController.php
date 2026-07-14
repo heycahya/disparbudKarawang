@@ -43,6 +43,9 @@ class CulinaryPlaceController extends Controller
     public function store(StoreCulinaryPlaceRequest $request)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        unset($validated['photos'], $validated['photo_captions']);
 
         try {
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
@@ -53,7 +56,24 @@ class CulinaryPlaceController extends Controller
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }
 
-        CulinaryPlace::create($validated);
+        $culinary = CulinaryPlace::create($validated);
+
+        if ($photosData && is_array($photosData)) {
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/culinary/gallery'
+                    ]);
+                    $culinary->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.culinary-places.index')
             ->with('success', 'Tempat kuliner berhasil ditambahkan.');
@@ -62,13 +82,17 @@ class CulinaryPlaceController extends Controller
     public function edit(CulinaryPlace $culinaryPlace)
     {
         return Inertia::render('Admin/Content/CulinaryPlace/Edit', [
-            'item' => $culinaryPlace
+            'item' => $culinaryPlace->load('photos')
         ]);
     }
 
     public function update(UpdateCulinaryPlaceRequest $request, CulinaryPlace $culinaryPlace)
     {
         $validated = $request->validated();
+        $photosData = $validated['photos'] ?? null;
+        $photoCaptions = $validated['photo_captions'] ?? null;
+        $deletedPhotoIds = $validated['deleted_photo_ids'] ?? null;
+        unset($validated['photos'], $validated['photo_captions'], $validated['deleted_photo_ids']);
 
         if ($request->hasFile('cover_image')) {
             try {
@@ -79,6 +103,8 @@ class CulinaryPlaceController extends Controller
             } catch (\Exception $e) {
                 return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
             }
+        } else {
+            unset($validated['cover_image']);
         }
 
         if ($culinaryPlace->name !== $validated['name']) {
@@ -86,6 +112,30 @@ class CulinaryPlaceController extends Controller
         }
 
         $culinaryPlace->update($validated);
+
+        // Delete requested gallery photos
+        if ($deletedPhotoIds && is_array($deletedPhotoIds)) {
+            $culinaryPlace->photos()->whereIn('id', $deletedPhotoIds)->delete();
+        }
+
+        // Save new gallery photos
+        if ($photosData && is_array($photosData)) {
+            $maxOrder = $culinaryPlace->photos()->max('order') ?? -1;
+            foreach ($photosData as $i => $file) {
+                try {
+                    $uploadResponse = $this->uploadApi->upload($file->getRealPath(), [
+                        'folder' => 'disparbud_karawang/culinary/gallery'
+                    ]);
+                    $culinaryPlace->photos()->create([
+                        'photo' => $uploadResponse['secure_url'],
+                        'caption' => $photoCaptions[$i] ?? null,
+                        'order' => $maxOrder + 1 + $i
+                    ]);
+                } catch (\Exception $e) {
+                    // Ignore single photo upload error
+                }
+            }
+        }
 
         return redirect()->route('admin.culinary-places.index')
             ->with('success', 'Tempat kuliner berhasil diperbarui.');

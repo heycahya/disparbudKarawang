@@ -20,6 +20,7 @@ class CreativeEconomySeeder extends Seeder
                 'owner_name' => null,
                 'contact' => null,
                 'address' => 'Kaum I, Jl. KH. Ahmad Dahlan No. 20, Kel. Karawang Kulon, Kec. Karawang Barat',
+                'cover_image' => 'https://images.unsplash.com/photo-1606744888344-493238951221?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Kampung Belanja Boneka Cikampek',
@@ -27,6 +28,7 @@ class CreativeEconomySeeder extends Seeder
                 'owner_name' => 'Kolektif Warga (Klaster UMKM)',
                 'contact' => null,
                 'address' => 'Kp. Ciselang, Desa Cikampek Utara, Kec. Kotabaru',
+                'cover_image' => 'https://images.unsplash.com/photo-1559251606-c623743a6d76?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'name' => 'Oleh-oleh Turubuk',
@@ -34,6 +36,7 @@ class CreativeEconomySeeder extends Seeder
                 'owner_name' => 'Kolaborasi PHRI Karawang & UMKM',
                 'contact' => null,
                 'address' => null,
+                'cover_image' => 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
             ],
         ];
 
@@ -45,7 +48,7 @@ class CreativeEconomySeeder extends Seeder
                 'owner_name' => $item['owner_name'],
                 'contact' => $item['contact'],
                 'address' => $item['address'],
-                'cover_image' => null,
+                'cover_image' => $item['cover_image'],
                 'status' => 'published',
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -22,24 +22,28 @@ class NewsSeeder extends Seeder
                 'category_name' => 'Event/Olahraga & Pariwisata',
                 'published_at' => '2026-06-17 00:00:00',
                 'content' => 'Festival dayung perahu naga perdana di Danau Cipule, Kec. Ciampel, 19–21 Juni 2026, melibatkan >30 perahu dan ±1.500 atlet/ofisial — jadi instrumen sports tourism yang mendongkrak ekonomi UMKM lokal.',
+                'thumbnail' => 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'title' => 'Bidang Kebudayaan dan Pora Tukar Tempat, Disparbud Karawang Siap Jalani Transisi',
                 'category_name' => 'Kebijakan Daerah',
                 'published_at' => '2025-10-08 00:00:00',
                 'content' => 'Perda penataan kelembagaan memindahkan Bidang Kebudayaan ke Dinas Pendidikan dan Bidang Pemuda/Olahraga ke Dinas Pariwisata, membentuk Disparpora mulai 2026. Kepala Dinas Abas Sudrajat memimpin proses transisi.',
+                'thumbnail' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'title' => 'Bukan Sekadar Kawasan Industri, Karawang Targetkan Penambahan Desa Wisata Baru di 2026',
                 'category_name' => 'Destinasi/Desa Wisata',
                 'published_at' => '2025-08-01 00:00:00',
                 'content' => 'Pemda mendorong pengembangan Desa Wisata dari basis 8 desa aktif (termasuk Desa Pangulah Utara pemenang runner-up Hari Pariwisata Dunia tingkat Jabar lewat Situ Darwin), dengan dukungan fiskal & manajerial.',
+                'thumbnail' => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
             ],
             [
                 'title' => 'Sebentar Lagi Warga Bisa Akses Informasi Cagar Budaya Karawang Lewat Kode QR (SAGAWANG)',
                 'category_name' => 'Inovasi Teknologi',
                 'published_at' => '2025-07-01 00:00:00',
                 'content' => 'Peluncuran platform digital SAGAWANG (Sejarah Cagar Budaya Karawang), digitalisasi manuskrip & silsilah cagar budaya, dengan plakat QR Code di situs-situs cagar budaya.',
+                'thumbnail' => 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&w=800&q=80',
             ],
         ];
 
@@ -53,7 +57,7 @@ class NewsSeeder extends Seeder
                     'news_category_id' => $catId,
                     'title' => $article['title'],
                     'slug' => Str::slug($article['title']),
-                    'thumbnail' => null,
+                    'thumbnail' => $article['thumbnail'],
                     'content' => $article['content'],
                     'status' => 'published',
                     'published_at' => $article['published_at'],
