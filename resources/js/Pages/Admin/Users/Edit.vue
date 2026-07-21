@@ -49,7 +49,6 @@ const submit = () => {
                             <label class="block text-sm font-medium text-gray-700">Role</label>
                             <select v-model="form.role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                                 <option value="admin">Admin</option>
-                                <option value="super_admin">Super Admin</option>
                             </select>
                             <div v-if="form.errors.role" class="text-red-500 text-sm mt-1">{{ form.errors.role }}</div>
                         </div>

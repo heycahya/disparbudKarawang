@@ -13,7 +13,7 @@ class NewsSeeder extends Seeder
      */
     public function run(): void
     {
-        $userId = DB::table('users')->where('role', 'super_admin')->value('id') ?? 1;
+        $userId = DB::table('users')->where('role', 'admin')->value('id') ?? 1;
         $categories = DB::table('news_categories')->pluck('id', 'slug');
 
         $articles = [

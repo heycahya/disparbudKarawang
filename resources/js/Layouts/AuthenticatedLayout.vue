@@ -87,8 +87,8 @@ watch(
                     </Link>
                 </template>
 
-                <!-- Admin & Super Admin Links -->
-                <template v-if="$page.props.auth.user?.role === 'admin' || $page.props.auth.user?.role === 'super_admin'">
+                <!-- Admin Links -->
+                <template v-if="$page.props.auth.user?.role === 'admin'">
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Manajemen Konten</span>
                     </div>
@@ -178,24 +178,22 @@ watch(
                         <span>Kuliner Lokal</span>
                     </Link>
 
-                    <!-- Akun (Super Admin Only) -->
-                    <template v-if="$page.props.auth.user?.role === 'super_admin'">
-                        <div class="pt-4 pb-2 px-4">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Sistem</span>
-                        </div>
-                        <Link 
-                            :href="route('admin.manajemen-akun')"
-                            class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
-                            :class="route().current('admin.manajemen-akun') 
-                                ? 'bg-amber-400 text-slate-900 shadow-md shadow-amber-400/20' 
-                                : 'text-emerald-100 hover:bg-white/10 hover:text-white'"
-                        >
-                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                            <span>Manajemen Akun</span>
-                        </Link>
-                    </template>
+                    <!-- Akun -->
+                    <div class="pt-4 pb-2 px-4">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Sistem</span>
+                    </div>
+                    <Link 
+                        :href="route('admin.manajemen-akun')"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.manajemen-akun') 
+                            ? 'bg-amber-400 text-slate-900 shadow-md shadow-amber-400/20' 
+                            : 'text-emerald-100 hover:bg-white/10 hover:text-white'"
+                    >
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span>Manajemen Akun</span>
+                    </Link>
                 </template>
             </nav>
 
@@ -292,7 +290,7 @@ watch(
                     </Link>
                 </template>
 
-                <template v-if="$page.props.auth.user?.role === 'admin' || $page.props.auth.user?.role === 'super_admin'">
+                <template v-if="$page.props.auth.user?.role === 'admin'">
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Manajemen Konten</span>
                     </div>
@@ -358,19 +356,17 @@ watch(
                     </Link>
 
                     <!-- Akun -->
-                    <template v-if="$page.props.auth.user?.role === 'super_admin'">
-                        <div class="pt-4 pb-2 px-4">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Sistem</span>
-                        </div>
-                        <Link 
-                            :href="route('admin.manajemen-akun')"
-                            @click="showingSidebarMobile = false"
-                            class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
-                            :class="route().current('admin.manajemen-akun') ? 'bg-amber-400 text-slate-900' : 'text-emerald-100 hover:bg-white/10'"
-                        >
-                            <span>Manajemen Akun</span>
-                        </Link>
-                    </template>
+                    <div class="pt-4 pb-2 px-4">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Sistem</span>
+                    </div>
+                    <Link 
+                        :href="route('admin.manajemen-akun')"
+                        @click="showingSidebarMobile = false"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.manajemen-akun') ? 'bg-amber-400 text-slate-900' : 'text-emerald-100 hover:bg-white/10'"
+                    >
+                        <span>Manajemen Akun</span>
+                    </Link>
                 </template>
             </nav>
 

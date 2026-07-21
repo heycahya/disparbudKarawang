@@ -50,27 +50,29 @@ const getCategoryLabel = (cat) => {
             
             <!-- Category Filter Pills -->
             <div class="flex flex-wrap gap-2 border-b border-gray-200 dark:border-gray-800 pb-6">
-                <Link 
+                <a 
                     :href="route('public.gallery.index', { category: 'all' })"
+                    rel="external"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === 'all' 
                         ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
                         : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     Semua Foto
-                </Link>
+                </a>
 
-                <Link 
+                <a 
                     v-for="cat in categories" 
                     :key="cat"
                     :href="route('public.gallery.index', { category: cat })"
+                    rel="external"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === cat 
                         ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
                         : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     {{ getCategoryLabel(cat) }}
-                </Link>
+                </a>
             </div>
 
             <!-- Image Grid -->
@@ -111,9 +113,10 @@ const getCategoryLabel = (cat) => {
             <!-- Pagination Links -->
             <div v-if="galleries?.links?.length > 3" class="flex justify-center space-x-2 mt-8">
                 <div v-for="link in galleries.links" :key="link.label">
-                    <Link 
+                    <a 
                         v-if="link.url" 
                         :href="link.url" 
+                        rel="external"
                         class="px-4 py-2 border rounded-lg text-sm font-semibold transition"
                         :class="link.active 
                             ? 'bg-[#0F5E3D] text-white border-[#0F5E3D]' 

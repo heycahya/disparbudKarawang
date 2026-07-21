@@ -1,34 +1,137 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+// FooterGlobal: All navigation links point to section anchors on the Home page.
+// External links (gov sites) open in a new tab.
 </script>
 
 <template>
-    <footer class="bg-[#0C4E5B] text-white py-12 mt-auto border-t border-teal-900">
+    <footer class="bg-[#004D3C] text-white pt-14 pb-8 mt-auto border-t border-black/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-emerald-300">Dinas Pariwisata dan Kebudayaan</h4>
-                    <p class="text-xs text-teal-100/80 leading-relaxed">
-                        Jl. Alun-Alun Selatan No. 1, Karawang Kulon, Kec. Karawang Barat, Kabupaten Karawang, Jawa Barat 41311
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/10">
+
+                <!-- Branding & About -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="flex-shrink-0">
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="36" height="36" rx="9" class="fill-white/10 dark:fill-gray-900/50 stroke-white/30" stroke-width="1.5"/>
+                                <path d="M12 13C14 17 16 27 20 27C24 27 26 17 28 13" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 18C18 20 20 22.5 20 22.5C20 22.5 22 20 24 18" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="20" cy="31" r="2" fill="#F59E0B" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xl font-extrabold tracking-tight text-white">
+                                Vibe <span class="text-emerald-300">Karawang</span>
+                            </span>
+                            <p class="text-[10px] uppercase font-bold tracking-wider text-amber-400">Pariwisata &amp; Kebudayaan</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-teal-100/80 leading-relaxed max-w-sm">
+                        Portal Resmi Dinas Pariwisata dan Kebudayaan Kabupaten Karawang. Melayani informasi pariwisata, cagar budaya, ekonomi kreatif, dan layanan mandiri masyarakat.
                     </p>
+                    <address class="text-xs text-teal-100/70 not-italic space-y-1">
+                        <p>📍 Jl. Alun-Alun Selatan No. 1, Karawang Kulon, Kec. Karawang Barat, Kabupaten Karawang 41311</p>
+                        <p>📞 (0267) 429800</p>
+                        <p>✉️ disparbud@karawangkab.go.id</p>
+                    </address>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-emerald-300">Tautan Pintas</h4>
-                    <ul class="space-y-1.5 text-xs text-teal-100/80">
-                        <li><Link :href="route('public.profile')" class="hover:text-amber-300 transition-colors">Profil Lembaga</Link></li>
-                        <li><Link :href="route('public.destinasi')" class="hover:text-amber-300 transition-colors">Direktori Pariwisata</Link></li>
-                        <li><Link :href="route('public.gallery.index')" class="hover:text-amber-300 transition-colors">Galeri Foto</Link></li>
-                        <li><Link :href="route('public.news.index')" class="hover:text-amber-300 transition-colors">Warta & Berita</Link></li>
+
+                <!-- Quick Navigation — all anchors to Home sections -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-emerald-300 uppercase tracking-widest">Navigasi Portal</h4>
+                    <ul class="space-y-2 text-xs text-teal-100/80">
+                        <li>
+                            <a href="/#section-hero" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Beranda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-profil" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Profil Lembaga
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-wisata" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Destinasi Wisata
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-budaya" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Seni &amp; Kebudayaan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-ekraf" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Ekonomi Kreatif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-akomodasi-kuliner" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Akomodasi &amp; Kuliner
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-berita" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Berita &amp; Pengumuman
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-galeri-peta" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Galeri &amp; Peta
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-3 text-emerald-300">Kontak Resmi</h4>
-                    <p class="text-xs text-teal-100/80">Telepon: (0267) 429800</p>
-                    <p class="text-xs text-teal-100/80">Email: disparbud@karawangkab.go.id</p>
+
+                <!-- Layanan & Instansi -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-emerald-300 uppercase tracking-widest">Layanan Masyarakat</h4>
+                    <ul class="space-y-2 text-xs text-teal-100/80">
+                        <li>
+                            <a href="/#section-layanan" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Form Pengaduan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-layanan" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Usul Wisata Baru
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#section-layanan" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                                <span class="text-[10px]">▸</span> Pengajuan Event
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="pt-2 border-t border-teal-800/40">
+                        <h4 class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-2">Instansi Terkait</h4>
+                        <ul class="space-y-1.5 text-xs text-teal-100/70">
+                            <li>
+                                <a href="https://www.karawangkab.go.id" target="_blank" rel="noopener noreferrer" class="hover:text-amber-300 transition-colors">
+                                    ↗ Pemkab Karawang
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://jabarprov.go.id" target="_blank" rel="noopener noreferrer" class="hover:text-amber-300 transition-colors">
+                                    ↗ Disparbud Jawa Barat
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://kemenparekraf.go.id" target="_blank" rel="noopener noreferrer" class="hover:text-amber-300 transition-colors">
+                                    ↗ Kemenparekraf RI
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
-            <div class="mt-8 pt-6 border-t border-teal-800/80 text-center text-xs text-teal-200/60">
-                &copy; 2026 Pemkab Karawang - Dinas Pariwisata dan Kebudayaan.
+
+            <!-- Bottom Bar -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-teal-200/50">
+                <p>&copy; 2026 Pemerintah Kabupaten Karawang — Dinas Pariwisata dan Kebudayaan.</p>
+                <p class="text-[10px]">Dikembangkan oleh Tim IT Disparbud Karawang</p>
             </div>
         </div>
     </footer>

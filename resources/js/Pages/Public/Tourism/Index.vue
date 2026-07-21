@@ -143,23 +143,22 @@ const getCulinaryTypeLabel = (type) => {
                             </span>
                         </div>
 
-                        <!-- Name -->
                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 line-clamp-2">
-                            <Link v-if="activeTab === 'tourism'" :href="route('public.tourism.show', item.slug)" class="hover:text-[#0F5E3D] transition">
+                            <a v-if="activeTab === 'tourism'" :href="route('public.tourism.show', item.slug)" rel="external" class="hover:text-[#0F5E3D] transition">
                                 {{ item.name }}
-                            </Link>
-                            <Link v-else-if="activeTab === 'culture'" :href="route('public.culture.show', item.slug)" class="hover:text-sky-700 transition">
+                            </a>
+                            <a v-else-if="activeTab === 'culture'" :href="route('public.culture.show', item.slug)" rel="external" class="hover:text-sky-700 transition">
                                 {{ item.name }}
-                            </Link>
-                            <Link v-else-if="activeTab === 'ekraf'" :href="route('public.ekraf.show', item.slug)" class="hover:text-purple-700 transition">
+                            </a>
+                            <a v-else-if="activeTab === 'ekraf'" :href="route('public.ekraf.show', item.slug)" rel="external" class="hover:text-purple-700 transition">
                                 {{ item.name }}
-                            </Link>
-                            <Link v-else-if="activeTab === 'accommodation'" :href="route('public.accommodation.show', item.slug)" class="hover:text-indigo-700 transition">
+                            </a>
+                            <a v-else-if="activeTab === 'accommodation'" :href="route('public.accommodation.show', item.slug)" rel="external" class="hover:text-indigo-700 transition">
                                 {{ item.name }}
-                            </Link>
-                            <Link v-else-if="activeTab === 'culinary'" :href="route('public.culinary.show', item.slug)" class="hover:text-amber-700 transition">
+                            </a>
+                            <a v-else-if="activeTab === 'culinary'" :href="route('public.culinary.show', item.slug)" rel="external" class="hover:text-amber-700 transition">
                                 {{ item.name }}
-                            </Link>
+                            </a>
                             <span v-else>{{ item.name }}</span>
                         </h3>
 
@@ -203,9 +202,10 @@ const getCulinaryTypeLabel = (type) => {
             <!-- Pagination links -->
             <div v-if="data?.links?.length > 3" class="flex justify-center space-x-2 mt-8">
                 <div v-for="link in data.links" :key="link.label">
-                    <Link 
+                    <a 
                         v-if="link.url" 
                         :href="link.url" 
+                        rel="external"
                         class="px-4 py-2 border rounded-lg text-sm transition font-medium"
                         :class="link.active 
                             ? 'bg-[#0F5E3D] text-white border-[#0F5E3D]' 

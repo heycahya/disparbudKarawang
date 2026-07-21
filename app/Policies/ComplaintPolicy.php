@@ -15,7 +15,7 @@ class ComplaintPolicy
      */
     public function before(User $user, string $ability): ?bool
     {
-        if (in_array($user->role, ['admin', 'super_admin'])) {
+        if ($user->role === 'admin') {
             return true;
         }
 

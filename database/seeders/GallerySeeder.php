@@ -13,7 +13,7 @@ class GallerySeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::where('role', 'admin')->orWhere('role', 'super_admin')->first()
+        $admin = User::where('role', 'admin')->first()
             ?? User::factory()->create(['role' => 'admin']);
 
         $items = [

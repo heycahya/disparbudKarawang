@@ -18,7 +18,7 @@ import { Head } from '@inertiajs/vue3';
                 <div class="overflow-hidden bg-white shadow-xl rounded-asymmetric dark:bg-gray-800 border-l-8 border-[#0F5E3D]">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1 class="text-2xl font-bold mb-4 text-[#0F5E3D]">Manajemen Akun Pengelola</h1>
-                        <p class="mb-4">Halaman khusus Super Admin untuk mengelola akun internal (Admin & Super Admin).</p>
+                        <p class="mb-4">Halaman Admin untuk mengelola akun pengelola Disparbud.</p>
                     </div>
                 </div>
             </div>

@@ -23,13 +23,27 @@ class PublicPortalController extends Controller
         $latestNews = News::with('category')
             ->where('status', 'published')
             ->latest()
-            ->take(3)
             ->get();
 
         $featuredDestinations = TourismDestination::with('category')
             ->where('status', 'published')
             ->latest()
-            ->take(6)
+            ->get();
+
+        $cultures = Culture::where('status', 'published')
+            ->latest()
+            ->get();
+
+        $ekraf = CreativeEconomy::where('status', 'published')
+            ->latest()
+            ->get();
+
+        $accommodations = Accommodation::where('status', 'published')
+            ->latest()
+            ->get();
+
+        $culinary = CulinaryPlace::where('status', 'published')
+            ->latest()
             ->get();
 
         $mapDestinations = TourismDestination::with('category')
@@ -58,11 +72,20 @@ class PublicPortalController extends Controller
             'ekraf' => CreativeEconomy::where('status', 'published')->count(),
         ];
 
+        $galleries = \App\Models\Gallery::latest()->take(6)->get();
+        $profile = \App\Models\OrganizationProfile::first();
+
         return Inertia::render('Public/Home', [
             'hero_stats' => $heroStats,
             'latest_news' => $latestNews,
             'featured_destinations' => $featuredDestinations,
+            'cultures' => $cultures,
+            'ekraf' => $ekraf,
+            'accommodations' => $accommodations,
+            'culinary' => $culinary,
             'destinations' => $mapDestinations,
+            'galleries' => $galleries,
+            'organization_profile' => $profile,
             'news' => $latestNews,
             'tourism' => $featuredDestinations,
         ]);
@@ -141,8 +164,16 @@ class PublicPortalController extends Controller
 
         $news->increment('views');
 
+        $relatedNews = News::with('category')
+            ->where('status', 'published')
+            ->where('id', '!=', $news->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/News/Show', [
             'news' => $news,
+            'relatedNews' => $relatedNews,
             'seo' => [
                 'title' => $news->title,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($news->content), 150),
@@ -236,10 +267,18 @@ class PublicPortalController extends Controller
             $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
         }
 
+        $relatedItems = TourismDestination::with('category')
+            ->where('id', '!=', $destination->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'tourism',
             'item' => $destination,
             'photos' => $photos->values(),
+            'relatedItems' => $relatedItems,
             'seo' => [
                 'title' => $destination->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($destination->description), 150),
@@ -266,10 +305,17 @@ class PublicPortalController extends Controller
             $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
         }
 
+        $relatedItems = Culture::where('id', '!=', $culture->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'culture',
             'item' => $culture,
             'photos' => $photos->values(),
+            'relatedItems' => $relatedItems,
             'seo' => [
                 'title' => $culture->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($culture->description), 150),
@@ -294,10 +340,17 @@ class PublicPortalController extends Controller
             $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
         }
 
+        $relatedItems = CreativeEconomy::where('id', '!=', $ekraf->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'ekraf',
             'item' => $ekraf,
             'photos' => $photos->values(),
+            'relatedItems' => $relatedItems,
             'seo' => [
                 'title' => $ekraf->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($ekraf->description), 150),
@@ -314,8 +367,6 @@ class PublicPortalController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
-        $accommodation->increment('views');
-
         $photos = collect();
         if ($accommodation->cover_image) {
             $photos->push(['url' => $accommodation->cover_image, 'caption' => $accommodation->name]);
@@ -324,10 +375,17 @@ class PublicPortalController extends Controller
             $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
         }
 
+        $relatedItems = Accommodation::where('id', '!=', $accommodation->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'accommodation',
             'item' => $accommodation,
             'photos' => $photos->values(),
+            'relatedItems' => $relatedItems,
             'seo' => [
                 'title' => $accommodation->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($accommodation->description), 150),
@@ -344,8 +402,6 @@ class PublicPortalController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
-        $culinary->increment('views');
-
         $photos = collect();
         if ($culinary->cover_image) {
             $photos->push(['url' => $culinary->cover_image, 'caption' => $culinary->name]);
@@ -354,10 +410,17 @@ class PublicPortalController extends Controller
             $photos->push(['url' => $p->photo, 'caption' => $p->caption ?? '']);
         }
 
+        $relatedItems = CulinaryPlace::where('id', '!=', $culinary->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         return Inertia::render('Public/Tourism/Show', [
             'type' => 'culinary',
             'item' => $culinary,
             'photos' => $photos->values(),
+            'relatedItems' => $relatedItems,
             'seo' => [
                 'title' => $culinary->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($culinary->description), 150),

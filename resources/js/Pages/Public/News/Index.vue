@@ -36,27 +36,29 @@ defineProps({
 
             <!-- Category Filter Bar if categories exist -->
             <div v-if="categories?.length" class="flex flex-wrap gap-2 border-b border-gray-200 dark:border-gray-800 pb-6">
-                <Link 
+                <a 
                     :href="route('public.news.index', { category: 'all' })"
+                    rel="external"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === 'all' 
                         ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
                         : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     Semua Berita
-                </Link>
+                </a>
 
-                <Link 
+                <a 
                     v-for="cat in categories" 
                     :key="cat.id"
                     :href="route('public.news.index', { category: cat.slug })"
+                    rel="external"
                     class="px-5 py-2 text-sm font-semibold transition duration-200 border"
                     :class="activeCategory === cat.slug 
                         ? 'bg-[#0F5E3D] text-white border-[#0F5E3D] rounded-md shadow-md' 
                         : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-100 rounded-md'"
                 >
                     {{ cat.name }}
-                </Link>
+                </a>
             </div>
 
             <!-- News Grid -->
@@ -84,19 +86,20 @@ defineProps({
                                 {{ item.category.name }}
                             </span>
                             <h3 class="text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-[#0F5E3D] transition">
-                                <Link :href="route('public.news.show', item.slug)">{{ item.title }}</Link>
+                                <a :href="route('public.news.show', item.slug)" rel="external">{{ item.title }}</a>
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed" v-html="item.content"></div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-0">
-                        <Link 
+                        <a 
                             :href="route('public.news.show', item.slug)" 
+                            rel="external"
                             class="text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline"
                         >
                             Baca Selengkapnya &rarr;
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -109,9 +112,10 @@ defineProps({
             <!-- Pagination links -->
             <div v-if="news?.links?.length > 3" class="flex justify-center space-x-2 mt-8">
                 <div v-for="link in news.links" :key="link.label">
-                    <Link 
+                    <a 
                         v-if="link.url" 
                         :href="link.url" 
+                        rel="external"
                         class="px-4 py-2 border rounded-lg text-sm font-semibold transition"
                         :class="link.active 
                             ? 'bg-[#0F5E3D] text-white border-[#0F5E3D]' 

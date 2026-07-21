@@ -64,8 +64,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
 
-    // Grup Admin & Super Admin
-    Route::middleware('role:super_admin,admin')->prefix('admin')->name('admin.')->group(function () {
+    // Grup Admin
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
@@ -91,14 +91,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::patch('event-broadcasts/{event_broadcast}/status', [\App\Http\Controllers\Admin\EventBroadcastReviewController::class, 'updateStatus'])->name('event-broadcasts.status');
         });
 
-        // Grup Eksklusif Super Admin
-        Route::middleware('role:super_admin')->group(function () {
-            Route::get('/manajemen-akun', function () {
-                return Inertia::render('Admin/ManajemenAkun');
-            })->name('manajemen-akun');
-            
-            Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
-        });
+        // Manajemen Akun & User Management
+        Route::get('/manajemen-akun', function () {
+            return Inertia::render('Admin/ManajemenAkun');
+        })->name('manajemen-akun');
+        
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
     });
 });
 

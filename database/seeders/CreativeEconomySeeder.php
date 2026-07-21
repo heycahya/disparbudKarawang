@@ -38,6 +38,30 @@ class CreativeEconomySeeder extends Seeder
                 'address' => null,
                 'cover_image' => 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
             ],
+            [
+                'name' => 'Kriya Anyam Bambu Pangulah',
+                'description' => 'Kerajinan anyaman bambu dari Desa Pangulah Utara yang menjadi produk unggulan Desa Wisata. Produk berupa keranjang, topi, tempat buah, hingga furnitur kecil berbasis bambu lokal dengan teknik anyam tradisional Sunda.',
+                'owner_name' => 'Kelompok Pengrajin Pangulah',
+                'contact' => null,
+                'address' => 'Desa Pangulah Utara, Kec. Kotabaru, Karawang',
+                'cover_image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
+            ],
+            [
+                'name' => 'Dorokdok Kulit Sapi Khas Karawang',
+                'description' => 'Kerupuk kulit sapi khas Karawang yang diolah secara tradisional dengan bumbu rempah khas Sunda. Menjadi oleh-oleh populer yang dijual di pusat oleh-oleh dan pasar tradisional Karawang.',
+                'owner_name' => 'UMKM Lokal Karawang',
+                'contact' => null,
+                'address' => 'Pasar Tradisional Karawang Kota',
+                'cover_image' => 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80',
+            ],
+            [
+                'name' => 'Kopi Arabika Sanggabuana',
+                'description' => 'Kopi arabika premium dari perkebunan lereng Gunung Sanggabuana, Karawang Selatan. Dikelola petani lokal dengan metode natural process, menghasilkan cita rasa fruity dan earthy yang diminati kafe-kafe di Jakarta dan Bandung.',
+                'owner_name' => 'Kelompok Tani Sanggabuana Coffee',
+                'contact' => null,
+                'address' => 'Kec. Tegalwaru, Karawang Selatan',
+                'cover_image' => 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80',
+            ],
         ];
 
         foreach ($creativeEconomies as $item) {

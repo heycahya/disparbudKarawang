@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
 
         $role = $request->user()->role;
 
-        if (in_array($role, ['super_admin', 'admin'])) {
+        if ($role === 'admin') {
             $intended = session()->get('url.intended');
             if ($intended && !str_contains($intended, '/admin')) {
                 session()->forget('url.intended');

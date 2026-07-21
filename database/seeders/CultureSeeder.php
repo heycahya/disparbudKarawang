@@ -32,6 +32,24 @@ class CultureSeeder extends Seeder
                 'description' => 'Teater rakyat & komedi satir vernakular khas Karawang, memadukan dramaturgi, lawakan spontan, dan tarian rakyat. Berelasi dengan akar penari ronggeng dan menjadi katalis lahirnya koreografi awal Tari Goyang Karawang.',
                 'cover_image' => 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80',
             ],
+            [
+                'name' => 'Wayang Golek Karawang',
+                'category' => 'kesenian',
+                'description' => 'Wayang golek khas Karawang dengan ciri khas karakter dan lakon yang berakar dari budaya Sunda pesisir. Pertunjukan wayang golek biasanya diiringi gamelan pelog-salendro dan menjadi hiburan rakyat di berbagai hajatan.',
+                'cover_image' => 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80',
+            ],
+            [
+                'name' => 'Beluk / Macapat Sunda',
+                'category' => 'tradisi',
+                'description' => 'Seni vokal tradisional Sunda yang dilantunkan dalam laras madenda atau salendro. Di Karawang, beluk biasa dimainkan dalam upacara selamatan, khitanan, dan pernikahan sebagai ungkapan syukur kepada Tuhan Yang Maha Esa.',
+                'cover_image' => 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
+            ],
+            [
+                'name' => 'Debus Karawang',
+                'category' => 'tradisi',
+                'description' => 'Seni bela diri mistis yang menampilkan kekebalan tubuh terhadap senjata tajam. Berakar dari tradisi pesantren dan dipertunjukkan pada perayaan hari besar Islam serta acara budaya resmi Kabupaten Karawang.',
+                'cover_image' => 'https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?auto=format&fit=crop&w=800&q=80',
+            ],
         ];
 
         foreach ($cultures as $culture) {

@@ -182,7 +182,7 @@ onBeforeUnmount(() => {
                             </p>
                         </div>
                         <div class="inline-flex self-start md:self-auto items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#0F5E3D]/10 text-[#0F5E3D] dark:bg-[#10B981]/10 dark:text-[#10B981]">
-                            Otoritas: {{ user.role === 'super_admin' ? 'Super Administrator' : 'Administrator' }}
+                            Otoritas: Administrator
                         </div>
                     </div>
                 </div>

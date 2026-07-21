@@ -38,19 +38,9 @@ test('admin user is redirected to admin dashboard after login', function () {
     $response->assertRedirect('/admin/dashboard');
 });
 
-test('admin user is forbidden from account management', function () {
+test('admin user can access admin dashboard and account management', function () {
     $user = User::factory()->create([
         'role' => 'admin',
-    ]);
-
-    $response = $this->actingAs($user)->get('/admin/manajemen-akun');
-
-    $response->assertStatus(403);
-});
-
-test('super admin can access admin dashboard and account management', function () {
-    $user = User::factory()->create([
-        'role' => 'super_admin',
     ]);
 
     $response1 = $this->actingAs($user)->get('/admin/dashboard');

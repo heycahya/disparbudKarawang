@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whereIn('role', ['admin', 'super_admin'])->latest()->paginate(10);
+        $users = User::where('role', 'admin')->latest()->paginate(10);
         return Inertia::render('Admin/Users/Index', [
             'users' => $users
         ]);
@@ -40,7 +40,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|in:admin,super_admin',
+            'role' => 'required|in:admin',
         ]);
 
         User::create([
@@ -80,7 +80,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class.',email,'.$user->id,
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|in:admin,super_admin',
+            'role' => 'required|in:admin',
         ]);
 
         $user->name = $validated['name'];

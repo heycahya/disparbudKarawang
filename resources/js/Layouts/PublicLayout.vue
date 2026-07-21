@@ -27,40 +27,7 @@ watch(
     { immediate: true, deep: true }
 );
 
-// Intercept all internal <a> link clicks to prevent full-page reload and use Inertia navigation
-const handleGlobalClick = (event) => {
-    const link = event.target.closest('a');
-    if (!link) return;
 
-    const href = link.getAttribute('href');
-    if (!href) return;
-
-    // Check if the link is an internal link (starts with "/" or matches local origin)
-    // Avoid intercepting external links, download routes, hash/anchor links, or Javascript calls
-    const isInternal = href.startsWith('/') || href.startsWith(window.location.origin);
-    const isAssetOrDownload = href.includes('/storage/') || href.includes('/download/') || link.hasAttribute('download');
-    const isHash = href.startsWith('#');
-    const isMailOrPhone = href.startsWith('mailto:') || href.startsWith('tel:');
-
-    if (isInternal && !isAssetOrDownload && !isHash && !isMailOrPhone) {
-        event.preventDefault();
-        
-        // Extract pathname and query if origin matches
-        const url = href.startsWith(window.location.origin) 
-            ? href.slice(window.location.origin.length) 
-            : href;
-            
-        router.visit(url);
-    }
-};
-
-onMounted(() => {
-    document.addEventListener('click', handleGlobalClick);
-});
-
-onBeforeUnmount(() => {
-    document.removeEventListener('click', handleGlobalClick);
-});
 </script>
 
 <template>

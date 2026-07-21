@@ -12,7 +12,7 @@ defineProps({
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Manajemen User (Admin & Super Admin)</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Manajemen User</h2>
         </template>
 
         <div class="py-12">
@@ -45,8 +45,8 @@ defineProps({
                                 <td class="px-6 py-4 whitespace-nowrap">{{ user.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap capitalize">
-                                    <span :class="{'bg-purple-100 text-purple-800': user.role === 'super_admin', 'bg-blue-100 text-blue-800': user.role === 'admin'}" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                                        {{ user.role.replace('_', ' ') }}
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        {{ user.role }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
