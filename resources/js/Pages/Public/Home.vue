@@ -317,10 +317,13 @@ onMounted(() => {
                     <div
                         v-for="item in visibleTourism"
                         :key="item.id" 
-                        class="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
+                        class="group bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
                     >
                         <div>
-                            <a :href="route('public.tourism.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
+                            <a :href="route('public.tourism.show', item.slug)" rel="external" class="block relative overflow-hidden h-52 bg-slate-200 dark:bg-gray-800">
+                                <span v-if="item.category" class="absolute top-3 left-3 z-10 inline-flex items-center text-[11px] font-extrabold text-gray-900 dark:text-white bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-white/40 shadow-sm px-3 py-1 rounded-full">
+                                    {{ item.category.name }}
+                                </span>
                                 <img 
                                     :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/wisata_placeholder.jpg'" 
                                     :alt="item.name" 
@@ -330,11 +333,6 @@ onMounted(() => {
                             </a>
 
                             <div class="p-5 space-y-2.5">
-                                <div class="flex items-center">
-                                    <span v-if="item.category" class="inline-block text-[11px] font-bold text-[#005F4A] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
-                                        {{ item.category.name }}
-                                    </span>
-                                </div>
                                 <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-1 group-hover:text-[#0F5E3D] transition">
                                     <a :href="route('public.tourism.show', item.slug)" rel="external">{{ item.name }}</a>
                                 </h3>
@@ -387,10 +385,13 @@ onMounted(() => {
                     <div
                         v-for="item in visibleCultures"
                         :key="item.id" 
-                        class="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
+                        class="group bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
                     >
                         <div>
-                            <a :href="route('public.culture.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
+                            <a :href="route('public.culture.show', item.slug)" rel="external" class="block relative overflow-hidden h-52 bg-slate-200 dark:bg-gray-800">
+                                <span class="absolute top-3 left-3 z-10 inline-flex items-center text-[11px] font-extrabold text-gray-900 dark:text-white bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-white/40 shadow-sm px-3 py-1 rounded-full">
+                                    Seni &amp; Tradisi
+                                </span>
                                 <img 
                                     :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/budaya_placeholder.jpg'" 
                                     :alt="item.name" 
@@ -400,11 +401,6 @@ onMounted(() => {
                             </a>
 
                             <div class="p-5 space-y-2.5">
-                                <div class="flex items-center">
-                                    <span class="inline-block text-[11px] font-bold text-[#005F4A] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
-                                        Seni &amp; Tradisi
-                                    </span>
-                                </div>
                                 <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-1 group-hover:text-[#0F5E3D] transition">
                                     <a :href="route('public.culture.show', item.slug)" rel="external">{{ item.name }}</a>
                                 </h3>
@@ -453,10 +449,13 @@ onMounted(() => {
                     <div
                         v-for="item in visibleEkraf"
                         :key="item.id" 
-                        class="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
+                        class="group bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 flex flex-col justify-between"
                     >
                         <div>
-                            <a :href="route('public.ekraf.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
+                            <a :href="route('public.ekraf.show', item.slug)" rel="external" class="block relative overflow-hidden h-52 bg-slate-200 dark:bg-gray-800">
+                                <span class="absolute top-3 left-3 z-10 inline-flex items-center text-[11px] font-extrabold text-gray-900 dark:text-white bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-white/40 shadow-sm px-3 py-1 rounded-full">
+                                    Produk Ekraf
+                                </span>
                                 <img 
                                     :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/ekraf_placeholder.jpg'" 
                                     :alt="item.name" 
@@ -466,11 +465,6 @@ onMounted(() => {
                             </a>
 
                             <div class="p-5 space-y-2.5">
-                                <div class="flex items-center">
-                                    <span class="inline-block text-[11px] font-bold text-[#005F4A] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
-                                        Produk Kriya &amp; Ekraf
-                                    </span>
-                                </div>
                                 <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-1 group-hover:text-[#0F5E3D] transition">
                                     <a :href="route('public.ekraf.show', item.slug)" rel="external">{{ item.name }}</a>
                                 </h3>
@@ -524,9 +518,9 @@ onMounted(() => {
                         <div 
                             v-for="item in visibleAccommodations" 
                             :key="item.id"
-                            class="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
+                            class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
                         >
-                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'">
+                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-xl object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'">
                             <div class="min-w-0 flex-1 space-y-1">
                                 <h3 class="text-sm font-bold text-gray-900 dark:text-white truncate">
                                     <a :href="route('public.accommodation.show', item.slug)" rel="external">{{ item.name }}</a>
@@ -566,9 +560,9 @@ onMounted(() => {
                         <div 
                             v-for="item in visibleCulinary" 
                             :key="item.id"
-                            class="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
+                            class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
                         >
-                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'">
+                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-xl object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'">
                             <div class="min-w-0 flex-1 space-y-1">
                                 <h3 class="text-sm font-bold text-gray-900 dark:text-white truncate">
                                     <a :href="route('public.culinary.show', item.slug)" rel="external">{{ item.name }}</a>

@@ -79,7 +79,7 @@ const typeConfig = computed(() => {
             label: 'Akomodasi', materialIcon: 'hotel',
             badgeClass: 'bg-emerald-50 dark:bg-emerald-950/60 text-[#005F4A] dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60',
             sectionTitle: 'Pilihan Akomodasi & Penginapan Lainnya',
-            homeSectionHash: '#section-[#005F4A]',
+            homeSectionHash: '#section-akomodasi-kuliner',
         },
         culinary: {
             label: 'Kuliner Lokal', materialIcon: 'restaurant',

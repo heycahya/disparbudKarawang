@@ -169,8 +169,7 @@ onBeforeUnmount(() => {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <!-- Welcome Banner -->
                 <div 
-                    class="mb-8 overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800 border-l-4 border-[#0F5E3D] transition duration-300"
-                    style="border-radius: 16px 4px 16px 4px;"
+                    class="mb-8 overflow-hidden bg-white shadow-sm rounded-2xl dark:bg-gray-800 border-l-4 border-[#0F5E3D] transition duration-300"
                 >
                     <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
@@ -192,8 +191,7 @@ onBeforeUnmount(() => {
                     <!-- Stat Card 1: Pengajuan Masuk / Pending (Harvest Gold) -->
                     <Link 
                         :href="route('admin.verifikasi-layanan.index')"
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block"
-                        style="border-radius: 20px 4px 20px 4px;"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block rounded-2xl"
                     >
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#D97706]/10 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
@@ -215,8 +213,7 @@ onBeforeUnmount(() => {
 
                     <!-- Stat Card 2: Destinasi Terpublikasi (Karawang Emerald) -->
                     <div 
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group"
-                        style="border-radius: 4px 20px 4px 20px;"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group rounded-2xl"
                     >
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#0F5E3D]/5 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
@@ -240,8 +237,7 @@ onBeforeUnmount(() => {
                     <!-- Stat Card 3: Usulan Wisata Disetujui vs Ditolak -->
                     <Link 
                         :href="route('admin.verifikasi-layanan.index', { status: 'disetujui' })"
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block"
-                        style="border-radius: 20px 4px 20px 4px;"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block rounded-2xl"
                     >
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#0F5E3D]/5 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
@@ -263,8 +259,7 @@ onBeforeUnmount(() => {
 
                     <!-- Stat Card 4: Kunjungan Halaman Web (Taruma Deep Teal) -->
                     <div 
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group"
-                        style="border-radius: 4px 20px 4px 20px;"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group rounded-2xl"
                     >
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#0C4E5B]/5 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
@@ -290,8 +285,7 @@ onBeforeUnmount(() => {
                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                     <!-- Left: Monthly Submissions Trend (Taruma Deep Teal styling) -->
                     <div 
-                        class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition duration-300"
-                        style="border-radius: 24px 6px 24px 6px;"
+                        class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition duration-300 rounded-2xl"
                     >
                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 flex items-center gap-2">
                             <span class="h-4 w-1 bg-[#0C4E5B] rounded"></span>
@@ -305,8 +299,7 @@ onBeforeUnmount(() => {
 
                     <!-- Right: Distribution of Status (Karawang Emerald styling) -->
                     <div 
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition duration-300"
-                        style="border-radius: 6px 24px 6px 24px;"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition duration-300 rounded-2xl"
                     >
                         <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 flex items-center gap-2">
                             <span class="h-4 w-1 bg-[#0F5E3D] rounded"></span>
