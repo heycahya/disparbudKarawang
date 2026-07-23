@@ -21,8 +21,12 @@ class TourismSubmission extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'category',
         'description',
         'address',
+        'contact',
+        'operating_hours',
+        'ticket_price',
         'latitude',
         'longitude',
         'photo',

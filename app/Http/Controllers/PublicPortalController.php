@@ -20,29 +20,33 @@ class PublicPortalController extends Controller
 {
     public function home()
     {
-        $latestNews = News::with('category')
+        $latestNews = News::with(['category', 'user'])
             ->where('status', 'published')
             ->latest()
             ->get();
 
-        $featuredDestinations = TourismDestination::with('category')
+        $featuredDestinations = TourismDestination::with(['category', 'photos'])
             ->where('status', 'published')
             ->latest()
             ->get();
 
-        $cultures = Culture::where('status', 'published')
+        $cultures = Culture::with('photos')
+            ->where('status', 'published')
             ->latest()
             ->get();
 
-        $ekraf = CreativeEconomy::where('status', 'published')
+        $ekraf = CreativeEconomy::with('photos')
+            ->where('status', 'published')
             ->latest()
             ->get();
 
-        $accommodations = Accommodation::where('status', 'published')
+        $accommodations = Accommodation::with('photos')
+            ->where('status', 'published')
             ->latest()
             ->get();
 
-        $culinary = CulinaryPlace::where('status', 'published')
+        $culinary = CulinaryPlace::with('photos')
+            ->where('status', 'published')
             ->latest()
             ->get();
 
@@ -70,9 +74,11 @@ class PublicPortalController extends Controller
             'news' => News::where('status', 'published')->count(),
             'cultures' => Culture::where('status', 'published')->count(),
             'ekraf' => CreativeEconomy::where('status', 'published')->count(),
+            'accommodations' => Accommodation::where('status', 'published')->count(),
+            'culinary' => CulinaryPlace::where('status', 'published')->count(),
         ];
 
-        $galleries = \App\Models\Gallery::latest()->take(6)->get();
+        $galleries = \App\Models\Gallery::with('user')->latest()->take(6)->get();
         $profile = \App\Models\OrganizationProfile::first();
 
         return Inertia::render('Public/Home', [
@@ -88,70 +94,6 @@ class PublicPortalController extends Controller
             'organization_profile' => $profile,
             'news' => $latestNews,
             'tourism' => $featuredDestinations,
-        ]);
-    }
-
-    public function profile()
-    {
-        $profile = OrganizationProfile::first();
-        $functions = OrganizationFunction::orderBy('order')->get();
-        $boards = OrganizationStructure::orderBy('order')->get();
-
-        return Inertia::render('Public/Profile', [
-            'organization' => [
-                'profile' => $profile ? $profile->history : '',
-                'vision_mission' => [
-                    'vision' => $profile ? $profile->vision : '',
-                    'mission' => $profile ? $profile->mission : '',
-                ],
-                'tupoksi' => $functions,
-                'boards' => $boards,
-                'details' => $profile,
-            ],
-        ]);
-    }
-
-    public function galleryIndex(Request $request)
-    {
-        $category = $request->query('category');
-
-        $query = Gallery::query();
-        if ($category && $category !== 'all') {
-            $query->where('category', $category);
-        }
-
-        $galleries = $query->latest()->paginate(12)->withQueryString();
-
-        return Inertia::render('Public/Gallery/Index', [
-            'galleries' => $galleries,
-            'categories' => ['wisata', 'budaya', 'ekraf', 'event', 'lainnya'],
-            'activeCategory' => $category ?? 'all',
-        ]);
-    }
-
-    public function newsIndex(Request $request)
-    {
-        $categorySlug = $request->query('category');
-
-        $query = News::with('category')
-            ->where('status', 'published');
-
-        if ($categorySlug && $categorySlug !== 'all') {
-            $query->whereHas('category', function ($q) use ($categorySlug) {
-                $q->where('slug', $categorySlug);
-            });
-        }
-
-        $news = $query->latest()
-            ->paginate(9)
-            ->withQueryString();
-
-        $categories = NewsCategory::all();
-
-        return Inertia::render('Public/News/Index', [
-            'news' => $news,
-            'categories' => $categories,
-            'activeCategory' => $categorySlug ?? 'all',
         ]);
     }
 
@@ -180,73 +122,6 @@ class PublicPortalController extends Controller
                 'image' => $news->thumbnail,
                 'type' => 'article',
             ]
-        ]);
-    }
-
-    public function tourismIndex(Request $request)
-    {
-        $tab = $request->query('tab', 'tourism');
-        $data = null;
-
-        switch ($tab) {
-            case 'culture':
-                $data = \App\Models\Culture::where('status', 'published')
-                    ->latest()
-                    ->paginate(9)
-                    ->withQueryString();
-                break;
-            case 'ekraf':
-                $data = \App\Models\CreativeEconomy::where('status', 'published')
-                    ->latest()
-                    ->paginate(9)
-                    ->withQueryString();
-                break;
-            case 'accommodation':
-                $data = \App\Models\Accommodation::where('status', 'published')
-                    ->latest()
-                    ->paginate(9)
-                    ->withQueryString();
-                break;
-            case 'culinary':
-                $data = \App\Models\CulinaryPlace::where('status', 'published')
-                    ->latest()
-                    ->paginate(9)
-                    ->withQueryString();
-                break;
-            case 'tourism':
-            default:
-                $data = TourismDestination::with('category')
-                    ->where('status', 'published')
-                    ->latest()
-                    ->paginate(9)
-                    ->withQueryString();
-                $tab = 'tourism';
-                break;
-        }
-
-        $destinations = TourismDestination::with('category')
-            ->where('status', 'published')
-            ->whereNotNull('latitude')
-            ->whereNotNull('longitude')
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'name' => $item->name,
-                    'slug' => $item->slug,
-                    'latitude' => (float) $item->latitude,
-                    'longitude' => (float) $item->longitude,
-                    'description' => \Illuminate\Support\Str::limit(strip_tags($item->description), 120),
-                    'address' => $item->address,
-                    'image_url' => $item->cover_image,
-                    'category' => $item->category?->name,
-                ];
-            });
-
-        return Inertia::render('Public/Tourism/Index', [
-            'data' => $data,
-            'activeTab' => $tab,
-            'destinations' => $destinations,
         ]);
     }
 
@@ -332,6 +207,8 @@ class PublicPortalController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
+        $ekraf->increment('views');
+
         $photos = collect();
         if ($ekraf->cover_image) {
             $photos->push(['url' => $ekraf->cover_image, 'caption' => $ekraf->name]);
@@ -367,6 +244,8 @@ class PublicPortalController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
+        $accommodation->increment('views');
+
         $photos = collect();
         if ($accommodation->cover_image) {
             $photos->push(['url' => $accommodation->cover_image, 'caption' => $accommodation->name]);
@@ -401,6 +280,8 @@ class PublicPortalController extends Controller
             ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
+
+        $culinary->increment('views');
 
         $photos = collect();
         if ($culinary->cover_image) {

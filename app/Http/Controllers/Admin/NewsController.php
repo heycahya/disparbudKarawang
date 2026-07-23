@@ -25,15 +25,24 @@ class NewsController extends Controller
     {
         $query = News::with(['category', 'user']);
 
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category_id')) {
+            $query->where('news_category_id', $request->category_id);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
 
         $news = $query->latest()->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Content/News/Index', [
             'news' => $news,
-            'filters' => $request->only(['search'])
+            'categories' => NewsCategory::orderBy('name')->get(),
+            'filters' => $request->only(['search', 'category_id', 'status'])
         ]);
     }
 

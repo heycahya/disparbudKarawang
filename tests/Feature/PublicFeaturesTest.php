@@ -103,55 +103,42 @@ test('skenario 1: guest can visit homepage and receive required inertia props', 
             ->has('latest_news')
             ->has('featured_destinations')
             ->has('destinations')
+            ->has('galleries')
+            ->has('organization_profile')
         );
 });
 
-test('skenario 2: guest can visit profile page and see board members data', function () {
+test('skenario 2: guest can visit homepage and see organization profile data', function () {
     seedPublicTestData();
 
-    $this->get(route('public.profile'))
+    $this->get(route('public.home'))
         ->assertStatus(200)
         ->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Profile')
-            ->has('organization.boards', 2)
-            ->where('organization.boards.0.name', 'Abas Sudrajat, S.Sos., M.P.')
-            ->where('organization.boards.0.position', 'Kepala Dinas')
+            ->component('Public/Home')
+            ->has('organization_profile')
+            ->where('organization_profile.vision', 'Terwujudnya Ekonomi Kerakyatan')
         );
 });
 
-test('skenario 3: guest can visit gallery page and filter by category', function () {
+test('skenario 3: guest can visit homepage and see gallery items', function () {
     seedPublicTestData();
 
-    $this->get(route('public.gallery.index'))
+    $this->get(route('public.home'))
         ->assertStatus(200)
         ->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Gallery/Index')
-            ->has('galleries.data', 1)
-            ->where('galleries.data.0.title', 'Keindahan Candi Jiwa')
-        );
-
-    $this->get(route('public.gallery.index', ['category' => 'wisata']))
-        ->assertStatus(200)
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Gallery/Index')
-            ->has('galleries.data', 1)
-        );
-
-    $this->get(route('public.gallery.index', ['category' => 'event']))
-        ->assertStatus(200)
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Gallery/Index')
-            ->has('galleries.data', 0)
+            ->component('Public/Home')
+            ->has('galleries', 1)
+            ->where('galleries.0.title', 'Keindahan Candi Jiwa')
         );
 });
 
-test('skenario 4: guest can visit destinasi page and destinations return valid numeric coordinates', function () {
+test('skenario 4: guest can visit homepage and destinations return valid numeric coordinates', function () {
     seedPublicTestData();
 
-    $response = $this->get(route('public.destinasi'))
+    $response = $this->get(route('public.home'))
         ->assertStatus(200)
         ->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Tourism/Index')
+            ->component('Public/Home')
             ->has('destinations')
         );
 

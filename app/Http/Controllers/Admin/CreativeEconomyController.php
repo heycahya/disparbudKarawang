@@ -23,15 +23,19 @@ class CreativeEconomyController extends Controller
     {
         $query = CreativeEconomy::query();
 
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
 
         $items = $query->latest()->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Content/CreativeEconomy/Index', [
             'items' => $items,
-            'filters' => $request->only(['search'])
+            'filters' => $request->only(['search', 'status'])
         ]);
     }
 

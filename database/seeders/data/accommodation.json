@@ -1,0 +1,58 @@
+[
+    {
+        "nama_akomodasi": "Resinda Hotel Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Jalan Resinda Raya No. 1, Desa Purwadana, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41361",
+        "estimasi_harga": "Rp 1.000.000 - Rp 1.500.000 per malam",
+        "fasilitas_utama": "Sento (kolam air panas tradisi Jepang), kolam renang luar ruangan ukuran olympic, restoran mewah (The Oryza & Tenkai), pusat kebugaran (gym) canggih, spa terapi, koneksi WiFi berkecepatan tinggi, ruang rapat besar (ballroom), akses jembatan langsung ke Resinda Park Mall."
+    },
+    {
+        "nama_akomodasi": "Mercure Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Jalan Galuh Mas Raya, Sukaharja, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41312",
+        "estimasi_harga": "Rp 550.000 - Rp 750.000 per malam",
+        "fasilitas_utama": "Kolam renang outdoor, pusat kebugaran modern, restoran internasional (Kemiri Restaurant), bar & lounge, area bermain anak-anak (playground), kamar ramah penyandang disabilitas, akses koridor terhubung langsung ke Mal Karawang Central Plaza."
+    },
+    {
+        "nama_akomodasi": "Delonix Hotel Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Kompleks Sedana Golf Country Club, Sukaluyu, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41361",
+        "estimasi_harga": "Rp 900.000 - Rp 1.200.000 per malam",
+        "fasilitas_utama": "Akses langsung lapangan golf Sedana, Ofuro (kolam mandi air hangat belerang gaya Jepang), kolam renang semi-indoor, restoran Jepang authentic (Sumiya), taman tropis asri untuk bersepeda, dapur lengkap di setiap tipe kamar studio (serviced apartment)."
+    },
+    {
+        "nama_akomodasi": "Swiss-Belinn Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Jalan Jendral Ahmad Yani No. 29, Kelurahan Nagasari, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41315",
+        "estimasi_harga": "Rp 550.000 - Rp 700.000 per malam",
+        "fasilitas_utama": "Kolam renang outdoor romantis, layanan spa profesional, bar tepi kolam, restoran internasional (Swiss-Cafe), ruang pertemuan korporat berteknologi multimedia lengkap, akses internet WiFi serat optik gratis, parkir mobil valet."
+    },
+    {
+        "nama_akomodasi": "favehotel Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Komplek Pasar Bersih Karawang, Jalan Arteri Galuh Mas, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41312",
+        "estimasi_harga": "Rp 400.000 - Rp 500.000 per malam",
+        "fasilitas_utama": "Kamar berdesain modern minimalis ceria, penyejuk udara (AC) hemat energi, tempat tidur kualitas premium, TV kabel flat, akses WiFi gratis di seluruh kawasan hotel, restoran masakan lokal, layanan pijat kamar (in-room massage), parkir kendaraan aman."
+    },
+    {
+        "nama_akomodasi": "Kampung Turis Resort & Waterpark",
+        "tipe": "Resort",
+        "alamat": "Kampung Parakan Badak, Desa Mekarbuana, Kecamatan Tegalwaru, Kabupaten Karawang, Jawa Barat 41362",
+        "estimasi_harga": "Rp 600.000 - Rp 1.500.000 per malam",
+        "fasilitas_utama": "Akomodasi villa panggung kayu bergaya tradisional Sunda dan Bali, pemandangan danau buatan dan sawah berundak, kolam renang waterpark, fasilitas outbound tebing buatan, restoran kuliner saung terapung, televisi layar datar, kamar mandi semi-terbuka."
+    },
+    {
+        "nama_akomodasi": "Rumantara Inn Karawang",
+        "tipe": "Hotel Melati",
+        "alamat": "Jalan AR. Hakim No. 7, Kelurahan Nagasari, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41312",
+        "estimasi_harga": "Rp 200.000 - Rp 300.000 per malam",
+        "fasilitas_utama": "Penyejuk udara (AC) di setiap kamar, koneksi WiFi gratis, kamar mandi dalam dengan shower air panas/dingin, televisi layar datar, resepsionis siaga 24 jam, area parkir mobil luas dan aman, lokasi sangat strategis hanya berjarak 73 meter di depan Stasiun Kereta Api Karawang."
+    },
+    {
+        "nama_akomodasi": "Front One Akshaya Hotel Karawang",
+        "tipe": "Hotel Bintang",
+        "alamat": "Jalan Arteri Tol Karawang Barat, Desa Margakaya, Kecamatan Telukjambe Timur, Kabupaten Karawang, Jawa Barat 41361",
+        "estimasi_harga": "Rp 300.000 - Rp 450.000 per malam",
+        "fasilitas_utama": "Kolam renang luar ruangan (outdoor pool) yang luas, restoran yang menyajikan menu lokal dan nusantara, penyejuk udara (AC) di setiap kamar, akses koneksi internet WiFi gratis di seluruh area hotel, ruang rapat korporat (meeting room), resepsionis siap siaga 24 jam, dan area parkir kendaraan gratis."
+    }
+]

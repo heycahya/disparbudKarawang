@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -31,6 +32,17 @@ class Culture extends Model
         'category' => 'string',
         'views' => 'integer'
     ];
+
+    /**
+     * Get a safe image URL, falling back to Cloudinary sample if null/empty.
+     */
+    public function getCoverImageUrlAttribute(): string
+    {
+        if (!empty($this->cover_image)) {
+            return $this->cover_image;
+        }
+        return CloudinaryService::getSampleUrl('culture');
+    }
 
     protected static function boot()
     {

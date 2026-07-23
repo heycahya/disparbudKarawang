@@ -1,144 +1,207 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { Link, router } from '@inertiajs/vue3'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { ref } from 'vue';
+import { Link, router } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import ConfirmDeleteModal from '@/Components/ConfirmDeleteModal.vue';
 
 const props = defineProps({
-  cultures: Object,
-  filters: Object
-})
+    cultures: Object,
+    filters: Object
+});
 
-const search = ref(props.filters.search || '')
+const search = ref(props.filters?.search || '');
+const selectedCategory = ref(props.filters?.category || '');
+const selectedStatus = ref(props.filters?.status || '');
 
-watch(search, (value) => {
-  router.get(route('admin.cultures.index'), { search: value }, {
-    preserveState: true,
-    replace: true
-  })
-})
+// Delete modal state
+const itemToDelete = ref(null);
+const showDeleteModal = ref(false);
+const isDeleting = ref(false);
 
-const deleteCulture = (id) => {
-  if (confirm('Apakah Anda yakin ingin menghapus data kebudayaan ini?')) {
-    router.delete(route('admin.cultures.destroy', id))
-  }
+function applyFilters() {
+    router.get(route('admin.cultures.index'), {
+        search: search.value,
+        category: selectedCategory.value,
+        status: selectedStatus.value
+    }, {
+        preserveState: true,
+        replace: true
+    });
 }
 
-const getCategoryLabel = (cat) => {
-  switch (cat) {
-    case 'kesenian': return 'Kesenian';
-    case 'tradisi': return 'Tradisi';
-    case 'warisan_budaya': return 'Warisan Budaya';
-    default: return cat;
-  }
+function promptDelete(item) {
+    itemToDelete.value = item;
+    showDeleteModal.value = true;
+}
+
+function confirmDelete() {
+    if (!itemToDelete.value) return;
+    isDeleting.value = true;
+    router.delete(route('admin.cultures.destroy', itemToDelete.value.id), {
+        onSuccess: () => {
+            showDeleteModal.value = false;
+            itemToDelete.value = null;
+            isDeleting.value = false;
+        },
+        onError: () => {
+            isDeleting.value = false;
+        }
+    });
 }
 </script>
 
 <template>
-  <AuthenticatedLayout>
-    <template #header>
-      <h2 class="font-semibold text-xl text-slate-800 leading-tight">Manajemen Warisan Budaya & Seni</h2>
-    </template>
+    <Head title="Manajemen Cagar Budaya & Seni - Admin Disparbud" />
 
-    <div class="py-12 bg-slate-50 min-h-screen">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100">
-          <div class="p-6 text-slate-900">
-            <!-- Header Actions -->
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-              <div class="relative w-full sm:w-80">
-                <input 
-                  v-model="search"
-                  type="text" 
-                  placeholder="Cari kebudayaan..." 
-                  class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:border-emerald-600 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 text-sm transition"
-                />
-                <span class="absolute left-3 top-2.5 text-slate-400">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </span>
-              </div>
-              
-              <Link 
-                :href="route('admin.cultures.create')" 
-                class="w-full sm:w-auto px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-md font-medium text-sm text-center shadow transition duration-150 ease-in-out"
-              >
-                + Tambah Kebudayaan
-              </Link>
+    <AuthenticatedLayout>
+        <template #header>
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-bold leading-tight text-slate-800 dark:text-slate-200">
+                    Manajemen Kebudayaan
+                </h2>
+                <Link
+                    :href="route('admin.cultures.create')"
+                    class="px-4 py-2 text-xs font-bold text-white bg-[#0F5E3D] hover:bg-emerald-800 rounded-xl transition shadow-md flex items-center gap-1.5"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Tambah Kebudayaan
+                </Link>
             </div>
+        </template>
 
-            <!-- Table -->
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-slate-200">
-                <thead class="bg-slate-50 rounded-md">
-                  <tr>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Gambar Cover</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Nama Kebudayaan</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Kategori</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-slate-100">
-                  <tr v-for="item in cultures.data" :key="item.id" class="hover:bg-slate-50/50 transition">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <img :src="item.cover_image" class="h-10 w-16 object-cover rounded-md border border-slate-200 shadow-sm" alt="Cover Image" />
-                    </td>
-                    <td class="px-6 py-4">
-                      <div class="text-sm font-semibold text-slate-800">{{ item.name }}</div>
-                      <div class="text-xs text-slate-400">Dilihat: {{ item.views }} kali</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                      {{ getCategoryLabel(item.category) }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span 
-                        :class="item.status === 'published' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'"
-                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full uppercase"
-                      >
-                        {{ item.status }}
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div class="flex justify-end gap-2">
-                        <Link :href="route('admin.cultures.edit', item.id)" class="text-emerald-700 hover:text-emerald-900 transition">
-                          Edit
-                        </Link>
-                        <button @click="deleteCulture(item.id)" class="text-rose-600 hover:text-rose-900 transition">
-                          Hapus
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr v-if="cultures.data.length === 0">
-                    <td colspan="5" class="px-6 py-8 text-center text-sm text-slate-400">
-                      Belum ada data kebudayaan.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="py-8 bg-slate-50 min-h-[calc(100vh-8rem)] dark:bg-slate-950 font-sans">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
 
-            <!-- Pagination -->
-            <div class="flex justify-between items-center mt-6">
-              <span class="text-xs text-slate-500">
-                Menampilkan {{ cultures.from || 0 }} sampai {{ cultures.to || 0 }} dari {{ cultures.total }} data
-              </span>
-              <div class="flex gap-1">
-                <Link 
-                  v-for="link in cultures.links" 
-                  :key="link.label"
-                  :href="link.url || '#'" 
-                  v-html="link.label"
-                  :class="[
-                    link.active ? 'bg-emerald-700 text-white border-emerald-700' : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-300',
-                    !link.url ? 'opacity-50 cursor-not-allowed' : ''
-                  ]"
-                  class="px-3 py-1 text-xs border rounded-md font-medium transition"
-                />
-              </div>
+                <!-- Filter Bar -->
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <!-- Category Filter -->
+                        <select
+                            v-model="selectedCategory"
+                            @change="applyFilters"
+                            class="py-2 px-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-300 focus:ring-emerald-500 focus:border-emerald-500"
+                        >
+                            <option value="">Semua Kategori</option>
+                            <option value="Seni Tradisional">Seni Tradisional</option>
+                            <option value="Situs Sejarah">Situs Sejarah</option>
+                            <option value="Cagar Budaya">Cagar Budaya</option>
+                            <option value="Upacara Adat">Upacara Adat</option>
+                        </select>
+
+                        <!-- Status Filter -->
+                        <select
+                            v-model="selectedStatus"
+                            @change="applyFilters"
+                            class="py-2 px-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-300 focus:ring-emerald-500 focus:border-emerald-500"
+                        >
+                            <option value="">Semua Status</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="w-full md:w-72 relative">
+                        <input
+                            v-model="search"
+                            @keyup.enter="applyFilters"
+                            type="text"
+                            placeholder="Cari kebudayaan..."
+                            class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs focus:ring-emerald-500 focus:border-emerald-500"
+                        />
+                        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Datagrid Table -->
+                <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 dark:bg-slate-950 text-slate-400 font-bold uppercase border-b border-slate-200/80 dark:border-slate-800">
+                                <tr>
+                                    <th class="px-6 py-4">Cover</th>
+                                    <th class="px-6 py-4">Nama Warisan / Seni</th>
+                                    <th class="px-6 py-4">Kategori</th>
+                                    <th class="px-6 py-4">Lokasi</th>
+                                    <th class="px-6 py-4">Status</th>
+                                    <th class="px-6 py-4 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tr v-for="item in cultures.data" :key="item.id" class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <img :src="item.cover_image" class="h-12 w-20 object-cover rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm" alt="Cover" />
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-extrabold text-slate-900 dark:text-white text-sm">{{ item.name }}</div>
+                                        <div class="text-[10px] text-slate-400 mt-0.5">👁️ Views: {{ item.views || 0 }} kali</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-600 dark:text-slate-300">
+                                        {{ item.category || '-' }}
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500 dark:text-slate-400 max-w-xs truncate">
+                                        {{ item.location || '-' }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="px-2.5 py-1 inline-flex text-[10px] font-extrabold rounded-full uppercase tracking-wider"
+                                            :class="item.status === 'published' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'"
+                                        >
+                                            {{ item.status }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
+                                        <Link
+                                            :href="route('admin.cultures.edit', item.id)"
+                                            class="px-3 py-1.5 text-[10px] font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 rounded-lg transition"
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            @click="promptDelete(item)"
+                                            class="px-3 py-1.5 text-[10px] font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:text-rose-300 rounded-lg transition border border-rose-200 dark:border-rose-900"
+                                        >
+                                            Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr v-if="cultures.data.length === 0">
+                                    <td colspan="6" class="px-6 py-12 text-center text-slate-400">
+                                        Belum ada data kebudayaan.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div v-if="cultures.links && cultures.links.length > 3" class="p-4 border-t border-slate-100 dark:border-slate-800 flex justify-center gap-1">
+                        <Component
+                            v-for="link in cultures.links"
+                            :key="link.label"
+                            :is="link.url ? Link : 'span'"
+                            :href="link.url"
+                            v-html="link.label"
+                            class="px-3 py-1 text-xs rounded-lg font-bold transition"
+                            :class="link.active ? 'bg-[#0F5E3D] text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'"
+                        />
+                    </div>
+                </div>
+
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </AuthenticatedLayout>
+
+        <!-- Confirm Delete Modal -->
+        <ConfirmDeleteModal
+            :show="showDeleteModal"
+            :item-name="itemToDelete?.name"
+            :processing="isDeleting"
+            @close="showDeleteModal = false"
+            @confirm="confirmDelete"
+        />
+    </AuthenticatedLayout>
 </template>

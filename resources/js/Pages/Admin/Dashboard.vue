@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage, Link } from '@inertiajs/vue3';
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
 import { Chart, registerables } from 'chart.js';
 
@@ -189,16 +189,17 @@ onBeforeUnmount(() => {
 
                 <!-- Stats Grid -->
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-                    <!-- Stat Card 1: Aduan Masuk (Harvest Gold) -->
-                    <div 
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group"
+                    <!-- Stat Card 1: Pengajuan Masuk / Pending (Harvest Gold) -->
+                    <Link 
+                        :href="route('admin.verifikasi-layanan.index')"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block"
                         style="border-radius: 20px 4px 20px 4px;"
                     >
-                        <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#D97706]/5 group-hover:scale-110 transition duration-300"></div>
+                        <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#D97706]/10 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Aduan Pending & Ditinjau</p>
-                                <h3 class="mt-2 text-3xl font-extrabold text-[#D97706]">{{ statistics.complaints.masuk + statistics.complaints.ditinjau }}</h3>
+                                <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Usulan Pending (Verifikasi)</p>
+                                <h3 class="mt-2 text-3xl font-extrabold text-[#D97706]">{{ statistics.layanan_summary.pending }}</h3>
                             </div>
                             <div class="p-3 bg-[#D97706]/10 rounded-lg text-[#D97706]">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -207,10 +208,10 @@ onBeforeUnmount(() => {
                             </div>
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-50 dark:border-gray-700 flex justify-between text-xs text-gray-500 dark:text-gray-400">
-                            <span>Selesai: <b>{{ statistics.complaints.disetujui }}</b></span>
-                            <span>Total Aduan: <b>{{ statistics.complaints.total }}</b></span>
+                            <span class="text-[#D97706] font-bold">Buka Verifikasi &rarr;</span>
+                            <span>Total Usulan: <b>{{ statistics.layanan_summary.total }}</b></span>
                         </div>
-                    </div>
+                    </Link>
 
                     <!-- Stat Card 2: Destinasi Terpublikasi (Karawang Emerald) -->
                     <div 
@@ -236,16 +237,17 @@ onBeforeUnmount(() => {
                         </div>
                     </div>
 
-                    <!-- Stat Card 3: Usulan Wisata Disetujui (Karawang Emerald / Green) -->
-                    <div 
-                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-md group"
+                    <!-- Stat Card 3: Usulan Wisata Disetujui vs Ditolak -->
+                    <Link 
+                        :href="route('admin.verifikasi-layanan.index', { status: 'disetujui' })"
+                        class="bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700 relative overflow-hidden transition-all duration-300 hover:shadow-lg group block"
                         style="border-radius: 20px 4px 20px 4px;"
                     >
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#0F5E3D]/5 group-hover:scale-110 transition duration-300"></div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Usulan Wisata Disetujui</p>
-                                <h3 class="mt-2 text-3xl font-extrabold text-[#0F5E3D] dark:text-[#10B981]">{{ statistics.tourism_submissions.disetujui }}</h3>
+                                <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Usulan Disetujui</p>
+                                <h3 class="mt-2 text-3xl font-extrabold text-[#0F5E3D] dark:text-[#10B981]">{{ statistics.layanan_summary.disetujui }}</h3>
                             </div>
                             <div class="p-3 bg-[#0F5E3D]/10 rounded-lg text-[#0F5E3D] dark:text-[#10B981]">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -254,10 +256,10 @@ onBeforeUnmount(() => {
                             </div>
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-50 dark:border-gray-700 flex justify-between text-xs text-gray-500 dark:text-gray-400">
-                            <span>Pending: <b>{{ statistics.tourism_submissions.masuk }}</b></span>
-                            <span>Total Usulan: <b>{{ statistics.tourism_submissions.total }}</b></span>
+                            <span class="text-[#0F5E3D] dark:text-[#10B981] font-bold">Buka Disetujui &rarr;</span>
+                            <span>Ditolak: <b class="text-rose-600 dark:text-rose-400">{{ statistics.layanan_summary.ditolak }}</b></span>
                         </div>
-                    </div>
+                    </Link>
 
                     <!-- Stat Card 4: Kunjungan Halaman Web (Taruma Deep Teal) -->
                     <div 

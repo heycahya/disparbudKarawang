@@ -15,8 +15,12 @@ class StoreTourismSubmissionRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'category' => ['nullable', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'contact' => ['nullable', 'string', 'max:255'],
+            'operating_hours' => ['nullable', 'string', 'max:255'],
+            'ticket_price' => ['nullable', 'string', 'max:255'],
             'photos' => ['nullable', 'array', 'max:5'],
             'photos.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];

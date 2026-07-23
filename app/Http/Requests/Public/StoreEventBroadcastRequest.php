@@ -20,7 +20,8 @@ class StoreEventBroadcastRequest extends FormRequest
             'start_date' => ['required', 'date', 'after_or_equal:today'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
             'description' => ['required', 'string'],
-            'proposal' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:5120'], // max 5MB
+            'target_audience' => ['nullable', 'string', 'max:255'],
+            'proposal' => ['required', 'file', 'mimes:pdf,doc,docx,jpg,jpeg,png', 'max:5120'], // max 5MB
         ];
     }
 }

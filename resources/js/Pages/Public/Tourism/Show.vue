@@ -23,8 +23,12 @@ const coverImage = computed(() => data.value?.cover_image ?? null);
 const isLocatable = computed(() => ['tourism', 'accommodation', 'culinary'].includes(activeType.value));
 
 // Image error fallback handling
+const FALLBACK_IMG = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/gallery_placeholder.jpg';
 const brokenImages = ref({});
-const handleImageError = (index) => {
+const handleImageError = (index, event) => {
+    if (event && event.target) {
+        event.target.src = FALLBACK_IMG;
+    }
     brokenImages.value[index] = true;
 };
 
@@ -32,7 +36,7 @@ const handleImageError = (index) => {
 const slides = computed(() => {
     if (props.photos && props.photos.length > 0) return props.photos;
     if (coverImage.value) return [{ url: coverImage.value, caption: entityName.value }];
-    return [];
+    return [{ url: FALLBACK_IMG, caption: entityName.value }];
 });
 
 // Slider state
@@ -253,17 +257,11 @@ const defaultHighlights = computed(() => {
                                 class="flex-shrink-0 w-full h-full relative"
                             >
                                 <img
-                                    v-if="!brokenImages[i]"
                                     :src="slide.url"
                                     :alt="slide.caption || entityName"
-                                    @error="handleImageError(i)"
+                                    @error="handleImageError(i, $event)"
                                     class="w-full h-full object-cover object-center"
                                 />
-                                <!-- Image Error Fallback -->
-                                <div v-else class="w-full h-full flex flex-col items-center justify-center bg-gray-800 text-gray-400 space-y-2">
-                                    <span class="material-symbols-outlined text-5xl">image_not_supported</span>
-                                    <p class="text-xs font-semibold">Foto tidak dapat dimuat</p>
-                                </div>
 
                                 <div v-if="slide.caption && i > 0" class="absolute bottom-4 left-5 text-white text-xs sm:text-sm font-medium drop-shadow bg-black/50 backdrop-blur-xs px-3 py-1 rounded-md">
                                     {{ slide.caption }}
@@ -318,7 +316,7 @@ const defaultHighlights = computed(() => {
                             <img 
                                 :src="slide.url" 
                                 :alt="`Foto ${i + 1}`" 
-                                @error="handleImageError(i)"
+                                @error="handleImageError(i, $event)"
                                 class="w-full h-full object-cover" 
                             />
                         </button>
@@ -515,7 +513,7 @@ const defaultHighlights = computed(() => {
                             </h3>
 
                             <!-- Leaflet Map Container -->
-                            <div v-if="hasMap" class="h-64 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-inner">
+                            <div v-if="hasMap" class="h-[350px] w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-inner">
                                 <LeafletMap :destinations="mapDestinations" height="100%" />
                             </div>
                             <div v-else class="rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-dashed border-gray-200 dark:border-gray-700 py-8 text-center text-xs text-gray-400">

@@ -9,16 +9,38 @@ use App\Http\Requests\Public\StoreComplaintRequest;
 use App\Http\Requests\Public\StoreTourismSubmissionRequest;
 use App\Http\Requests\Public\StoreEventBroadcastRequest;
 use Cloudinary\Api\Upload\UploadApi;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class LayananMasyarakatController extends Controller
 {
-    protected $uploadApi;
-
-    public function __construct(UploadApi $uploadApi)
+    /**
+     * Helper method to upload file to Cloudinary with fallback to Local Storage.
+     */
+    private function uploadFile(UploadedFile $file, string $folder = 'submissions'): string
     {
-        $this->uploadApi = $uploadApi;
+        $hasCloudinaryConfig = (!empty(env('CLOUDINARY_API_SECRET')) && !empty(env('CLOUDINARY_CLOUD_NAME'))) 
+            || (!empty(config('cloudinary.secret')) && !empty(config('cloudinary.cloud_name')))
+            || app()->environment('testing');
+
+        if ($hasCloudinaryConfig) {
+            try {
+                $uploadApi = app(UploadApi::class);
+                $response = $uploadApi->upload($file->getRealPath(), [
+                    'folder' => 'disparbud_karawang/' . $folder
+                ]);
+                if (isset($response['secure_url']) && !empty($response['secure_url'])) {
+                    return (string) $response['secure_url'];
+                }
+            } catch (\Throwable $e) {
+                // Fallback to local storage if Cloudinary throws any error or TypeError
+            }
+        }
+
+        // Local Storage Fallback
+        $path = $file->store($folder, 'public');
+        return Storage::url($path);
     }
 
     // 1. Pengaduan Masyarakat
@@ -34,11 +56,8 @@ class LayananMasyarakatController extends Controller
 
         if ($request->hasFile('attachment')) {
             try {
-                $response = $this->uploadApi->upload($request->file('attachment')->getRealPath(), [
-                    'folder' => 'disparbud_karawang/complaints'
-                ]);
-                $attachmentUrl = $response['secure_url'];
-            } catch (\Exception $e) {
+                $attachmentUrl = $this->uploadFile($request->file('attachment'), 'complaints');
+            } catch (\Throwable $e) {
                 return back()->withErrors(['attachment' => 'Gagal mengunggah lampiran.'])->withInput();
             }
         }
@@ -46,6 +65,8 @@ class LayananMasyarakatController extends Controller
         Complaint::create([
             'user_id' => auth()->id(),
             'subject' => $validated['title'],
+            'category' => $validated['category'] ?? null,
+            'location' => $validated['location'] ?? null,
             'description' => $validated['description'],
             'attachment' => $attachmentUrl,
             'status' => 'masuk'
@@ -69,14 +90,12 @@ class LayananMasyarakatController extends Controller
         if ($request->hasFile('photos')) {
             try {
                 foreach ($request->file('photos') as $photoFile) {
-                    $response = $this->uploadApi->upload($photoFile->getRealPath(), [
-                        'folder' => 'disparbud_karawang/submissions'
-                    ]);
+                    $url = $this->uploadFile($photoFile, 'submissions');
                     if (!$photoUrl) {
-                        $photoUrl = $response['secure_url'];
+                        $photoUrl = $url;
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 return back()->withErrors(['photos' => 'Gagal mengunggah foto.'])->withInput();
             }
         }
@@ -84,8 +103,12 @@ class LayananMasyarakatController extends Controller
         TourismSubmission::create([
             'user_id' => auth()->id(),
             'name' => $validated['name'],
+            'category' => $validated['category'] ?? null,
             'description' => $validated['description'],
             'address' => $validated['location'],
+            'contact' => $validated['contact'] ?? null,
+            'operating_hours' => $validated['operating_hours'] ?? null,
+            'ticket_price' => $validated['ticket_price'] ?? null,
             'photo' => $photoUrl,
             'status' => 'masuk'
         ]);
@@ -107,11 +130,8 @@ class LayananMasyarakatController extends Controller
 
         if ($request->hasFile('proposal')) {
             try {
-                $response = $this->uploadApi->upload($request->file('proposal')->getRealPath(), [
-                    'folder' => 'disparbud_karawang/proposals'
-                ]);
-                $proposalUrl = $response['secure_url'];
-            } catch (\Exception $e) {
+                $proposalUrl = $this->uploadFile($request->file('proposal'), 'proposals');
+            } catch (\Throwable $e) {
                 return back()->withErrors(['proposal' => 'Gagal mengunggah proposal.'])->withInput();
             }
         }
@@ -121,8 +141,10 @@ class LayananMasyarakatController extends Controller
             'organization' => $validated['organization'],
             'event_name' => $validated['event_name'],
             'event_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'] ?? null,
             'event_location' => $validated['event_location'],
             'description' => $validated['description'],
+            'target_audience' => $validated['target_audience'] ?? null,
             'attachment' => $proposalUrl,
             'status' => 'masuk'
         ]);

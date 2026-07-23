@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Leaflet Map Tailwind Tile Fix */
+.leaflet-container img.leaflet-tile {
+    max-width: none !important;
+    max-height: none !important;
+}
+
+.leaflet-container {
+    font-family: inherit;
+    z-index: 10;
+}
+
+/* Ensure Leaflet popups display above tiles cleanly */
+.leaflet-popup-content-wrapper {
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    padding: 4px;
+}
+
+.leaflet-popup-content {
+    margin: 12px 14px;
+    line-height: 1.4;
+}

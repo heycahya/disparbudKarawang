@@ -24,15 +24,24 @@ class TourismDestinationController extends Controller
     {
         $query = TourismDestination::with('category');
 
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category_id')) {
+            $query->where('tourism_category_id', $request->category_id);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
 
         $destinations = $query->latest()->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Content/Tourism/Index', [
             'destinations' => $destinations,
-            'filters' => $request->only(['search'])
+            'categories' => TourismCategory::orderBy('name')->get(),
+            'filters' => $request->only(['search', 'category_id', 'status'])
         ]);
     }
 

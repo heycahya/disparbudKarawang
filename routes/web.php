@@ -7,35 +7,17 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Guest Routes - Portal Publik (Katalog Informasi)
+// Guest Routes - Portal Publik (Katalog Informasi & Detail Page)
 Route::name('public.')->group(function () {
     Route::get('/', [PublicPortalController::class, 'home'])->name('home');
-    Route::get('/profil', [PublicPortalController::class, 'profile'])->name('profile');
-    Route::get('/galeri', [PublicPortalController::class, 'galleryIndex'])->name('gallery.index');
-    Route::get('/destinasi', [PublicPortalController::class, 'tourismIndex'])->name('destinasi');
     
-    Route::prefix('news')->name('news.')->group(function () {
-        Route::get('/', [PublicPortalController::class, 'newsIndex'])->name('index');
-        Route::get('/{slug}', [PublicPortalController::class, 'newsShow'])->name('show');
-    });
-
-    Route::prefix('tourism')->name('tourism.')->group(function () {
-        Route::get('/', [PublicPortalController::class, 'tourismIndex'])->name('index');
-        Route::get('/{slug}', [PublicPortalController::class, 'tourismShow'])->name('show');
-    });
-
-    // Detail pages per category
+    // Detail routes per kategori & berita
+    Route::get('/news/{slug}', [PublicPortalController::class, 'newsShow'])->name('news.show');
+    Route::get('/tourism/{slug}', [PublicPortalController::class, 'tourismShow'])->name('tourism.show');
     Route::get('/budaya/{slug}', [PublicPortalController::class, 'cultureShow'])->name('culture.show');
     Route::get('/ekraf/{slug}', [PublicPortalController::class, 'ekrafShow'])->name('ekraf.show');
     Route::get('/akomodasi/{slug}', [PublicPortalController::class, 'accommodationShow'])->name('accommodation.show');
     Route::get('/kuliner/{slug}', [PublicPortalController::class, 'culinaryShow'])->name('culinary.show');
-});
-
-// Public Layanan Masyarakat GET routes
-Route::prefix('layanan-masyarakat')->name('layanan-masyarakat.')->group(function () {
-    Route::get('/complaints/create', [LayananMasyarakatController::class, 'createComplaint'])->name('complaints.create');
-    Route::get('/tourism-submissions/create', [LayananMasyarakatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
-    Route::get('/event-broadcasts/create', [LayananMasyarakatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -51,15 +33,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('public.history.index');
 
-        // Auth & Role:public Routes - Layanan Masyarakat (POST only)
+        // Auth & Role:public Routes - Layanan Masyarakat (GET & POST)
         Route::prefix('layanan-masyarakat')->name('layanan-masyarakat.')->group(function () {
             // Pengaduan Masyarakat (Complaints)
+            Route::get('/complaints/create', [LayananMasyarakatController::class, 'createComplaint'])->name('complaints.create');
             Route::post('/complaints', [LayananMasyarakatController::class, 'storeComplaint'])->name('complaints.store');
             
             // Usulan Wisata (Tourism Submissions)
+            Route::get('/tourism-submissions/create', [LayananMasyarakatController::class, 'createTourismSubmission'])->name('tourism-submissions.create');
             Route::post('/tourism-submissions', [LayananMasyarakatController::class, 'storeTourismSubmission'])->name('tourism-submissions.store');
             
             // Permohonan Siaran Acara (Event Broadcast Requests)
+            Route::get('/event-broadcasts/create', [LayananMasyarakatController::class, 'createEventBroadcast'])->name('event-broadcasts.create');
             Route::post('/event-broadcasts', [LayananMasyarakatController::class, 'storeEventBroadcast'])->name('event-broadcasts.store');
         });
     });
@@ -77,6 +62,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
 
         // Service Rakyat Inbox
+        Route::get('/verifikasi-layanan', [\App\Http\Controllers\Admin\AdminLayananMasyarakatController::class, 'index'])->name('verifikasi-layanan.index');
+        Route::patch('/verifikasi-layanan/{type}/{id}/status', [\App\Http\Controllers\Admin\AdminLayananMasyarakatController::class, 'updateStatus'])->name('verifikasi-layanan.update-status');
+        Route::post('/verifikasi-layanan/{type}/{id}/clone', [\App\Http\Controllers\Admin\AdminLayananMasyarakatController::class, 'cloneToPublic'])->name('verifikasi-layanan.clone');
+
         Route::prefix('service-rakyat')->name('service-rakyat.')->group(function () {
             // Complaints
             Route::resource('complaints', \App\Http\Controllers\Admin\ComplaintReviewController::class)->only(['index', 'show']);
@@ -92,10 +81,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Manajemen Akun & User Management
-        Route::get('/manajemen-akun', function () {
-            return Inertia::render('Admin/ManajemenAkun');
-        })->name('manajemen-akun');
-        
+        Route::get('/manajemen-akun', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('manajemen-akun');
+        Route::post('users/{user}/reset-password', [\App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('users.reset-password');
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
     });
 });

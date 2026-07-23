@@ -1,0 +1,58 @@
+[
+    {
+        "nama_kuliner": "Soto Tangkar Mang Nean",
+        "kategori": "Makanan Khas",
+        "alamat": "Jalan Dewi Sartika No. 23-38, Kelurahan Nagasari, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41312",
+        "estimasi_harga": "Rp 25.000 - Rp 45.000 per porsi",
+        "deskripsi_kelezatan": "Soto Tangkar Mang Nean merupakan soto iga sapi legendaris khas Karawang yang dirintis sejak tahun 1980, menyuguhkan potongan tulang iga, daging sengkel, dan bagian kaki sapi yang empuk. Kuahnya terbuat dari perpaduan kaldu sapi kental, santan kelapa murni, serta racikan bumbu rempah kuning kunyit, kemiri, kapulaga, ketumbar, dan bawang merah giling yang menghasilkan cita rasa gurih sedap beraroma tajam."
+    },
+    {
+        "nama_kuliner": "Pepes Jambal Walahar H. Dirja",
+        "kategori": "Restoran Tradisional",
+        "alamat": "Jalan Bendungan Walahar, Desa Kutapohaci, Kecamatan Ciampel, Kabupaten Karawang, Jawa Barat 41363",
+        "estimasi_harga": "Rp 15.000 - Rp 50.000 per porsi",
+        "deskripsi_kelezatan": "Rumah makan ini menyajikan menu legendaris pepes ikan jambal sungai yang sangat lembut, berlemak, bebas bau tanah, dan dibalut bumbu rempah melimpah. Sebelum disajikan, bumbu halus berupa bawang merah, cabai merah iris, serai, daun salam, serta daun kemangi segar dibungkus rapat daun pisang batu bersama ikan, lalu dibakar di atas bara arang kayu tradisional hingga kering meresap."
+    },
+    {
+        "nama_kuliner": "Sorabi Kuntilanak Rengasdengklok M. Kasim",
+        "kategori": "Pusat Jajanan",
+        "alamat": "Jalan Raya Rengasdengklok, Desa Kalijaya, Kecamatan Rengasdengklok, Kabupaten Karawang, Jawa Barat 41352",
+        "estimasi_harga": "Rp 15.000 - Rp 35.000 per porsi",
+        "deskripsi_kelezatan": "Penganan jajanan pasar manis tradisional ini terbuat dari tepung beras berkualitas tinggi yang difermentasi alami, lalu diberi warna hijau cerah dari perasan daun suji dan daun pandan wangi asli tanpa pewarna buatan. Sorabi dipanggang menggunakan tungku tanah liat kayu bakar, disajikan hangat bersama siraman kuah kinca manis gurih kental dari gula aren murni dan santan kelapa."
+    },
+    {
+        "nama_kuliner": "Seafood Teh Empop Karangpawitan",
+        "kategori": "Restoran Tradisional",
+        "alamat": "Area Lapangan Sepatu Roda Karangpawitan, Kelurahan Karangpawitan, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41315",
+        "estimasi_harga": "Rp 30.000 - Rp 100.000 per porsi",
+        "deskripsi_kelezatan": "Destinasi kuliner malam favorit di pusat kota ini menyajikan aneka hidangan laut segar (seafood) seperti kepiting bakau, udang windu, cumi-cumi, dan aneka kerang. Kelezatan utama terletak pada siraman saus Padang yang kental, berani bumbu pedas manis, serta ditumis hangat menggunakan irisan serai, daun jeruk, bawang bombay, dan telur kocok."
+    },
+    {
+        "nama_kuliner": "Sangu Tahu (Sangtau) Alun-Alun",
+        "kategori": "Makanan Khas",
+        "alamat": "Sentra Kuliner Alun-Alun Kota Karawang, Kelurahan Karawang Kulon, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41311",
+        "estimasi_harga": "Rp 10.000 - Rp 20.000 per porsi",
+        "deskripsi_kelezatan": "Sangtau atau Sangu Tahu merupakan masakan tradisional sederhana khas Karawang berupa nasi putih hangat pulen yang dipadukan dengan potongan tahu kuning goreng setengah matang. Hidangan ini disiram bumbu kacang giling kasar pedas manis beraroma kencur dan jeruk nipis, lalu ditaburi bawang goreng renyah dan kerupuk aci sebagai pelengkap."
+    },
+    {
+        "nama_kuliner": "Tutut Kuah Kuning Alun-Alun",
+        "kategori": "Pusat Jajanan",
+        "alamat": "Sentra Kuliner Alun-Alun Kota Karawang, Kelurahan Karawang Kulon, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat 41311",
+        "estimasi_harga": "Rp 10.000 - Rp 15.000 per porsi",
+        "deskripsi_kelezatan": "Jajanan merakyat berprotein tinggi ini menggunakan bahan utama tutut atau keong sawah segar yang direbus dalam waktu lama bersama kaldu kuah kuning berempah. Kaldu kuah kuning diolah dari bawang putih, kunyit, jahe, ketumbar, sereh, daun salam, serta irisan cabai rawit pedas untuk menghasilkan cita rasa gurih hangat yang meresap hingga ke dalam cangkang keong."
+    },
+    {
+        "nama_kuliner": "Bubur Ayam Cilamaya H. Dul",
+        "kategori": "Makanan Khas",
+        "alamat": "Jalan Raya Cilamaya, Desa Cilamaya, Kecamatan Cilamaya Wetan, Kabupaten Karawang, Jawa Barat 41384",
+        "estimasi_harga": "Rp 15.000 - Rp 25.000 per porsi",
+        "deskripsi_kelezatan": "Bubur ayam khas wilayah pesisir Cilamaya ini memiliki keunggulan berupa tekstur bubur beras yang sangat gurih lembut karena dimasak menggunakan kaldu ayam murni. Bubur disajikan hangat dengan siraman kuah kaldu kuning pekat kaya rempah jahe, suwiran ayam goreng yang melimpah, kacang kedelai goreng, emping melinjo renyah, sate ati ampela, serta taburan daun seledri segar."
+    },
+    {
+        "nama_kuliner": "Koffie Hideung Puncak Sempur",
+        "kategori": "Cafe",
+        "alamat": "Kawasan Wanawisata Puncak Sempur, Desa Cintalaksana, Kecamatan Tegalwaru, Kabupaten Karawang, Jawa Barat 41362",
+        "estimasi_harga": "Rp 15.000 - Rp 80.000 per menu",
+        "deskripsi_kelezatan": "Cafe bernuansa alam terbuka di atas ketinggian pegunungan ini menawarkan aneka olahan kopi robusta dan arabika khas pegunungan Sanggabuana Karawang selatan. Biji kopi diproses roasting tradisional oleh petani setempat, menghasilkan rasa kopi hitam pekat berciri rasa tanah basah hutan tropis (earthy) dengan aroma kelapa bakar yang gurih nikmat saat dinikmati."
+    }
+]

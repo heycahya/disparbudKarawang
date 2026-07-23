@@ -23,8 +23,10 @@ class EventBroadcastRequest extends Model
         'organization',
         'event_name',
         'event_date',
+        'end_date',
         'event_location',
         'description',
+        'target_audience',
         'attachment',
         'status',
         'admin_note',
@@ -35,6 +37,7 @@ class EventBroadcastRequest extends Model
 
     protected $casts = [
         'event_date' => 'date',
+        'end_date' => 'date',
         'reviewed_at' => 'datetime',
         'status' => 'string',
     ];

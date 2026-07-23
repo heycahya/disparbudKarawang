@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class PopulateMissingImagesSeeder extends Seeder
 {
@@ -12,19 +12,19 @@ class PopulateMissingImagesSeeder extends Seeder
     {
         // 1. Tourism Destinations
         $destinations = [
-            'candi-jiwa-percandian-batujaya' => 'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1200&q=80',
-            'monumen-perjuangan-rawagede' => 'https://images.unsplash.com/photo-1526958097901-5e6d742d3371?w=1200&q=80',
-            'tugu-kebulatan-tekad' => 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=1200&q=80',
-            'pantai-tangkolak-hutan-mangrove' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
-            'pantai-tanjung-pakis' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
-            'pantai-samudra-baru' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
-            'makam-syekh-quro' => 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1200&q=80',
-            'makam-keramat-nagasari' => 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1200&q=80',
-            'danau-cipule-situ-cipule' => 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80',
-            'situ-darwin' => 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80',
-            'wisata-danau-wanajaya' => 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1200&q=80',
-            'kawasan-industri-surya-cipta' => 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
-            'kawasan-international-industrial-city-kiic' => 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
+            'candi-jiwa-percandian-batujaya' => CloudinaryService::getSampleUrl('tourism', 0),
+            'monumen-perjuangan-rawagede' => CloudinaryService::getSampleUrl('tourism', 1),
+            'tugu-kebulatan-tekad' => CloudinaryService::getSampleUrl('tourism', 2),
+            'pantai-tangkolak-hutan-mangrove' => CloudinaryService::getSampleUrl('tourism', 3),
+            'pantai-tanjung-pakis' => CloudinaryService::getSampleUrl('tourism', 0),
+            'pantai-samudra-baru' => CloudinaryService::getSampleUrl('tourism', 1),
+            'makam-syekh-quro' => CloudinaryService::getSampleUrl('culture', 0),
+            'makam-keramat-nagasari' => CloudinaryService::getSampleUrl('culture', 1),
+            'danau-cipule-situ-cipule' => CloudinaryService::getSampleUrl('tourism', 2),
+            'situ-darwin' => CloudinaryService::getSampleUrl('tourism', 3),
+            'wisata-danau-wanajaya' => CloudinaryService::getSampleUrl('tourism', 0),
+            'kawasan-industri-surya-cipta' => CloudinaryService::getSampleUrl('accommodation', 0),
+            'kawasan-international-industrial-city-kiic' => CloudinaryService::getSampleUrl('accommodation', 1),
         ];
 
         foreach ($destinations as $slug => $imageUrl) {
@@ -38,9 +38,9 @@ class PopulateMissingImagesSeeder extends Seeder
 
         // 2. Cultures
         $cultures = [
-            'tari-goyang-karawang' => 'https://images.unsplash.com/photo-1508918290772-74d17d890d6b?auto=format&fit=crop&w=800&q=80',
-            'seni-ajeng' => 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80',
-            'topeng-banjet' => 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80',
+            'tari-goyang-karawang' => CloudinaryService::getSampleUrl('culture', 0),
+            'seni-ajeng' => CloudinaryService::getSampleUrl('culture', 1),
+            'topeng-banjet' => CloudinaryService::getSampleUrl('culture', 2),
         ];
 
         foreach ($cultures as $slug => $imageUrl) {
@@ -54,9 +54,9 @@ class PopulateMissingImagesSeeder extends Seeder
 
         // 3. Creative Economies
         $ekraf = [
-            'batik-karawang-rumah-kreasi-taza' => 'https://images.unsplash.com/photo-1606744888344-493238951221?auto=format&fit=crop&w=800&q=80',
-            'kampung-belanja-boneka-cikampek' => 'https://images.unsplash.com/photo-1559251606-c623743a6d76?auto=format&fit=crop&w=800&q=80',
-            'oleh-oleh-turubuk' => 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
+            'batik-karawang-rumah-kreasi-taza' => CloudinaryService::getSampleUrl('ekraf', 0),
+            'kampung-belanja-boneka-cikampek' => CloudinaryService::getSampleUrl('ekraf', 1),
+            'oleh-oleh-turubuk' => CloudinaryService::getSampleUrl('ekraf', 2),
         ];
 
         foreach ($ekraf as $slug => $imageUrl) {
@@ -70,14 +70,14 @@ class PopulateMissingImagesSeeder extends Seeder
 
         // 4. Accommodations
         $accommodations = [
-            'resinda-hotel-karawang-padma-hotels' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-            'mercure-karawang' => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80',
-            'brits-hotel-karawang' => 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
-            'swiss-belhotel-karawang' => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-            'asialink-premier-hotel-residence' => 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
-            'novotel-karawang' => 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80',
-            'primebiz-hotel-karawang' => 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
-            'grand-karawang-indah-hotel' => 'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?auto=format&fit=crop&w=800&q=80',
+            'resinda-hotel-karawang-padma-hotels' => CloudinaryService::getSampleUrl('accommodation', 0),
+            'mercure-karawang' => CloudinaryService::getSampleUrl('accommodation', 1),
+            'brits-hotel-karawang' => CloudinaryService::getSampleUrl('accommodation', 2),
+            'swiss-belhotel-karawang' => CloudinaryService::getSampleUrl('accommodation', 0),
+            'asialink-premier-hotel-residence' => CloudinaryService::getSampleUrl('accommodation', 1),
+            'novotel-karawang' => CloudinaryService::getSampleUrl('accommodation', 2),
+            'primebiz-hotel-karawang' => CloudinaryService::getSampleUrl('accommodation', 0),
+            'grand-karawang-indah-hotel' => CloudinaryService::getSampleUrl('accommodation', 1),
         ];
 
         foreach ($accommodations as $slug => $imageUrl) {
@@ -91,10 +91,10 @@ class PopulateMissingImagesSeeder extends Seeder
 
         // 5. Culinary Places
         $culinary = [
-            'resto-lawasan-caraka' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-            'swiss-cafe-restaurant' => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
-            'zenfuku-restaurant' => 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80',
-            'konter-teppanyaki-swiss-belhotel' => 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
+            'resto-lawasan-caraka' => CloudinaryService::getSampleUrl('culinary', 0),
+            'swiss-cafe-restaurant' => CloudinaryService::getSampleUrl('culinary', 1),
+            'zenfuku-restaurant' => CloudinaryService::getSampleUrl('culinary', 2),
+            'konter-teppanyaki-swiss-belhotel' => CloudinaryService::getSampleUrl('culinary', 0),
         ];
 
         foreach ($culinary as $slug => $imageUrl) {
@@ -108,10 +108,10 @@ class PopulateMissingImagesSeeder extends Seeder
 
         // 6. News
         $news = [
-            'pemkab-karawang-bakal-gelar-festival-dragon-boat-pertama-1500-peserta-siap-ramaikan-danau-cipule' => 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80',
-            'bidang-kebudayaan-dan-pora-tukar-tempat-disparbud-karawang-siap-jalani-transisi' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-            'bukan-sekadar-kawasan-industri-karawang-targetkan-penambahan-desa-wisata-baru-di-2026' => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-            'sebentar-lagi-warga-bisa-akses-informasi-cagar-budaya-karawang-lewat-kode-qr-sagawang' => 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&w=800&q=80',
+            'pemkab-karawang-bakal-gelar-festival-dragon-boat-pertama-1500-peserta-siap-ramaikan-danau-cipule' => CloudinaryService::getSampleUrl('news', 0),
+            'bidang-kebudayaan-dan-pora-tukar-tempat-disparbud-karawang-siap-jalani-transisi' => CloudinaryService::getSampleUrl('news', 1),
+            'bukan-sekadar-kawasan-industri-karawang-targetkan-penambahan-desa-wisata-baru-di-2026' => CloudinaryService::getSampleUrl('news', 2),
+            'sebentar-lagi-warga-bisa-akses-informasi-cagar-budaya-karawang-lewat-kode-qr-sagawang' => CloudinaryService::getSampleUrl('news', 0),
         ];
 
         foreach ($news as $slug => $imageUrl) {

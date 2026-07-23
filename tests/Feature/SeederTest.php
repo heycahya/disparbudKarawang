@@ -14,13 +14,13 @@ test('database seeder seeds all real local data correctly', function () {
     expect(DB::table('organization_structures')->count())->toBe(5);
 
     expect(DB::table('tourism_categories')->count())->toBe(5);
-    expect(DB::table('tourism_destinations')->count())->toBe(13);
-    expect(DB::table('tourism_destinations')->where('name', 'Curug Cigeuntis')->exists())->toBeFalse();
+    expect(DB::table('tourism_destinations')->count())->toBe(8);
+    expect(DB::table('tourism_destinations')->where('name', 'Curug Cigentis')->exists())->toBeTrue();
 
-    expect(DB::table('cultures')->count())->toBe(6);
-    expect(DB::table('creative_economies')->count())->toBe(6);
+    expect(DB::table('cultures')->count())->toBe(8);
+    expect(DB::table('creative_economies')->count())->toBe(8);
     expect(DB::table('accommodations')->count())->toBe(8);
-    expect(DB::table('culinary_places')->count())->toBe(4);
+    expect(DB::table('culinary_places')->count())->toBe(8);
 
     expect(DB::table('news_categories')->count())->toBe(4);
     expect(DB::table('news')->count())->toBe(4);

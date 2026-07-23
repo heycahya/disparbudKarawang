@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             GallerySeeder::class,
             SocialMediaLinkSeeder::class,
+            ComplaintSeeder::class,
+            TourismSubmissionSeeder::class,
+            EventBroadcastRequestSeeder::class,
         ]);
     }
 }

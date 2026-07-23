@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,97 +14,94 @@ class AccommodationSeeder extends Seeder
      */
     public function run(): void
     {
-        $accommodations = [
-            [
-                'name' => 'Resinda Hotel Karawang (Padma Hotels)',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 4 terintegrasi dengan Resinda Park Mall; kolam air panas indoor, sauna, fasilitas konvensi.',
-                'address' => 'Jl. Resinda Raya No. 1, Purwadana, Kec. Telukjambe Timur, 41361',
-                'phone' => '(0267) 8622000',
-                'price_range' => 'Mulai Rp1.262.973',
-                'cover_image' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+        $json = file_get_contents(database_path('seeders/data/accommodation.json'));
+        $accommodations = json_decode($json, true);
+
+        $typeMap = [
+            'Hotel Bintang' => 'hotel',
+            'Resort' => 'villa',
+            'Hotel Melati' => 'penginapan',
+        ];
+
+        $images = [
+            'Resinda Hotel Karawang' => [
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Mercure Karawang',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 4 dekat klaster Galuh Mas & Balai Kota; kolam renang outdoor.',
-                'address' => 'Jl. Galuh Mas Raya, Sukaharja, Kec. Telukjambe Timur, 41361',
-                'phone' => '(0267) 8638888',
-                'price_range' => 'Rp500.136–Rp569.256',
-                'cover_image' => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80',
+            'Mercure Karawang' => [
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Brits Hotel Karawang',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 4 dekat gerbang tol Karawang Barat; kitchenette, sauna, dapur terbuka.',
-                'address' => 'Jl. Arteri Tol Karawang Barat No. 1, Kav. 8, Margakaya, Kec. Telukjambe Barat, 41361',
-                'phone' => null, // Excluded twin duplicate phone to prevent redundant data distortion
-                'price_range' => 'Rp466.301–Rp591.143',
-                'cover_image' => 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+            'Delonix Hotel Karawang' => [
+                'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Swiss-Belhotel Karawang',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 3/4 dengan outdoor sky pool, karaoke privat, 9 ruang meeting, konter teppanyaki.',
-                'address' => 'Jl. Jenderal Ahmad Yani No. 29, Tanjungpura, Kec. Karawang Barat, 41315',
-                'phone' => null,
-                'price_range' => 'Rp538.428',
-                'cover_image' => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+            'Swiss-Belinn Karawang' => [
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Asialink Premier Hotel & Residence',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 4 fasilitas Sierra Spa, whirlpool, KTV Bar & Lounge, restoran Zenfuku.',
-                'address' => 'Jl. Raya Badami RT.04/RW.02, Margakaya, Kec. Telukjambe Barat, 41361',
-                'phone' => '(0267) 8637638',
-                'price_range' => 'Mulai Rp263.383',
-                'cover_image' => 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+            'favehotel Karawang' => [
+                'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Novotel Karawang',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 4 jaringan multinasional, untuk keluarga & delegasi bisnis.',
-                'address' => 'Jl. Interchange Karawang Barat, Margakaya, Kec. Telukjambe Barat, 41361',
-                'phone' => '(0267) 6483333',
-                'price_range' => 'Rp520.651–Rp637.641',
-                'cover_image' => 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80',
+            'Kampung Turis Resort & Waterpark' => [
+                'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'PrimeBiz Hotel Karawang',
-                'type' => 'hotel',
-                'description' => 'Hotel bintang 3 dekat Kota Bukit Indah/Cikampek, untuk profesional logistik/teknisi.',
-                'address' => 'Blok C, Kawasan Kota, Kalihurip, Kec. Cikampek, 41363',
-                'phone' => '(0264) 8371010',
-                'price_range' => 'Mulai Rp334.790',
-                'cover_image' => 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
+            'Rumantara Inn Karawang' => [
+                'https://images.unsplash.com/photo-1495365200479-c4ed1d392743?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&h=500&q=80',
             ],
-            [
-                'name' => 'Grand Karawang Indah Hotel',
-                'type' => 'hotel',
-                'description' => 'Hotel budget opsi ekonomis di pusat kota.',
-                'address' => 'Jl. Jenderal Ahmad Yani By Pass No. 28, Tanjungpura, Kec. Karawang Barat, 41315',
-                'phone' => '(0267) 410656',
-                'price_range' => 'Rp196.560–Rp279.400',
-                'cover_image' => 'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?auto=format&fit=crop&w=800&q=80',
+            'Front One Akshaya Hotel Karawang' => [
+                'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&h=500&q=80',
+                'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&h=500&q=80',
             ],
         ];
 
-        foreach ($accommodations as $item) {
-            DB::table('accommodations')->insert([
-                'name' => $item['name'],
-                'slug' => Str::slug($item['name']),
-                'type' => $item['type'],
-                'description' => $item['description'],
-                'address' => $item['address'],
-                'phone' => $item['phone'],
-                'price_range' => $item['price_range'],
-                'cover_image' => $item['cover_image'],
+        foreach ($accommodations as $index => $item) {
+            $type = $typeMap[$item['tipe']] ?? 'hotel';
+
+            $itemImages = $images[$item['nama_akomodasi']] ?? $images['Resinda Hotel Karawang'];
+            $cover = $itemImages[0];
+
+            $accId = DB::table('accommodations')->insertGetId([
+                'name' => $item['nama_akomodasi'],
+                'slug' => Str::slug($item['nama_akomodasi']),
+                'type' => $type,
+                'description' => $item['fasilitas_utama'],
+                'address' => $item['alamat'],
+                'phone' => null,
+                'price_range' => $item['estimasi_harga'],
+                'cover_image' => CloudinaryService::getUrl($cover, 'accommodation'),
                 'latitude' => null,
                 'longitude' => null,
                 'status' => 'published',
+                'views' => rand(10, 300),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Add 2 related sample photos in the gallery
+            for ($i = 1; $i <= 2; $i++) {
+                $photo = $itemImages[$i] ?? $itemImages[0];
+                DB::table('gallery_photos')->insert([
+                    'imageable_id' => $accId,
+                    'imageable_type' => 'App\Models\Accommodation',
+                    'photo' => CloudinaryService::getUrl($photo, 'accommodation'),
+                    'caption' => $item['nama_akomodasi'] . ' Detail ' . $i,
+                    'order' => $i - 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }

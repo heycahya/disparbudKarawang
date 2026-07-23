@@ -15,6 +15,8 @@ class StoreComplaintRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'category' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'attachment' => [
                 'nullable',

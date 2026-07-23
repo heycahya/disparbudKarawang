@@ -58,9 +58,15 @@ const submit = () => {
   })
 }
 
+const newCoverPreviewUrl = ref('');
+
 const handleCoverImageChange = (e) => {
-  form.cover_image = e.target.files[0]
-}
+  const file = e.target.files[0];
+  if (file) {
+    form.cover_image = file;
+    newCoverPreviewUrl.value = URL.createObjectURL(file);
+  }
+};
 </script>
 
 <template>
@@ -150,9 +156,15 @@ const handleCoverImageChange = (e) => {
               <!-- Cover Image -->
               <div>
                 <label class="block text-sm font-semibold text-slate-700">Gambar Cover</label>
-                <div class="flex items-center gap-4 mt-1 mb-2" v-if="destination.cover_image">
-                  <img :src="destination.cover_image" class="h-20 w-32 object-cover rounded-md border" alt="Cover Saat Ini" />
-                  <span class="text-xs text-slate-400">Gambar cover saat ini</span>
+                <div class="flex items-center gap-4 mt-2 mb-3">
+                  <div v-if="destination.cover_image" class="relative">
+                    <img :src="destination.cover_image" class="h-20 w-32 object-cover rounded-xl border border-slate-200" alt="Cover Saat Ini" />
+                    <span class="block text-[10px] text-slate-400 mt-1 text-center font-bold">Foto Saat Ini</span>
+                  </div>
+                  <div v-if="newCoverPreviewUrl" class="relative">
+                    <img :src="newCoverPreviewUrl" class="h-20 w-32 object-cover rounded-xl border border-emerald-500 ring-2 ring-emerald-500/20" alt="Cover Baru" />
+                    <span class="block text-[10px] text-emerald-600 font-bold mt-1 text-center">Foto Baru Dipilih</span>
+                  </div>
                 </div>
                 <input 
                   type="file" 

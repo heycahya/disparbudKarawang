@@ -23,15 +23,23 @@ class CultureController extends Controller
     {
         $query = Culture::query();
 
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
 
         $cultures = $query->latest()->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Content/Culture/Index', [
             'cultures' => $cultures,
-            'filters' => $request->only(['search'])
+            'filters' => $request->only(['search', 'category', 'status'])
         ]);
     }
 

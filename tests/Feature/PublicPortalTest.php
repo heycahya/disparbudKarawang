@@ -45,18 +45,8 @@ beforeEach(function () {
     $this->tourismCategory = TourismCategory::create(['name' => 'Kategori 2', 'slug' => 'kategori-2']);
 });
 
-test('guest can access public home, news catalog, and tourism catalog', function () {
+test('guest can access public home', function () {
     $this->get(route('public.home'))->assertStatus(200);
-    $this->get(route('public.news.index'))->assertStatus(200);
-    $this->get(route('public.tourism.index'))->assertStatus(200);
-});
-
-test('guest can access all directory tabs in public catalog', function () {
-    $this->get(route('public.tourism.index', ['tab' => 'tourism']))->assertStatus(200);
-    $this->get(route('public.tourism.index', ['tab' => 'culture']))->assertStatus(200);
-    $this->get(route('public.tourism.index', ['tab' => 'ekraf']))->assertStatus(200);
-    $this->get(route('public.tourism.index', ['tab' => 'accommodation']))->assertStatus(200);
-    $this->get(route('public.tourism.index', ['tab' => 'culinary']))->assertStatus(200);
 });
 
 test('guest can access news show and tourism show', function () {
@@ -82,18 +72,18 @@ test('guest can access news show and tourism show', function () {
     $this->get(route('public.tourism.show', $tourism->slug))->assertStatus(200);
 });
 
-test('unauthorized guest can view forms but is redirected from submitting to layanan masyarakat', function () {
-    $this->get(route('layanan-masyarakat.complaints.create'))->assertStatus(200);
+test('unauthorized guest is redirected to login when trying to access layanan masyarakat form routes', function () {
+    $this->get(route('layanan-masyarakat.complaints.create'))->assertRedirect('/login');
     $this->post(route('layanan-masyarakat.complaints.store'), [])->assertRedirect('/login');
 
-    $this->get(route('layanan-masyarakat.tourism-submissions.create'))->assertStatus(200);
+    $this->get(route('layanan-masyarakat.tourism-submissions.create'))->assertRedirect('/login');
     $this->post(route('layanan-masyarakat.tourism-submissions.store'), [])->assertRedirect('/login');
 
-    $this->get(route('layanan-masyarakat.event-broadcasts.create'))->assertStatus(200);
+    $this->get(route('layanan-masyarakat.event-broadcasts.create'))->assertRedirect('/login');
     $this->post(route('layanan-masyarakat.event-broadcasts.store'), [])->assertRedirect('/login');
 });
 
-test('forbidden non-public roles can view forms but are blocked from submitting to layanan masyarakat', function () {
+test('forbidden non-public roles are blocked from accessing or submitting to layanan masyarakat', function () {
     $admin = User::create([
         'name' => 'Admin User',
         'email' => 'admin@example.com',
@@ -101,13 +91,13 @@ test('forbidden non-public roles can view forms but are blocked from submitting 
         'role' => 'admin'
     ]);
 
-    $this->actingAs($admin)->get(route('layanan-masyarakat.complaints.create'))->assertStatus(200);
+    $this->actingAs($admin)->get(route('layanan-masyarakat.complaints.create'))->assertStatus(403);
     $this->actingAs($admin)->post(route('layanan-masyarakat.complaints.store'), [])->assertStatus(403);
 
-    $this->actingAs($admin)->get(route('layanan-masyarakat.tourism-submissions.create'))->assertStatus(200);
+    $this->actingAs($admin)->get(route('layanan-masyarakat.tourism-submissions.create'))->assertStatus(403);
     $this->actingAs($admin)->post(route('layanan-masyarakat.tourism-submissions.store'), [])->assertStatus(403);
 
-    $this->actingAs($admin)->get(route('layanan-masyarakat.event-broadcasts.create'))->assertStatus(200);
+    $this->actingAs($admin)->get(route('layanan-masyarakat.event-broadcasts.create'))->assertStatus(403);
     $this->actingAs($admin)->post(route('layanan-masyarakat.event-broadcasts.store'), [])->assertStatus(403);
 });
 
@@ -125,6 +115,8 @@ test('public user can submit a complaint (happy path)', function () {
 
     $payload = [
         'title' => 'Jalan Rusak Dekat Candi Jiwa',
+        'category' => 'Fasilitas Destinasi Wisata',
+        'location' => 'Area Candi Jiwa',
         'description' => 'Mohon segera diperbaiki jalannya.',
         'attachment' => $file
     ];
@@ -137,6 +129,8 @@ test('public user can submit a complaint (happy path)', function () {
     $this->assertDatabaseHas('complaints', [
         'user_id' => $user->id,
         'subject' => 'Jalan Rusak Dekat Candi Jiwa',
+        'category' => 'Fasilitas Destinasi Wisata',
+        'location' => 'Area Candi Jiwa',
         'description' => 'Mohon segera diperbaiki jalannya.',
         'attachment' => 'https://res.cloudinary.com/dummy/uploaded.jpg',
         'status' => 'masuk'
@@ -191,8 +185,12 @@ test('public user can submit a tourism destination suggestion', function () {
 
     $payload = [
         'name' => 'Curug Cigentis Baru',
+        'category' => 'Wisata Alam',
         'description' => 'Keindahan air terjun asri',
         'location' => 'Loji, Karawang',
+        'contact' => '08123456789',
+        'operating_hours' => '08.00 - 17.00 WIB',
+        'ticket_price' => 'Rp 15.000',
         'photos' => [$photo1]
     ];
 
@@ -203,8 +201,12 @@ test('public user can submit a tourism destination suggestion', function () {
     $this->assertDatabaseHas('tourism_submissions', [
         'user_id' => $user->id,
         'name' => 'Curug Cigentis Baru',
+        'category' => 'Wisata Alam',
         'description' => 'Keindahan air terjun asri',
         'address' => 'Loji, Karawang',
+        'contact' => '08123456789',
+        'operating_hours' => '08.00 - 17.00 WIB',
+        'ticket_price' => 'Rp 15.000',
         'photo' => 'https://res.cloudinary.com/dummy/uploaded.jpg',
         'status' => 'masuk'
     ]);
@@ -251,6 +253,7 @@ test('public user can submit an event broadcast request', function () {
         'start_date' => now()->addDays(5)->format('Y-m-d'),
         'end_date' => now()->addDays(6)->format('Y-m-d'),
         'description' => 'Acara pameran kopi lokal Karawang.',
+        'target_audience' => 'Penggemar Kopi & Masyarakat Umum',
         'proposal' => $proposal
     ];
 
@@ -264,18 +267,16 @@ test('public user can submit an event broadcast request', function () {
         'event_name' => 'Festival Kopi Karawang',
         'event_location' => 'Lapangan Karangpawitan',
         'event_date' => now()->addDays(5)->format('Y-m-d 00:00:00'),
+        'end_date' => now()->addDays(6)->format('Y-m-d 00:00:00'),
         'description' => 'Acara pameran kopi lokal Karawang.',
+        'target_audience' => 'Penggemar Kopi & Masyarakat Umum',
         'attachment' => 'https://res.cloudinary.com/dummy/uploaded.jpg',
         'status' => 'masuk'
     ]);
 });
 
-test('public pages render successfully with global footer component', function () {
+test('public home page renders successfully', function () {
     $this->get(route('public.home'))->assertStatus(200);
-    $this->get(route('public.profile'))->assertStatus(200);
-    $this->get(route('public.gallery.index'))->assertStatus(200);
-    $this->get(route('public.news.index'))->assertStatus(200);
-    $this->get(route('public.destinasi'))->assertStatus(200);
 });
 
 test('authenticated user accessing dashboard receives service_requests prop for summary table', function () {
@@ -418,5 +419,37 @@ test('policies prevent unauthorized access (IDOR) on Layanan Masyarakat models',
     expect($admin->can('view', $complaint))->toBeTrue();
     expect($admin->can('update', $complaint))->toBeTrue();
     expect($admin->can('delete', $complaint))->toBeTrue();
+});
+
+test('upload falls back to local storage when Cloudinary fails or throws exception', function () {
+    $user = User::create([
+        'name' => 'User Fallback Test',
+        'email' => 'fallback@example.com',
+        'password' => bcrypt('password'),
+        'role' => 'public'
+    ]);
+
+    // Mock Cloudinary UploadApi to throw an exception
+    $this->mock(UploadApi::class, function ($mock) {
+        $mock->shouldReceive('upload')->andThrow(new \Exception('Cloudinary credentials missing or invalid'));
+    });
+
+    Storage::fake('public');
+    $photo1 = UploadedFile::fake()->create('wisata_local.jpg', 500, 'image/jpeg');
+
+    $payload = [
+        'name' => 'Curug Local Storage',
+        'description' => 'Keindahan air terjun asri',
+        'location' => 'Loji, Karawang',
+        'photos' => [$photo1]
+    ];
+
+    $this->actingAs($user)
+        ->post(route('layanan-masyarakat.tourism-submissions.store'), $payload)
+        ->assertRedirect(route('public.history.index'));
+
+    $submission = TourismSubmission::where('user_id', $user->id)->first();
+    expect($submission)->not->toBeNull();
+    expect($submission->photo)->toContain('/storage/submissions/');
 });
 

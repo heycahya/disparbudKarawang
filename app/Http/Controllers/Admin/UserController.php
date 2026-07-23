@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Validation\Rules;
@@ -13,18 +12,46 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users (both Admin and Public users).
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role', 'admin')->latest()->paginate(10);
+        $role = $request->query('role', 'all');
+        $search = $request->query('search', '');
+
+        $query = User::query();
+
+        if ($role && $role !== 'all') {
+            $query->where('role', $role);
+        }
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $query->latest()->paginate(10)->withQueryString();
+
+        $stats = [
+            'total' => User::count(),
+            'admin' => User::where('role', 'admin')->count(),
+            'public' => User::where('role', 'public')->count(),
+        ];
+
         return Inertia::render('Admin/Users/Index', [
-            'users' => $users
+            'users' => $users,
+            'stats' => $stats,
+            'filters' => [
+                'role' => $role,
+                'search' => $search,
+            ],
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      */
     public function create()
     {
@@ -32,7 +59,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      */
     public function store(Request $request)
     {
@@ -40,7 +67,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|in:admin',
+            'role' => 'required|in:admin,public',
         ]);
 
         User::create([
@@ -50,19 +77,11 @@ class UserController extends Controller
             'role' => $validated['role'],
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan.');
+        return redirect()->route('admin.users.index')->with('success', 'Akun pengguna berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        // Not used, as excluded in routes
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user.
      */
     public function edit(User $user)
     {
@@ -72,7 +91,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user in storage.
      */
     public function update(Request $request, User $user)
     {
@@ -80,7 +99,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class.',email,'.$user->id,
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|in:admin',
+            'role' => 'required|in:admin,public',
         ]);
 
         $user->name = $validated['name'];
@@ -93,19 +112,35 @@ class UserController extends Controller
         
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('admin.users.index')->with('success', 'Data akun pengguna berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Reset user password directly.
+     */
+    public function resetPassword(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect()->back()->with('success', "Password untuk akun {$user->name} ({$user->email}) berhasil direset.");
+    }
+
+    /**
+     * Remove the specified user from storage.
      */
     public function destroy(User $user)
     {
         if ($user->id === auth()->id()) {
-            return back()->withErrors(['error' => 'Anda tidak bisa menghapus akun Anda sendiri.']);
+            return back()->withErrors(['error' => 'Anda tidak bisa menghapus akun Anda sendiri yang sedang aktif.']);
         }
         
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');
+        return redirect()->route('admin.users.index')->with('success', 'Akun pengguna berhasil dihapus dari sistem.');
     }
 }

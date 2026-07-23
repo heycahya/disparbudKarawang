@@ -1,4 +1,5 @@
 <script setup>
+import ToastNotification from '@/Components/ToastNotification.vue';
 import { ref, watch } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -32,18 +33,18 @@ watch(
 </script>
 
 <template>
-    <div class="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans flex text-slate-800 dark:text-slate-200">
+    <div class="h-screen max-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 font-sans flex text-slate-800 dark:text-slate-200">
         
         <!-- Sidebar: Desktop Left Navigation (w-64) -->
         <aside 
-            class="hidden lg:flex flex-col w-64 bg-gradient-to-b from-[#0F5E3D] to-emerald-950 text-white shrink-0 border-r border-emerald-800/20 relative"
+            class="hidden lg:flex flex-col w-64 h-screen shrink-0 bg-gradient-to-b from-[#0F5E3D] to-emerald-950 text-white border-r border-emerald-800/20 relative z-20"
         >
             <!-- Pattern -->
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-5 pointer-events-none"></div>
 
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10">
-                <Link href="/" class="flex items-center gap-3 group">
+                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-md group-hover:scale-105 transition-transform duration-300">
                         <ApplicationLogo class="w-7 h-7" />
                     </div>
@@ -89,6 +90,24 @@ watch(
 
                 <!-- Admin Links -->
                 <template v-if="$page.props.auth.user?.role === 'admin'">
+                    <div class="pt-4 pb-2 px-4">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Layanan Masyarakat</span>
+                    </div>
+
+                    <!-- Verifikasi Layanan -->
+                    <Link 
+                        :href="route('admin.verifikasi-layanan.index')"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.verifikasi-layanan.*') 
+                            ? 'bg-amber-400 text-slate-900 shadow-md shadow-amber-400/20' 
+                            : 'text-emerald-100 hover:bg-white/10 hover:text-white'"
+                    >
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Verifikasi Layanan</span>
+                    </Link>
+
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Manajemen Konten</span>
                     </div>
@@ -239,7 +258,7 @@ watch(
 
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10 flex justify-between items-center">
-                <Link href="/" class="flex items-center gap-3">
+                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center border border-white/20 shadow-md">
                         <ApplicationLogo class="w-6 h-6" />
                     </div>
@@ -291,6 +310,24 @@ watch(
                 </template>
 
                 <template v-if="$page.props.auth.user?.role === 'admin'">
+                    <div class="pt-4 pb-2 px-4">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Layanan Masyarakat</span>
+                    </div>
+
+                    <Link 
+                        :href="route('admin.verifikasi-layanan.index')"
+                        @click="showingSidebarMobile = false"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.verifikasi-layanan.*') 
+                            ? 'bg-amber-400 text-slate-900' 
+                            : 'text-emerald-100 hover:bg-white/10'"
+                    >
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Verifikasi Layanan</span>
+                    </Link>
+
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Manajemen Konten</span>
                     </div>
@@ -391,8 +428,8 @@ watch(
             </div>
         </aside>
 
-        <!-- Right Side: Content Wrapper -->
-        <div class="flex-1 flex flex-col min-w-0 min-h-screen">
+        <!-- Right Side: Content Wrapper (Independent Scroll) -->
+        <div class="flex-1 h-screen flex flex-col min-w-0 overflow-y-auto">
             
             <!-- Top Nav Bar -->
             <header class="bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 h-16 flex items-center justify-between px-6 shrink-0 relative z-30 shadow-sm">
@@ -414,9 +451,16 @@ watch(
                     </div>
                 </div>
 
-                <!-- Right: Profile / Logout Dropdown -->
+                <!-- Right: Profile & View Public Portal Button -->
                 <div class="flex items-center gap-4">
-                    
+                    <a 
+                        :href="route('public.home')" 
+                        target="_blank"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-900/50 text-xs font-bold hover:bg-emerald-100 transition shadow-sm"
+                    >
+                        <span>🌐 Lihat Portal Utama</span>
+                    </a>
+
                     <!-- Profile Dropdown -->
                     <Dropdown align="right" width="48">
                         <template #trigger>
@@ -448,41 +492,7 @@ watch(
             </main>
         </div>
 
-        <!-- Global Floating Toasts -->
-        <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-2">
-            <!-- Success Toast -->
-            <div v-if="successMessage" class="flex items-center p-4 text-gray-500 bg-white rounded-lg shadow-lg dark:text-gray-400 dark:bg-gray-800 border-l-4 border-emerald-500 transition-all duration-300" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-emerald-500 bg-emerald-100 rounded-lg dark:bg-emerald-800 dark:text-emerald-200">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                    </svg>
-                    <span class="sr-only">Success icon</span>
-                </div>
-                <div class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-100 pr-2">{{ successMessage }}</div>
-                <button @click="successMessage = null" type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Error Toast -->
-            <div v-if="errorMessage" class="flex items-center p-4 text-gray-500 bg-white rounded-lg shadow-lg dark:text-gray-400 dark:bg-gray-800 border-l-4 border-red-500 transition-all duration-300" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm1.25 11.5a1.25 1.25 0 1 1-2.5 0v-5a1.25 1.25 0 1 1 2.5 0v5Zm0-8a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z"/>
-                    </svg>
-                    <span class="sr-only">Error icon</span>
-                </div>
-                <div class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-100 pr-2">{{ errorMessage }}</div>
-                <button @click="errorMessage = null" type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
+        <!-- Global Floating Toast Notification -->
+        <ToastNotification />
     </div>
 </template>

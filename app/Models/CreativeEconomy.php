@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -26,12 +27,24 @@ class CreativeEconomy extends Model
         'contact',
         'address',
         'cover_image',
-        'status'
+        'status',
+        'views'
     ];
 
     protected $casts = [
         'status' => 'string'
     ];
+
+    /**
+     * Get a safe image URL, falling back to Cloudinary sample if null/empty.
+     */
+    public function getCoverImageUrlAttribute(): string
+    {
+        if (!empty($this->cover_image)) {
+            return $this->cover_image;
+        }
+        return CloudinaryService::getSampleUrl('ekraf');
+    }
 
     protected static function boot()
     {

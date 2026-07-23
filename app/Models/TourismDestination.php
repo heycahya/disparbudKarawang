@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,6 +31,17 @@ class TourismDestination extends Model
         'latitude' => 'decimal:7',
         'longitude' => 'decimal:7'
     ];
+
+    /**
+     * Get a safe image URL, falling back to Cloudinary sample if null/empty.
+     */
+    public function getCoverImageUrlAttribute(): string
+    {
+        if (!empty($this->cover_image)) {
+            return $this->cover_image;
+        }
+        return CloudinaryService::getSampleUrl('tourism');
+    }
 
     public function category(): BelongsTo
     {

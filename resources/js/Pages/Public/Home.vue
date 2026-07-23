@@ -1,5 +1,5 @@
 <script setup>
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage, router } from '@inertiajs/vue3';
 import { ref, computed, onMounted } from 'vue';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import LeafletMap from '@/Components/LeafletMap.vue';
@@ -63,6 +63,9 @@ const showAllWisata  = ref(false);
 const showAllBudaya  = ref(false);
 const showAllEkraf   = ref(false);
 const showAllBerita  = ref(false);
+const showAllAkomodasi = ref(false);
+const showAllKuliner = ref(false);
+const showAllGaleri = ref(false);
 
 // Computed: sliced arrays for display
 const visibleTourism = computed(() =>
@@ -77,6 +80,15 @@ const visibleEkraf = computed(() =>
 const visibleNews = computed(() =>
     showAllBerita.value ? displayNews : displayNews.slice(0, PREVIEW_COUNT)
 );
+const visibleAccommodations = computed(() =>
+    showAllAkomodasi.value ? props.accommodations : props.accommodations.slice(0, PREVIEW_COUNT)
+);
+const visibleCulinary = computed(() =>
+    showAllKuliner.value ? props.culinary : props.culinary.slice(0, PREVIEW_COUNT)
+);
+const visibleGalleries = computed(() =>
+    showAllGaleri.value ? props.galleries : props.galleries.slice(0, 6)
+);
 
 // Smooth scroll to a section by its ID
 const scrollToSection = (id) => {
@@ -87,11 +99,13 @@ const scrollToSection = (id) => {
 };
 
 const handleServiceClick = (e, routeName) => {
-    if (!page.props.auth?.user) {
+    if (e && e.preventDefault) {
         e.preventDefault();
+    }
+    if (!page.props.auth?.user) {
         window.location.href = route('login') + '?intended=' + encodeURIComponent(route(routeName));
     } else {
-        window.location.href = route(routeName);
+        router.visit(route(routeName));
     }
 };
 
@@ -112,7 +126,7 @@ onMounted(() => {
     <PublicLayout>
 
         <!-- 1. HERO SECTION & PROFIL DISPARBUD -->
-        <section id="section-hero" class="relative text-white overflow-hidden py-24 sm:py-36 pb-36 sm:pb-44 scroll-mt-20" style="background-image: linear-gradient(to bottom, rgba(15, 94, 61, 0.90), rgba(12, 78, 91, 0.95)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+        <section id="section-hero" class="relative text-white overflow-hidden py-24 sm:py-36 pb-36 sm:pb-44 scroll-mt-20" style="background-image: linear-gradient(to bottom, rgba(15, 94, 61, 0.90), rgba(12, 78, 91, 0.95)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
 
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,32 +198,46 @@ onMounted(() => {
                 </div>
 
                 <!-- Stats Counter Row -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 bg-white/10 dark:bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg mt-16">
-                    <div class="flex items-center justify-between md:border-r border-white/10 last:border-0 pr-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 bg-white/10 dark:bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg mt-16">
+                    <div class="flex items-center justify-between lg:border-r border-white/10 pr-2">
                         <div>
                             <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Destinasi Wisata</p>
-                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.destinations || displayTourism.length || 13 }}</h3>
+                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.destinations || displayTourism.length || 8 }}</h3>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between md:border-r border-white/10 last:border-0 px-4">
-                        <div>
-                            <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Warta & Berita</p>
-                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.news || displayNews.length || 5 }}</h3>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between md:border-r border-white/10 last:border-0 px-4">
+                    <div class="flex items-center justify-between lg:border-r border-white/10 px-2">
                         <div>
                             <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Seni & Budaya</p>
                             <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.cultures || 8 }}</h3>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between pl-4">
+                    <div class="flex items-center justify-between lg:border-r border-white/10 px-2">
                         <div>
                             <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Ekonomi Kreatif</p>
-                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.ekraf || 12 }}</h3>
+                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.ekraf || 8 }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between lg:border-r border-white/10 px-2">
+                        <div>
+                            <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Akomodasi</p>
+                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.accommodations || 8 }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between lg:border-r border-white/10 px-2">
+                        <div>
+                            <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Kuliner Khas</p>
+                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.culinary || 8 }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pl-2">
+                        <div>
+                            <p class="text-[10px] font-semibold text-emerald-100 uppercase tracking-wider">Warta & Berita</p>
+                            <h3 class="text-2xl font-black text-amber-300 mt-0.5">{{ hero_stats.news || displayNews.length || 4 }}</h3>
                         </div>
                     </div>
                 </div>
@@ -294,14 +322,11 @@ onMounted(() => {
                         <div>
                             <a :href="route('public.tourism.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
                                 <img 
-                                    v-if="item.cover_image" 
-                                    :src="item.cover_image" 
+                                    :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/wisata_placeholder.jpg'" 
                                     :alt="item.name" 
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                    @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/wisata_placeholder.jpg'"
                                 >
-                                <div v-else class="w-full h-full flex items-center justify-center text-gray-400 font-medium text-sm">
-                                    Foto Destinasi
-                                </div>
                             </a>
 
                             <div class="p-5 space-y-2.5">
@@ -367,14 +392,11 @@ onMounted(() => {
                         <div>
                             <a :href="route('public.culture.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
                                 <img 
-                                    v-if="item.cover_image" 
-                                    :src="item.cover_image" 
+                                    :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/budaya_placeholder.jpg'" 
                                     :alt="item.name" 
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                    @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/budaya_placeholder.jpg'"
                                 >
-                                <div v-else class="w-full h-full flex items-center justify-center text-gray-400 font-medium text-sm">
-                                    Foto Kebudayaan
-                                </div>
                             </a>
 
                             <div class="p-5 space-y-2.5">
@@ -436,14 +458,11 @@ onMounted(() => {
                         <div>
                             <a :href="route('public.ekraf.show', item.slug)" rel="external" class="block relative overflow-hidden h-48 bg-slate-200 dark:bg-gray-800">
                                 <img 
-                                    v-if="item.cover_image" 
-                                    :src="item.cover_image" 
+                                    :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/ekraf_placeholder.jpg'" 
                                     :alt="item.name" 
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                    @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/ekraf_placeholder.jpg'"
                                 >
-                                <div v-else class="w-full h-full flex items-center justify-center text-gray-400 font-medium text-sm">
-                                    Foto Produk Ekraf
-                                </div>
                             </a>
 
                             <div class="p-5 space-y-2.5">
@@ -483,19 +502,31 @@ onMounted(() => {
                         <div>
                             <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white mt-0.5">Akomodasi Pilihan</h2>
                         </div>
-                        <button @click="scrollToSection('section-akomodasi-kuliner')" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline transition whitespace-nowrap group">
-                            Semua Pilihan <svg class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                        <button 
+                            v-if="accommodations.length > PREVIEW_COUNT"
+                            @click="showAllAkomodasi = !showAllAkomodasi" 
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline transition whitespace-nowrap group"
+                        >
+                            {{ showAllAkomodasi ? 'Sembunyikan' : 'Semua Pilihan' }}
+                            <svg 
+                                class="w-3.5 h-3.5 transition-transform duration-200" 
+                                :class="{ 'rotate-180': showAllAkomodasi }"
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                            </svg>
                         </button>
                     </div>
 
                     <div class="space-y-4">
                         <div 
-                            v-for="item in accommodations.slice(0, 3)" 
+                            v-for="item in visibleAccommodations" 
                             :key="item.id"
                             class="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
                         >
-                            <img v-if="item.cover_image" :src="item.cover_image" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0">
-                            <div v-else class="w-20 h-20 bg-slate-200 dark:bg-gray-800 rounded-lg shrink-0 flex items-center justify-center text-[10px] text-gray-400">Hotel</div>
+                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/akomodasi_placeholder.jpg'">
                             <div class="min-w-0 flex-1 space-y-1">
                                 <h3 class="text-sm font-bold text-gray-900 dark:text-white truncate">
                                     <a :href="route('public.accommodation.show', item.slug)" rel="external">{{ item.name }}</a>
@@ -513,19 +544,31 @@ onMounted(() => {
                         <div>
                             <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white mt-0.5">Kuliner &amp; Tempat Makan</h2>
                         </div>
-                        <button @click="scrollToSection('section-akomodasi-kuliner')" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline transition whitespace-nowrap group">
-                            Semua Pilihan <svg class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                        <button 
+                            v-if="culinary.length > PREVIEW_COUNT"
+                            @click="showAllKuliner = !showAllKuliner" 
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline transition whitespace-nowrap group"
+                        >
+                            {{ showAllKuliner ? 'Sembunyikan' : 'Semua Pilihan' }}
+                            <svg 
+                                class="w-3.5 h-3.5 transition-transform duration-200" 
+                                :class="{ 'rotate-180': showAllKuliner }"
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                            </svg>
                         </button>
                     </div>
 
                     <div class="space-y-4">
                         <div 
-                            v-for="item in culinary.slice(0, 3)" 
+                            v-for="item in visibleCulinary" 
                             :key="item.id"
                             class="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-100 dark:border-gray-800 flex gap-4 items-center shadow-sm hover:shadow-md transition"
                         >
-                            <img v-if="item.cover_image" :src="item.cover_image" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0">
-                            <div v-else class="w-20 h-20 bg-slate-200 dark:bg-gray-800 rounded-lg shrink-0 flex items-center justify-center text-[10px] text-gray-400">Kuliner</div>
+                            <img :src="item.cover_image || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'" :alt="item.name" class="w-20 h-20 rounded-lg object-cover shrink-0" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/kuliner_placeholder.jpg'">
                             <div class="min-w-0 flex-1 space-y-1">
                                 <h3 class="text-sm font-bold text-gray-900 dark:text-white truncate">
                                     <a :href="route('public.culinary.show', item.slug)" rel="external">{{ item.name }}</a>
@@ -570,14 +613,11 @@ onMounted(() => {
                         <div>
                             <a :href="route('public.news.show', item.slug)" rel="external" class="block relative overflow-hidden h-44 bg-slate-200 dark:bg-gray-800">
                                 <img 
-                                    v-if="item.thumbnail" 
-                                    :src="item.thumbnail" 
+                                    :src="item.thumbnail || 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/berita_placeholder.jpg'" 
                                     :alt="item.title" 
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/berita_placeholder.jpg'"
                                 >
-                                <div v-else class="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                                    Sampul Berita
-                                </div>
                             </a>
                             <div class="p-5 space-y-2.5">
                                 <div v-if="item.category" class="flex items-center">
@@ -673,19 +713,32 @@ onMounted(() => {
                         <div>
                             <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white mt-0.5">Galeri Foto Kegiatan &amp; Pariwisata</h2>
                         </div>
-                        <button @click="scrollToSection('section-galeri-peta')" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:text-emerald-700 hover:underline transition whitespace-nowrap group">
-                            Lihat Semua Foto <svg class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                        <button 
+                            v-if="galleries.length > 6"
+                            @click="showAllGaleri = !showAllGaleri" 
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:text-emerald-700 hover:underline transition whitespace-nowrap group"
+                        >
+                            {{ showAllGaleri ? 'Sembunyikan' : 'Lihat Semua Foto' }}
+                            <svg 
+                                class="w-3.5 h-3.5 transition-transform duration-200" 
+                                :class="{ 'rotate-180': showAllGaleri }"
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                            </svg>
                         </button>
                     </div>
 
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         <div 
-                            v-for="g in galleries.slice(0, 6)" 
+                            v-for="g in visibleGalleries" 
                             :key="g.id"
                             @click="selectedGalleryImage = g"
                             class="relative h-40 rounded-xl overflow-hidden group cursor-pointer shadow-sm border border-gray-100 dark:border-gray-800"
                         >
-                            <img :src="g.photo" :alt="g.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <img :src="g.photo" :alt="g.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" @error="e => e.target.src = 'https://res.cloudinary.com/mabhpcw6/image/upload/c_fill,g_auto,w_800,h_500,f_auto,q_auto/gallery_placeholder.jpg'">
                             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-center p-2">
                                 <p class="text-[11px] font-bold line-clamp-2">{{ g.title }}</p>
                             </div>
@@ -699,8 +752,8 @@ onMounted(() => {
                         <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white mt-0.5">Peta Interaktif Sebaran Wisata Karawang</h2>
                     </div>
 
-                    <div class="h-96 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-md">
-                        <LeafletMap :destinations="destinations" />
+                    <div class="h-[450px] w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-md">
+                        <LeafletMap :destinations="destinations" height="100%" />
                     </div>
                 </div>
             </section>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\CloudinaryService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +28,17 @@ class News extends Model
         'published_at' => 'datetime',
         'status' => 'string'
     ];
+
+    /**
+     * Get a safe thumbnail URL, falling back to Cloudinary sample if null/empty.
+     */
+    public function getThumbnailUrlAttribute(): string
+    {
+        if (!empty($this->thumbnail)) {
+            return $this->thumbnail;
+        }
+        return CloudinaryService::getSampleUrl('news');
+    }
 
     public function user(): BelongsTo
     {
