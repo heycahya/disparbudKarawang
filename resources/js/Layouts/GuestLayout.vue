@@ -9,9 +9,9 @@ import { Link } from '@inertiajs/vue3';
     >
         <div class="mb-4">
             <Link href="/" class="flex flex-col items-center space-y-2">
-                <ApplicationLogo class="h-16 w-16 fill-karawang-emerald dark:fill-emerald-400" />
+                <ApplicationLogo class="w-14 h-14 text-[#005F4A] dark:text-emerald-400" />
                 <span class="text-xl font-extrabold tracking-tight text-sanggabuana-slate dark:text-white">
-                    Disparbud <span class="text-karawang-emerald dark:text-emerald-400">Karawang</span>
+                    Vibe <span class="text-[#005F4A] dark:text-emerald-400">Karawang</span>
                 </span>
             </Link>
         </div>

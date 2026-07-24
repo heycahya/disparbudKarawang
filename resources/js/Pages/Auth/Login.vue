@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 defineProps({
     canResetPassword: {
@@ -41,9 +42,7 @@ const submit = () => {
             <div class="relative z-10">
                 <Link href="/" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg group-hover:scale-105 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                        </svg>
+                        <ApplicationLogo class="w-7 h-7 text-white" />
                     </div>
                     <div>
                         <span class="text-lg font-black tracking-wider block">VIBE <span class="text-amber-400">KARAWANG</span></span>

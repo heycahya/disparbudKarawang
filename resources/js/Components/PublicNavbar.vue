@@ -1,6 +1,7 @@
 <script setup>
 import { usePage } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 const page = usePage();
 const searchQuery = ref('');
@@ -163,12 +164,7 @@ function handleSelectSearchItem(item) {
                     <!-- Branding (Left) -->
                     <div class="flex items-center space-x-3 shrink-0">
                         <div class="flex-shrink-0">
-                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="36" height="36" rx="9" class="fill-white/10 dark:fill-gray-900/50 stroke-white/30" stroke-width="1.5"/>
-                                <path d="M12 13C14 17 16 27 20 27C24 27 26 17 28 13" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16 18C18 20 20 22.5 20 22.5C20 22.5 22 20 24 18" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="20" cy="31" r="2" fill="#F59E0B" />
-                            </svg>
+                            <ApplicationLogo class="w-9 h-9 text-white" />
                         </div>
                         <div>
                             <a :href="route('public.home')" rel="external" class="text-xl font-extrabold tracking-tight text-white hover:text-emerald-100 transition">

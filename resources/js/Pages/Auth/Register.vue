@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 const form = useForm({
     name: '',
@@ -32,9 +33,7 @@ const submit = () => {
             <div class="relative z-10">
                 <Link href="/" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg group-hover:scale-105 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m2 9h4a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
+                        <ApplicationLogo class="w-7 h-7 text-white" />
                     </div>
                     <div>
                         <span class="text-lg font-black tracking-wider block">VIBE <span class="text-amber-400">KARAWANG</span></span>
