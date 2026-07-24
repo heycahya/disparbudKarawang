@@ -41,12 +41,12 @@ const submit = () => {
             <!-- Top Logo/Branding -->
             <div class="relative z-10">
                 <Link href="/" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg group-hover:scale-105 transition-transform duration-300">
-                        <ApplicationLogo class="w-7 h-7 text-white" />
+                    <div class="w-10 h-10 rounded-xl bg-white p-1 shadow-md group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                        <ApplicationLogo class="w-8 h-8" />
                     </div>
                     <div>
-                        <span class="text-lg font-black tracking-wider block">VIBE <span class="text-amber-400">KARAWANG</span></span>
-                        <span class="text-[10px] text-emerald-200/80 tracking-widest uppercase block -mt-1 font-bold">Pariwisata & Kebudayaan</span>
+                        <span class="text-lg font-black tracking-wider block text-white">VIBE KARAWANG</span>
+                        <span class="text-[10px] text-white/90 tracking-widest uppercase block -mt-1 font-bold">Pariwisata &amp; Kebudayaan</span>
                     </div>
                 </Link>
             </div>

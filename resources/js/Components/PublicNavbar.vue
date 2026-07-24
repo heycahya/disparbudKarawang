@@ -163,14 +163,14 @@ function handleSelectSearchItem(item) {
                     
                     <!-- Branding (Left) -->
                     <div class="flex items-center space-x-3 shrink-0">
-                        <div class="flex-shrink-0">
-                            <ApplicationLogo class="w-9 h-9 text-white" />
+                        <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm">
+                            <ApplicationLogo class="w-8 h-8" />
                         </div>
                         <div>
                             <a :href="route('public.home')" rel="external" class="text-xl font-extrabold tracking-tight text-white hover:text-emerald-100 transition">
-                                Vibe <span class="text-emerald-300">Karawang</span>
+                                Vibe Karawang
                             </a>
-                            <p class="text-[10px] uppercase font-bold tracking-wider text-amber-400">Pariwisata &amp; Kebudayaan</p>
+                            <p class="text-[10px] uppercase font-bold tracking-wider text-white">Pariwisata &amp; Kebudayaan</p>
                         </div>
                     </div>
 

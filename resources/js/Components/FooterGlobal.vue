@@ -12,14 +12,14 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                 <!-- Branding & About -->
                 <div class="md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="flex-shrink-0">
-                            <ApplicationLogo class="w-9 h-9 text-white" />
+                        <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm">
+                            <ApplicationLogo class="w-8 h-8" />
                         </div>
                         <div>
                             <span class="text-xl font-extrabold tracking-tight text-white">
-                                Vibe <span class="text-emerald-300">Karawang</span>
+                                Vibe Karawang
                             </span>
-                            <p class="text-[10px] uppercase font-bold tracking-wider text-amber-400">Pariwisata &amp; Kebudayaan</p>
+                            <p class="text-[10px] uppercase font-bold tracking-wider text-white">Pariwisata &amp; Kebudayaan</p>
                         </div>
                     </div>
                     <p class="text-xs text-teal-100/80 leading-relaxed max-w-sm">

@@ -45,12 +45,12 @@ watch(
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10">
                 <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-md group-hover:scale-105 transition-transform duration-300">
-                        <ApplicationLogo class="w-7 h-7 text-white" />
+                    <div class="w-10 h-10 rounded-xl bg-white p-1 shadow-md group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                        <ApplicationLogo class="w-8 h-8" />
                     </div>
                     <div>
-                        <span class="text-xs font-black tracking-wider block">VIBE <span class="text-amber-400">KARAWANG</span></span>
-                        <span class="text-[9px] text-emerald-200/80 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
+                        <span class="text-xs font-black tracking-wider block text-white">VIBE KARAWANG</span>
+                        <span class="text-[9px] text-white/90 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
                     </div>
                 </Link>
             </div>
@@ -259,12 +259,12 @@ watch(
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10 flex justify-between items-center">
                 <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center border border-white/20 shadow-md">
-                        <ApplicationLogo class="w-6 h-6 text-white" />
+                    <div class="w-9 h-9 rounded-lg bg-white p-1 shadow-md flex items-center justify-center">
+                        <ApplicationLogo class="w-7 h-7" />
                     </div>
                     <div>
-                        <span class="text-xs font-black tracking-wider block">VIBE <span class="text-amber-400">KARAWANG</span></span>
-                        <span class="text-[8px] text-emerald-200/80 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
+                        <span class="text-xs font-black tracking-wider block text-white">VIBE KARAWANG</span>
+                        <span class="text-[8px] text-white/90 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
                     </div>
                 </Link>
                 <button 
