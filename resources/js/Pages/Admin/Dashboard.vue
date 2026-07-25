@@ -156,31 +156,31 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <Head title="Admin Dashboard" />
+    <Head title="Dashboard Admin - Vibe Karawang" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                Pusat Kendali & Analitik Admin
+            <h2 class="text-xl font-bold leading-tight text-slate-800 dark:text-slate-200">
+                Dashboard Administrator Disparbud Karawang
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="py-6 sm:py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Welcome Banner -->
                 <div 
-                    class="mb-8 overflow-hidden bg-white shadow-sm rounded-2xl dark:bg-gray-800 border-l-4 border-[#0F5E3D] transition duration-300"
+                    class="mb-8 overflow-hidden bg-white shadow-sm rounded-xl dark:bg-gray-800 border-l-4 border-[#004b23] transition duration-300"
                 >
                     <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
                             <h1 class="text-2xl font-bold mb-1">
-                                Selamat datang kembali, <span class="text-[#0F5E3D] dark:text-[#10B981] font-extrabold">{{ user.name }}</span>!
+                                Selamat datang kembali, <span class="text-[#004b23] dark:text-[#10B981] font-extrabold">{{ user.name }}</span>!
                             </h1>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 Pantau dan kelola Layanan Masyarakat Disparbud Kabupaten Karawang secara real-time.
                             </p>
                         </div>
-                        <div class="inline-flex self-start md:self-auto items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#0F5E3D]/10 text-[#0F5E3D] dark:bg-[#10B981]/10 dark:text-[#10B981]">
+                        <div class="inline-flex self-start md:self-auto items-center px-4 py-1.5 rounded-md text-xs font-bold bg-[#004b23]/10 text-[#004b23] dark:bg-[#10B981]/10 dark:text-[#10B981]">
                             Otoritas: Administrator
                         </div>
                     </div>

@@ -31,7 +31,7 @@ const formatDate = (dateStr) => {
 const getStatusBadgeClass = (status) => {
     switch (status) {
         case 'disetujui':
-            return 'bg-emerald-100 text-[#0F5E3D] dark:bg-emerald-950 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
+            return 'bg-emerald-100 text-[#004b23] dark:bg-emerald-950 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
         case 'ditolak':
             return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 border-red-200 dark:border-red-800';
         case 'ditinjau':
@@ -102,7 +102,7 @@ const getStepStatus = (currentStatus, stepName) => {
                         :class="[
                             'px-4 py-2 text-sm font-semibold transition-all border-b-2 outline-none',
                             activeTab === 'all'
-                                ? 'border-[#0F5E3D] text-[#0F5E3D] dark:text-emerald-400'
+                                ? 'border-[#004b23] text-[#004b23] dark:text-emerald-400'
                                 : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400'
                         ]"
                     >
@@ -113,7 +113,7 @@ const getStepStatus = (currentStatus, stepName) => {
                         :class="[
                             'px-4 py-2 text-sm font-semibold transition-all border-b-2 outline-none',
                             activeTab === 'complaint'
-                                ? 'border-[#0F5E3D] text-[#0F5E3D] dark:text-emerald-400'
+                                ? 'border-[#004b23] text-[#004b23] dark:text-emerald-400'
                                 : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400'
                         ]"
                     >
@@ -124,7 +124,7 @@ const getStepStatus = (currentStatus, stepName) => {
                         :class="[
                             'px-4 py-2 text-sm font-semibold transition-all border-b-2 outline-none',
                             activeTab === 'tourism_submission'
-                                ? 'border-[#0F5E3D] text-[#0F5E3D] dark:text-emerald-400'
+                                ? 'border-[#004b23] text-[#004b23] dark:text-emerald-400'
                                 : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400'
                         ]"
                     >
@@ -135,7 +135,7 @@ const getStepStatus = (currentStatus, stepName) => {
                         :class="[
                             'px-4 py-2 text-sm font-semibold transition-all border-b-2 outline-none',
                             activeTab === 'event_broadcast'
-                                ? 'border-[#0F5E3D] text-[#0F5E3D] dark:text-emerald-400'
+                                ? 'border-[#004b23] text-[#004b23] dark:text-emerald-400'
                                 : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400'
                         ]"
                     >
@@ -148,11 +148,11 @@ const getStepStatus = (currentStatus, stepName) => {
                     <div
                         v-for="sub in filteredSubmissions"
                         :key="`${sub.type}-${sub.id}`"
-                        class="overflow-hidden bg-white shadow-xl rounded-asymmetric dark:bg-gray-800 border-l-8 border-[#0F5E3D] p-6 hover:shadow-2xl transition-shadow"
+                        class="overflow-hidden bg-white shadow-xl rounded-xl dark:bg-gray-800 border-l-8 border-[#004b23] p-6 hover:shadow-2xl transition-shadow"
                     >
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-gray-150 dark:border-gray-700 pb-4 mb-4">
                             <div>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border" :class="getStatusBadgeClass(sub.status)">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold border" :class="getStatusBadgeClass(sub.status)">
                                     {{ getStatusLabel(sub.status) }}
                                 </span>
                                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-1">
@@ -170,7 +170,7 @@ const getStepStatus = (currentStatus, stepName) => {
                                 <!-- Connecting Lines -->
                                 <div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-1 bg-gray-200 dark:bg-gray-700 -z-0">
                                     <div 
-                                        class="h-full bg-[#0F5E3D] transition-all duration-500"
+                                        class="h-full bg-[#004b23] transition-all duration-500"
                                         :class="{
                                             'w-1/2': sub.status === 'ditinjau',
                                             'w-full': sub.status === 'disetujui' || sub.status === 'ditolak',
@@ -185,7 +185,7 @@ const getStepStatus = (currentStatus, stepName) => {
                                         class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors border-2"
                                         :class="[
                                             getStepStatus(sub.status, 'masuk') === 'active'
-                                                ? 'bg-[#0F5E3D] text-white border-[#0F5E3D]'
+                                                ? 'bg-[#004b23] text-white border-[#004b23]'
                                                 : 'bg-white text-gray-405 dark:bg-gray-800 border-gray-300'
                                         ]"
                                     >
@@ -263,10 +263,10 @@ const getStepStatus = (currentStatus, stepName) => {
                     <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-white">Belum ada pengajuan</h3>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Anda belum membuat pengajuan layanan apapun saat ini.</p>
                     <div class="mt-6 flex justify-center gap-4">
-                        <Link :href="route('layanan-masyarakat.complaints.create')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#0F5E3D] hover:bg-emerald-700">
+                        <Link :href="route('layanan-masyarakat.complaints.create')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-[#004b23] hover:bg-[#003d1d]">
                             Buat Pengaduan
                         </Link>
-                        <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="inline-flex items-center px-4 py-2 border border-[#0F5E3D] text-sm font-medium rounded-md text-[#0F5E3D] bg-white hover:bg-emerald-50 dark:bg-gray-900 dark:text-emerald-400 dark:border-emerald-600 dark:hover:bg-gray-850">
+                        <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="inline-flex items-center px-4 py-2 border border-[#004b23] text-sm font-medium rounded-lg text-[#004b23] bg-white hover:bg-emerald-50 dark:bg-gray-900 dark:text-emerald-400 dark:border-emerald-600 dark:hover:bg-gray-850">
                             Usul Wisata Baru
                         </Link>
                     </div>

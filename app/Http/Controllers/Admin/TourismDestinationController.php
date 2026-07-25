@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateTourismDestinationRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Cloudinary\Api\Upload\UploadApi;
+use App\Services\CloudinaryService;
 
 class TourismDestinationController extends Controller
 {
@@ -64,7 +65,7 @@ class TourismDestinationController extends Controller
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
                 'folder' => 'disparbud_karawang/tourism'
             ]);
-            $validated['cover_image'] = $response['secure_url'];
+            $validated['cover_image'] = CloudinaryService::getUrl($response['secure_url'] ?? null, 'tourism');
         } catch (\Exception $e) {
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }

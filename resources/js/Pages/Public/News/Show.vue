@@ -72,10 +72,10 @@ const shareFacebook = () => {
                     <a
                         :href="route('public.home')"
                         rel="external"
-                        class="inline-flex items-center gap-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-[#005F4A] dark:hover:text-emerald-400 transition-colors group"
+                        class="inline-flex items-center gap-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-[#004b23] dark:hover:text-emerald-400 transition-colors group"
                     >
                         <span class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950/60 transition-colors">
-                            <span class="material-symbols-outlined text-base text-gray-600 dark:text-gray-300 group-hover:text-[#005F4A] dark:group-hover:text-emerald-400">arrow_back</span>
+                            <span class="material-symbols-outlined text-base text-gray-600 dark:text-gray-300 group-hover:text-[#004b23] dark:group-hover:text-emerald-400">arrow_back</span>
                         </span>
                         Kembali ke Beranda
                     </a>
@@ -97,12 +97,12 @@ const shareFacebook = () => {
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
                     <!-- LEFT COLUMN: Main Article (8 Cols) -->
-                    <article class="lg:col-span-8 bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden p-6 sm:p-10 space-y-8">
+                    <article class="lg:col-span-8 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden p-6 sm:p-10 space-y-8">
                         
                         <!-- Header ABOVE Image -->
                         <header class="space-y-4 border-b border-gray-100 dark:border-gray-800 pb-6">
                             <div class="flex flex-wrap items-center gap-2">
-                                <span v-if="news.category" class="inline-block text-[11px] font-bold text-[#005F4A] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-3 py-1 rounded-md">
+                                <span v-if="news.category" class="inline-block text-[11px] font-bold text-[#004b23] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-3 py-1 rounded-md">
                                     {{ news.category.name }}
                                 </span>
                                 <span class="text-xs font-semibold text-gray-400">Kabar Resmi Disparbud</span>
@@ -121,7 +121,7 @@ const shareFacebook = () => {
                             <!-- Author & Meta Info Bar -->
                             <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400 pt-2">
                                 <div class="flex items-center gap-2.5">
-                                    <div class="w-9 h-9 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-200/60 dark:border-emerald-800/60 flex items-center justify-center text-[#005F4A] dark:text-emerald-400 font-bold shrink-0">
+                                    <div class="w-9 h-9 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-200/60 dark:border-emerald-800/60 flex items-center justify-center text-[#004b23] dark:text-emerald-400 font-bold shrink-0">
                                         <span class="material-symbols-outlined text-lg">newspaper</span>
                                     </div>
                                     <div>
@@ -197,7 +197,7 @@ const shareFacebook = () => {
                                     <button 
                                         @click="copyShareLink"
                                         title="Salin Tautan"
-                                        class="px-3.5 py-2 text-xs font-bold text-white bg-[#005F4A] hover:bg-[#004D3C] rounded-xl transition flex items-center gap-1.5"
+                                        class="px-3.5 py-2 text-xs font-bold text-white bg-[#004b23] hover:bg-[#003d1d] rounded-lg transition flex items-center gap-1.5"
                                     >
                                         <span class="material-symbols-outlined text-base">link</span>
                                         {{ isCopied ? 'Tersalin!' : 'Salin Link' }}
@@ -212,7 +212,7 @@ const shareFacebook = () => {
                     <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
                         
                         <!-- Publisher Information Card -->
-                        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
+                        <div class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
                             <h3 class="text-sm font-extrabold uppercase tracking-wider text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-800 pb-3 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-lg">verified</span>
                                 Redaksi Disparbud Karawang
@@ -224,18 +224,18 @@ const shareFacebook = () => {
 
                             <div class="pt-2 border-t border-gray-100 dark:border-gray-800 space-y-2 text-xs text-gray-600 dark:text-gray-400">
                                 <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-base text-[#005F4A]">verified_user</span>
+                                    <span class="material-symbols-outlined text-base text-[#004b23]">verified_user</span>
                                     <span>Informasi Resmi Terverifikasi</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-base text-[#005F4A]">update</span>
+                                    <span class="material-symbols-outlined text-base text-[#004b23]">update</span>
                                     <span>Diperbarui Secara Berkala</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Sidebar Popular / Related Articles Widget -->
-                        <div v-if="relatedNews && relatedNews.length > 0" class="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
+                        <div v-if="relatedNews && relatedNews.length > 0" class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
                             <h3 class="text-sm font-extrabold uppercase tracking-wider text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-800 pb-3 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-amber-500 text-lg">trending_up</span>
                                 Berita Terkait Lainnya
@@ -252,10 +252,10 @@ const shareFacebook = () => {
                                         <div v-else class="w-full h-full flex items-center justify-center text-gray-400 text-[10px]">Foto</div>
                                     </a>
                                     <div class="space-y-1 text-xs">
-                                        <span v-if="item.category" class="text-[10px] font-bold text-[#005F4A] dark:text-emerald-400 block">
+                                        <span v-if="item.category" class="text-[10px] font-bold text-[#004b23] dark:text-emerald-400 block">
                                             {{ item.category.name }}
                                         </span>
-                                        <h4 class="font-bold text-gray-900 dark:text-white group-hover:text-[#005F4A] transition line-clamp-2 leading-snug">
+                                        <h4 class="font-bold text-gray-900 dark:text-white group-hover:text-[#004b23] transition line-clamp-2 leading-snug">
                                             <a :href="route('public.news.show', item.slug)" rel="external">{{ item.title }}</a>
                                         </h4>
                                     </div>
@@ -264,14 +264,14 @@ const shareFacebook = () => {
                         </div>
 
                         <!-- Sidebar Share / Callout Box -->
-                        <div class="bg-gradient-to-br from-emerald-900 via-[#005F4A] to-teal-900 text-white p-6 rounded-2xl shadow-lg space-y-3">
+                        <div class="bg-gradient-to-br from-emerald-900 via-[#004b23] to-emerald-950 text-white p-6 rounded-xl shadow-lg space-y-3">
                             <h4 class="text-sm font-extrabold">Bagikan Informasi Ini</h4>
                             <p class="text-xs text-emerald-100/90 leading-relaxed">
                                 Bantu publikasikan kegiatan pariwisata &amp; kebudayaan Karawang ke jejaring sosial Anda.
                             </p>
                             <button 
                                 @click="copyShareLink"
-                                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#005F4A] bg-white hover:bg-emerald-50 rounded-xl transition shadow"
+                                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#004b23] bg-white hover:bg-emerald-50 rounded-lg transition shadow"
                             >
                                 <span class="material-symbols-outlined text-base">link</span>
                                 {{ isCopied ? 'Link Berhasil Disalin!' : 'Salin Tautan Artikel' }}

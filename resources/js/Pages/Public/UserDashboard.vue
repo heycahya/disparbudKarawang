@@ -83,7 +83,7 @@ const formatDate = (dateString) => {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
                 
                 <!-- 1. Banner Welcome Card -->
-                <div class="relative overflow-hidden bg-gradient-to-r from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 rounded-3xl shadow-xl text-white p-6 sm:p-10">
+                <div class="relative overflow-hidden bg-gradient-to-r from-[#004b23] via-[#002e15] to-emerald-950 rounded-2xl shadow-xl text-white p-6 sm:p-10">
                     <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
                     <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-amber-500 rounded-full filter blur-3xl opacity-20"></div>
                     <div class="absolute -left-16 -top-16 w-80 h-80 bg-emerald-400 rounded-full filter blur-3xl opacity-20"></div>
@@ -156,30 +156,30 @@ const formatDate = (dateString) => {
                     <h3 class="text-lg font-extrabold text-slate-800 dark:text-white tracking-tight">Layanan Publik Mandiri</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- CTA 1 -->
-                        <Link :href="route('layanan-masyarakat.complaints.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl hover:border-[#0F5E3D] hover:shadow-lg dark:hover:border-emerald-500/50 hover:-translate-y-1 transition-all duration-300 group">
+                        <Link :href="route('layanan-masyarakat.complaints.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl hover:border-[#004b23] hover:shadow-lg dark:hover:border-emerald-500/50 hover:-translate-y-1 transition-all duration-300 group">
                             <div>
-                                <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform text-[#0F5E3D] dark:text-emerald-400 shrink-0">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform text-[#004b23] dark:text-emerald-400 shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                     </svg>
                                 </div>
-                                <h4 class="font-extrabold text-[#0F5E3D] dark:text-emerald-400 text-lg mb-1">Laporkan Pengaduan</h4>
+                                <h4 class="font-extrabold text-[#004b23] dark:text-emerald-400 text-lg mb-1">Laporkan Pengaduan</h4>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Laporkan kendala fasilitas jalan, sampah liar, atau keluhan di destinasi wisata Karawang.</p>
                             </div>
-                            <span class="mt-6 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                            <span class="mt-6 text-xs font-bold text-[#004b23] dark:text-emerald-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                                 Mulai Lapor <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                             </span>
                         </Link>
 
                         <!-- CTA 2 -->
-                        <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl hover:border-amber-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <Link :href="route('layanan-masyarakat.tourism-submissions.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl hover:border-amber-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                             <div>
                                 <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-950/40 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform text-amber-600 dark:text-amber-400 shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                                     </svg>
                                 </div>
-                                <h4 class="font-extrabold text-[#0F5E3D] dark:text-emerald-400 text-lg mb-1">Usulkan Wisata Baru</h4>
+                                <h4 class="font-extrabold text-[#004b23] dark:text-emerald-400 text-lg mb-1">Usulkan Wisata Baru</h4>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Punya rekomendasi air terjun tersembunyi, cagar budaya, atau spot foto alam? Ajukan ke dinas.</p>
                             </div>
                             <span class="mt-6 text-xs font-bold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -188,14 +188,14 @@ const formatDate = (dateString) => {
                         </Link>
 
                         <!-- CTA 3 -->
-                        <Link :href="route('layanan-masyarakat.event-broadcasts.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl hover:border-teal-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <Link :href="route('layanan-masyarakat.event-broadcasts.create')" class="flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl hover:border-teal-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                             <div>
                                 <div class="w-10 h-10 rounded-lg bg-teal-50 dark:bg-teal-950/40 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform text-teal-600 dark:text-teal-400 shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <h4 class="font-extrabold text-[#0F5E3D] dark:text-emerald-400 text-lg mb-1">Pengajuan Siaran Acara</h4>
+                                <h4 class="font-extrabold text-[#004b23] dark:text-emerald-400 text-lg mb-1">Pengajuan Siaran Acara</h4>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Promosikan festival kebudayaan, pagelaran seni lokal, atau pentas musik komunitas Anda.</p>
                             </div>
                             <span class="mt-6 text-xs font-bold text-teal-600 dark:text-teal-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -210,8 +210,8 @@ const formatDate = (dateString) => {
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h3 class="text-lg font-extrabold text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
-                                <svg class="w-5 h-5 text-[#0F5E3D] dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                <svg class="w-5 h-5 text-[#004b23] dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 022 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                 </svg>
                                 <span>Pelacakan Status Pengajuan</span>
                             </h3>
@@ -219,14 +219,14 @@ const formatDate = (dateString) => {
                         </div>
                         <Link 
                             :href="route('public.history.index')" 
-                            class="inline-flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                            class="inline-flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
                         >
                             <span>Lihat Seluruh Riwayat</span> &rarr;
                         </Link>
                     </div>
 
                     <!-- Summary Table -->
-                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/80 shadow-sm overflow-hidden">
+                    <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800/80 shadow-sm overflow-hidden">
                         <div v-if="service_requests?.length" class="overflow-x-auto">
                             <table class="w-full text-left text-sm text-slate-600 dark:text-slate-400">
                                 <thead class="bg-slate-50/50 dark:bg-slate-800/30 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-800">
@@ -241,7 +241,7 @@ const formatDate = (dateString) => {
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                                     <tr v-for="req in service_requests.slice(0, 5)" :key="req.type + '-' + req.id" class="hover:bg-slate-50/30 dark:hover:bg-slate-800/20 transition-colors">
                                         <td class="px-6 py-4.5 whitespace-nowrap">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-[#0F5E3D] dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/40">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-[#004b23] dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/40">
                                                 {{ req.type_label }}
                                             </span>
                                         </td>

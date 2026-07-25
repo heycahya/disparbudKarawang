@@ -1,58 +1,202 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌿 VibeKarawang — Portal Resmi DISPARBUD Kabupaten Karawang
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 11" />
+  <img src="https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white" alt="Vue 3" />
+  <img src="https://img.shields.io/badge/Inertia.js-Monolith_SPA-9553E9?style=for-the-badge&logo=inertia&logoColor=white" alt="Inertia.js" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.x-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Leaflet-1.x-[#199900]?style=for-the-badge&logo=leaflet&logoColor=white" alt="Leaflet JS" />
+  <img src="https://img.shields.io/badge/Pest_PHP-Testing-34D399?style=for-the-badge&logo=php&logoColor=white" alt="Pest PHP" />
+  <img src="https://img.shields.io/badge/Docker-Laravel_Sail-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Laravel Sail" />
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Ringkasan Proyek
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**VibeKarawang** adalah platform web portal yang dikembangkan sebagai **proyek perkuliahan (akademis)** untuk mensimulasikan sistem portal resmi Dinas Pariwisata dan Kebudayaan (DISPARBUD) Kabupaten Karawang. Platform ini dirancang untuk mempromosikan potensi pariwisata, kekayaan seni & kebudayaan, pelaku ekonomi kreatif, tempat kuliner khas, serta akomodasi di Karawang secara interaktif. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Selain sebagai katalog informasi publik, VibeKarawang menyediakan modul **Service Rakyat** untuk memfasilitasi aspirasi publik, pengaduan masyarakat, serta pengajuan siaran acara budaya secara transparan dan terintegrasi.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Fitur Utama
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🌐 1. Portal Publik (Katalog & Informasi Interaktif)
+- **Destinasi Wisata**: Informasi lengkap lokasi wisata alam, bersejarah, tirta, dan buatan di Karawang.
+- **Seni & Kebudayaan**: Dokumentasi tari tradisional (Jaipong, Seni Ajeng), cagar budaya, dan warisan leluhur.
+- **Ekonomi Kreatif (Ekraf)**: Sentra UMKM, kerajinan batik Karawang, dan produk lokal kreatif.
+- **Kuliner Lokal**: Rekomendasi tempat makan khas, resto legendaris, dan jajanan tradisional.
+- **Akomodasi**: Direktori hotel, villa, dan homestay bagi para wisatawan.
+- **🗺️ Peta Interaktif Leaflet.js**: Visualisasi spasial penanda lokasi geografis berbasis koordinat Latitude & Longitude.
+- **🖼️ Galeri Foto & Dokumentasi**: Koleksi dokumentasi visual kegiatan dan estetika budaya Karawang.
+- **📰 Berita & Pengumuman**: Berita resmi terupdate dari Disparbud Karawang.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 🤝 2. Service Rakyat (Layanan Publik Terpadu)
+- **📢 Pengaduan Masyarakat (Complaints)**: Pelaporan kendala fasilitas publik pariwisata atau budaya.
+- **🏞️ Usulan Wisata Baru**: Pengajuan tempat wisata baru oleh warga untuk ditinjau oleh dinas.
+- **📅 Pengajuan Siaran Acara (Event Broadcast)**: Permohonan pengumuman kegiatan budaya/event komunitas.
 
-## Agentic Development
+### 🛡️ 3. Dashboard Pengguna & Admin CMS
+- **👤 Panel Member (Role Public)**: Dashboard masyarakat untuk memantau status review pengaduan & usulan.
+- **⚙️ Panel Admin CMS**:
+  - Manajemen Katalog Konten (Create, Edit, Delete pada 7 modul utama).
+  - Verifikasi Layanan (Moderasi status pengaduan/usulan serta fitur *Clone to Public Catalog*).
+  - Manajemen Akun Pengguna & Reset Password.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🛠️ Tech Stack & Arsitektur
 
-php artisan boost:install
-```
+| Layer | Teknologi / Library | Deskripsi |
+| :--- | :--- | :--- |
+| **Backend Framework** | **Laravel 11** | Framework PHP modern dengan struktur modular & ORM Eloquent |
+| **Frontend Framework** | **Vue 3** | Composition API (`<script setup>`) untuk UI komponen reaktif |
+| **Glue Layer** | **Inertia.js** | Monolithic SPA bridge (bebas kerumitan API routing terpisah) |
+| **Styling & UI** | **Tailwind CSS** | Design system modern, responsive layout, dark mode, & glassmorphism |
+| **Geospatial Map** | **Leaflet.js** | Interaktif map renderer dengan TileLayer & Custom Marker Pin |
+| **Cloud Storage** | **Cloudinary Service** | Penyimpanan & transformasi media gambar via `CloudinaryService` |
+| **Testing** | **Pest PHP** | Automated unit & feature test suite |
+| **Containerization** | **Laravel Sail** | Environment Docker bawaan (PHP, MySQL 8, Redis) |
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🚀 Panduan Setup & Instalasi Lokal
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Anda dapat menjalankan aplikasi VibeKarawang di lingkungan lokal menggunakan **Opsi A (Docker Sail)** atau **Opsi B (Tanpa Docker / Native PHP & MySQL)**.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🐳 Opsi A: Menggunakan Laravel Sail (Docker Compose) — *Rekomendasi*
 
-## Security Vulnerabilities
+Jika Anda telah menginstal **Docker Desktop**, cara ini adalah yang paling cepat dan praktis:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clone Repository & Environment Setup**
+   ```bash
+   git clone https://github.com/heycahya/disparbudKarawang.git
+   cd disparbudKarawang
+   cp .env.example .env
+   ```
 
-## License
+2. **Jalankan Container Docker**
+   ```bash
+   ./vendor/bin/sail up -d
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. **Migrasi & Seeding Database**
+   ```bash
+   ./vendor/bin/sail artisan migrate:fresh --seed
+   ```
+
+4. **Build Assets Frontend**
+   ```bash
+   # Mode Development
+   ./vendor/bin/sail npm run dev
+
+   # Mode Production Build
+   rm -rf public/build && ./vendor/bin/sail npm run build
+   ```
+
+5. **Jalankan Testing (Pest)**
+   ```bash
+   ./vendor/bin/sail pest
+   ```
+
+---
+
+### 💻 Opsi B: Tanpa Docker (Native PHP, Composer, Node.js & MySQL)
+
+Jika Anda tidak menggunakan Docker, Anda dapat menjalankannya langsung menggunakan stack PHP & MySQL lokal (XAMPP / Laragon / PHP CLI):
+
+#### Prasyarat Sistem:
+- **PHP** `>= 8.2` (dengan ekstensi `pdo_mysql`, `mbstring`, `gd`, `curl`, `bcmath`, `xml`, `zip`)
+- **Composer** `>= 2.x`
+- **Node.js** `>= 18.x` & **NPM**
+- **MySQL** / **MariaDB** Database Server
+
+#### Langkah Instalasi:
+
+1. **Clone Repository & Copy File Environment**
+   ```bash
+   git clone https://github.com/heycahya/disparbudKarawang.git
+   cd disparbudKarawang
+   cp .env.example .env
+   ```
+
+2. **Install Depedensi PHP via Composer**
+   ```bash
+   composer install
+   ```
+
+3. **Generate Application Key**
+   ```bash
+   php artisan key:generate
+   ```
+
+4. **Konfigurasi Database pada `.env`**
+   Buat database baru di MySQL lokal Anda (contoh nama: `disparbud_karawang`), lalu buka file `.env` dan sesuaikan koneksinya:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=disparbud_karawang
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+   *(Opsional) Konfigurasi Cloudinary API jika ingin menguji upload gambar:*
+   ```env
+   CLOUDINARY_CLOUD_NAME=mabhpcw6
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
+
+5. **Jalankan Migrasi & Seeder Database**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+
+6. **Install Depedensi Frontend & Compile Asset**
+   ```bash
+   # Install NPM packages
+   npm install
+
+   # Jalankan Server Frontend Vite (Development)
+   npm run dev
+
+   # ATAU Compile Asset untuk Production
+   npm run build
+   ```
+
+7. **Jalankan Local Development Server**
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi dapat diakses melalui browser di **`http://127.0.0.1:8000`**.
+
+8. **Jalankan Automated Test (Pest)**
+   ```bash
+   php artisan test
+   # ATAU
+   ./vendor/bin/pest
+   ```
+
+---
+
+## 🔑 Akun Default Seeder (Testing Credentials)
+
+Setelah menjalankan `migrate:fresh --seed`, Anda dapat menguji akses sistem menggunakan akun default berikut:
+
+| Role | Email | Password | Hak Akses |
+| :--- | :--- | :--- | :--- |
+| **Admin Disparbud** | `admin@disparbud.test` | `password` | Akses penuh Panel Admin CMS & Verifikasi Layanan |
+| **Masyarakat 1** | `public1@example.com` | `password` | Pengajuan Service Rakyat & Member Dashboard |
+| **Masyarakat 2** | `public2@example.com` | `password` | Pengajuan Service Rakyat & Member Dashboard |
+
+---
+
+## 🎓 Informasi Proyek Akademik & Dummy Data
+Proyek aplikasi web **VibeKarawang** ini dikembangkan untuk memenuhi tugas perkuliahan / akademis. 
+
+> [!NOTE]
+> **Penafian Data Dummy**: Seluruh aset gambar, dokumentasi foto, teks deskripsi, serta record database yang ada dalam aplikasi ini menggunakan **data dummy (simulasi)** yang bersumber dari sampel publik/Unsplash semata untuk keperluan demonstrasi fungsionalitas aplikasi dan portofolio pengembangan perangkat lunak.

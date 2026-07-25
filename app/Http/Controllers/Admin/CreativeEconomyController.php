@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCreativeEconomyRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Cloudinary\Api\Upload\UploadApi;
+use App\Services\CloudinaryService;
 
 class CreativeEconomyController extends Controller
 {
@@ -55,7 +56,7 @@ class CreativeEconomyController extends Controller
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
                 'folder' => 'disparbud_karawang/ekraf'
             ]);
-            $validated['cover_image'] = $response['secure_url'];
+            $validated['cover_image'] = CloudinaryService::getUrl($response['secure_url'] ?? null, 'ekraf');
         } catch (\Exception $e) {
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }

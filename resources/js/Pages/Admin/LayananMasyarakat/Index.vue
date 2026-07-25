@@ -135,9 +135,9 @@ const getTypeBadgeClass = (type) => {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                 <!-- 1. Header Banner -->
-                <div class="bg-gradient-to-r from-[#0F5E3D] via-emerald-800 to-teal-900 rounded-3xl shadow-xl text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+                <div class="bg-gradient-to-r from-[#004b23] via-[#003d1d] to-emerald-950 rounded-2xl shadow-xl text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
                     <div class="relative z-10">
-                        <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-amber-300 mb-2 border border-white/10 uppercase tracking-wider">
+                        <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-md text-xs font-bold text-amber-300 mb-2 border border-white/10 uppercase tracking-wider">
                             Modul Moderasi Admin
                         </span>
                         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Verifikasi Layanan & Usulan Publik</h1>
@@ -151,8 +151,8 @@ const getTypeBadgeClass = (type) => {
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
                     <button
                         @click="activeStatus = 'all'; applyFilters()"
-                        class="p-4 bg-white dark:bg-slate-900 border rounded-2xl text-left transition-all hover:border-[#0F5E3D]"
-                        :class="activeStatus === 'all' ? 'border-[#0F5E3D] shadow-md ring-2 ring-emerald-500/20' : 'border-slate-200/80 dark:border-slate-800'"
+                        class="p-4 bg-white dark:bg-slate-900 border rounded-xl text-left transition-all hover:border-[#004b23]"
+                        :class="activeStatus === 'all' ? 'border-[#004b23] shadow-md ring-2 ring-emerald-500/20' : 'border-slate-200/80 dark:border-slate-800'"
                     >
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Masuk</span>
                         <span class="block text-xl font-black text-slate-800 dark:text-white mt-1">{{ stats.total }}</span>
@@ -160,7 +160,7 @@ const getTypeBadgeClass = (type) => {
 
                     <button
                         @click="activeStatus = 'masuk'; applyFilters()"
-                        class="p-4 bg-white dark:bg-slate-900 border rounded-2xl text-left transition-all hover:border-amber-500"
+                        class="p-4 bg-white dark:bg-slate-900 border rounded-xl text-left transition-all hover:border-amber-500"
                         :class="['masuk', 'pending'].includes(activeStatus) ? 'border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'border-slate-200/80 dark:border-slate-800'"
                     >
                         <span class="block text-[10px] font-bold text-amber-600 uppercase tracking-wider">Perlu Ditinjau</span>
@@ -169,7 +169,7 @@ const getTypeBadgeClass = (type) => {
 
                     <button
                         @click="activeStatus = 'ditinjau'; applyFilters()"
-                        class="p-4 bg-white dark:bg-slate-900 border rounded-2xl text-left transition-all hover:border-blue-500"
+                        class="p-4 bg-white dark:bg-slate-900 border rounded-xl text-left transition-all hover:border-blue-500"
                         :class="['ditinjau', 'diproses'].includes(activeStatus) ? 'border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'border-slate-200/80 dark:border-slate-800'"
                     >
                         <span class="block text-[10px] font-bold text-blue-600 uppercase tracking-wider">Ditinjau</span>
@@ -178,7 +178,7 @@ const getTypeBadgeClass = (type) => {
 
                     <button
                         @click="activeStatus = 'disetujui'; applyFilters()"
-                        class="p-4 bg-white dark:bg-slate-900 border rounded-2xl text-left transition-all hover:border-emerald-500"
+                        class="p-4 bg-white dark:bg-slate-900 border rounded-xl text-left transition-all hover:border-emerald-500"
                         :class="['disetujui', 'approved'].includes(activeStatus) ? 'border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'border-slate-200/80 dark:border-slate-800'"
                     >
                         <span class="block text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Disetujui</span>
@@ -187,7 +187,7 @@ const getTypeBadgeClass = (type) => {
 
                     <button
                         @click="activeStatus = 'ditolak'; applyFilters()"
-                        class="p-4 bg-white dark:bg-slate-900 border rounded-2xl text-left transition-all hover:border-rose-500"
+                        class="p-4 bg-white dark:bg-slate-900 border rounded-xl text-left transition-all hover:border-rose-500"
                         :class="['ditolak', 'rejected'].includes(activeStatus) ? 'border-rose-500 shadow-md ring-2 ring-rose-500/20' : 'border-slate-200/80 dark:border-slate-800'"
                     >
                         <span class="block text-[10px] font-bold text-rose-600 uppercase tracking-wider">Ditolak</span>
@@ -196,20 +196,20 @@ const getTypeBadgeClass = (type) => {
                 </div>
 
                 <!-- 3. Filter Bar & Search -->
-                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
                     <!-- Type Pills -->
                     <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto">
                         <button
                             @click="activeType = 'all'; applyFilters()"
-                            class="px-3 py-1.5 rounded-xl text-xs font-bold transition"
-                            :class="activeType === 'all' ? 'bg-[#0F5E3D] text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'"
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition"
+                            :class="activeType === 'all' ? 'bg-[#004b23] text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'"
                         >
                             Semua Layanan
                         </button>
                         <button
                             @click="activeType = 'complaint'; applyFilters()"
-                            class="px-3 py-1.5 rounded-xl text-xs font-bold transition"
-                            :class="activeType === 'complaint' ? 'bg-[#0F5E3D] text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'"
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition"
+                            :class="activeType === 'complaint' ? 'bg-[#004b23] text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'"
                         >
                             Pengaduan
                         </button>

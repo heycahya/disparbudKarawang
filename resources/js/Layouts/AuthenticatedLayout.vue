@@ -37,21 +37,15 @@ watch(
         
         <!-- Sidebar: Desktop Left Navigation (w-64) -->
         <aside 
-            class="hidden lg:flex flex-col w-64 h-screen shrink-0 bg-gradient-to-b from-[#0F5E3D] to-emerald-950 text-white border-r border-emerald-800/20 relative z-20"
+            class="hidden lg:flex flex-col w-64 h-screen shrink-0 bg-gradient-to-b from-[#004b23] to-emerald-950 text-white border-r border-emerald-800/20 relative z-20"
         >
             <!-- Pattern -->
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-5 pointer-events-none"></div>
 
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10">
-                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-white p-1 shadow-md group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                        <ApplicationLogo class="w-8 h-8" />
-                    </div>
-                    <div>
-                        <span class="text-xs font-black tracking-wider block text-white">VIBE KARAWANG</span>
-                        <span class="text-[9px] text-white/90 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
-                    </div>
+                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center group">
+                    <ApplicationLogo class="h-10 w-auto text-white group-hover:scale-105 transition-transform duration-300" />
                 </Link>
             </div>
 
@@ -197,6 +191,20 @@ watch(
                         <span>Kuliner Lokal</span>
                     </Link>
 
+                    <!-- Galeri Foto -->
+                    <Link 
+                        :href="route('admin.galleries.index')"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.galleries.*') 
+                            ? 'bg-amber-400 text-slate-900 shadow-md shadow-amber-400/20' 
+                            : 'text-emerald-100 hover:bg-white/10 hover:text-white'"
+                    >
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span>Galeri Foto</span>
+                    </Link>
+
                     <!-- Akun -->
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300/60 block">Sistem</span>
@@ -250,7 +258,7 @@ watch(
 
         <!-- Mobile Sidebar Drawer -->
         <aside 
-            class="fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col bg-gradient-to-b from-[#0F5E3D] to-emerald-950 text-white border-r border-emerald-800/20 transform transition-transform duration-300 ease-in-out lg:hidden"
+            class="fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col bg-gradient-to-b from-[#004b23] to-emerald-950 text-white border-r border-emerald-800/20 transform transition-transform duration-300 ease-in-out lg:hidden"
             :class="showingSidebarMobile ? 'translate-x-0' : '-translate-x-full'"
         >
             <!-- Pattern -->
@@ -258,14 +266,8 @@ watch(
 
             <!-- Logo Branding Section -->
             <div class="p-6 border-b border-white/10 relative z-10 flex justify-between items-center">
-                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-white p-1 shadow-md flex items-center justify-center">
-                        <ApplicationLogo class="w-7 h-7" />
-                    </div>
-                    <div>
-                        <span class="text-xs font-black tracking-wider block text-white">VIBE KARAWANG</span>
-                        <span class="text-[8px] text-white/90 tracking-widest uppercase block -mt-0.5 font-bold">Portal Mandiri</span>
-                    </div>
+                <Link :href="$page.props.auth.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" class="flex items-center">
+                    <ApplicationLogo class="h-9 w-auto text-white" />
                 </Link>
                 <button 
                     @click="showingSidebarMobile = false" 
@@ -390,6 +392,16 @@ watch(
                         :class="route().current('admin.culinary-places.*') ? 'bg-amber-400 text-slate-900' : 'text-emerald-100 hover:bg-white/10'"
                     >
                         <span>Kuliner Lokal</span>
+                    </Link>
+
+                    <!-- Galeri Foto -->
+                    <Link 
+                        :href="route('admin.galleries.index')"
+                        @click="showingSidebarMobile = false"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all"
+                        :class="route().current('admin.galleries.*') ? 'bg-amber-400 text-slate-900' : 'text-emerald-100 hover:bg-white/10'"
+                    >
+                        <span>Galeri Foto</span>
                     </Link>
 
                     <!-- Akun -->

@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateAccommodationRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Cloudinary\Api\Upload\UploadApi;
+use App\Services\CloudinaryService;
 
 class AccommodationController extends Controller
 {
@@ -59,7 +60,7 @@ class AccommodationController extends Controller
             $response = $this->uploadApi->upload($request->file('cover_image')->getRealPath(), [
                 'folder' => 'disparbud_karawang/accommodation'
             ]);
-            $validated['cover_image'] = $response['secure_url'];
+            $validated['cover_image'] = CloudinaryService::getUrl($response['secure_url'] ?? null, 'accommodation');
         } catch (\Exception $e) {
             return back()->withErrors(['cover_image' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }

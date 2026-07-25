@@ -31,7 +31,7 @@ const submit = () => {
     <div class="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-slate-50 dark:bg-slate-950 font-sans select-none">
         
         <!-- Left Side: Vibrant Branding & Info (Hidden on mobile) -->
-        <div class="hidden lg:flex lg:col-span-5 xl:col-span-4 bg-gradient-to-br from-[#0F5E3D] via-[#0C4E5B] to-emerald-950 relative overflow-hidden flex-col justify-between p-12 text-white">
+        <div class="hidden lg:flex lg:col-span-5 xl:col-span-4 bg-gradient-to-br from-[#004b23] via-[#002e15] to-emerald-950 relative overflow-hidden flex-col justify-between p-12 text-white">
             
             <!-- Graphic background patterns -->
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
@@ -40,14 +40,8 @@ const submit = () => {
             
             <!-- Top Logo/Branding -->
             <div class="relative z-10">
-                <Link href="/" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-white p-1 shadow-md group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                        <ApplicationLogo class="w-8 h-8" />
-                    </div>
-                    <div>
-                        <span class="text-lg font-black tracking-wider block text-white">VIBE KARAWANG</span>
-                        <span class="text-[10px] text-white/90 tracking-widest uppercase block -mt-1 font-bold">Pariwisata &amp; Kebudayaan</span>
-                    </div>
+                <Link href="/" class="flex items-center group">
+                    <ApplicationLogo class="h-12 w-auto text-white group-hover:scale-105 transition-transform duration-300" />
                 </Link>
             </div>
 
@@ -87,7 +81,7 @@ const submit = () => {
             <div class="flex justify-between items-center mb-8 lg:mb-0">
                 <Link 
                     href="/" 
-                    class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-[#0F5E3D] dark:text-slate-400 dark:hover:text-emerald-400 transition"
+                    class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-[#004b23] dark:text-slate-400 dark:hover:text-emerald-400 transition"
                 >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -96,8 +90,10 @@ const submit = () => {
                 </Link>
                 
                 <!-- Mobile Branding (Logo only visible on smaller viewports) -->
-                <div class="lg:hidden flex items-center gap-2">
-                    <span class="text-sm font-black tracking-wider text-slate-800 dark:text-white">VIBE <span class="text-emerald-700">KRW</span></span>
+                <div class="lg:hidden flex items-center">
+                    <Link href="/">
+                        <ApplicationLogo class="h-8 w-auto text-[#004b23] dark:text-emerald-400" />
+                    </Link>
                 </div>
             </div>
 
@@ -111,7 +107,7 @@ const submit = () => {
                     </h2>
                     <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">
                         Belum memiliki akun? 
-                        <Link :href="route('register')" class="text-[#0F5E3D] dark:text-emerald-400 font-semibold hover:underline">
+                        <Link :href="route('register')" class="text-[#004b23] dark:text-emerald-400 font-semibold hover:underline">
                             Daftar gratis sekarang
                         </Link>
                     </p>
@@ -203,7 +199,7 @@ const submit = () => {
                         <button 
                             type="submit" 
                             :disabled="form.processing"
-                            class="w-full bg-[#0F5E3D] hover:bg-[#0C4E5B] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50 flex items-center justify-center gap-2"
+                            class="w-full bg-[#004b23] hover:bg-[#003d1d] text-white py-3.5 px-4 rounded-lg font-bold text-sm shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50 flex items-center justify-center gap-2"
                         >
                             <svg v-if="form.processing" class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />

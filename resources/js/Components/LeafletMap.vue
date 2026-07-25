@@ -57,11 +57,11 @@ const renderMarkers = () => {
                 const popupContent = `
                     <div style="max-width: 230px; font-family: system-ui, -apple-system, sans-serif;">
                         ${item.image_url ? `<img src="${item.image_url}" style="width: 100%; height: 115px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;" />` : ''}
-                        <h4 style="font-weight: 700; margin: 0 0 4px 0; color: #0F5E3D; font-size: 14px;">${item.name}</h4>
+                        <h4 style="font-weight: 700; margin: 0 0 4px 0; color: #004b23; font-size: 14px;">${item.name}</h4>
                         ${item.category ? `<span style="display: inline-block; background: #ECFDF5; color: #059669; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 12px; margin-bottom: 6px;">${item.category}</span>` : ''}
                         <p style="font-size: 12px; color: #4B5563; margin: 0 0 6px 0; line-height: 1.3;">${item.description || ''}</p>
                         ${item.address ? `<p style="font-size: 11px; color: #6B7280; margin: 0 0 8px 0;">📍 ${item.address}</p>` : ''}
-                        ${item.slug ? `<a href="/tourism/${item.slug}" rel="external" style="display: inline-block; font-size: 12px; color: #0F5E3D; font-weight: 700; text-decoration: none;">Lihat Detail &rarr;</a>` : ''}
+                        ${item.slug ? `<a href="/tourism/${item.slug}" rel="external" style="display: inline-block; font-size: 12px; color: #004b23; font-weight: 700; text-decoration: none;">Lihat Detail &rarr;</a>` : ''}
                     </div>
                 `;
                 marker.bindPopup(popupContent);

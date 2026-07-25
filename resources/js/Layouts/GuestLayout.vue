@@ -8,16 +8,13 @@ import { Link } from '@inertiajs/vue3';
         class="flex min-h-screen flex-col items-center justify-center bg-rice-husk p-4 sm:p-6 dark:bg-slate-900"
     >
         <div class="mb-4">
-            <Link href="/" class="flex flex-col items-center space-y-2">
-                <ApplicationLogo class="w-14 h-14 text-[#005F4A] dark:text-emerald-400" />
-                <span class="text-xl font-extrabold tracking-tight text-sanggabuana-slate dark:text-white">
-                    Vibe Karawang
-                </span>
+            <Link href="/" class="flex justify-center">
+                <ApplicationLogo class="h-14 w-auto text-[#004b23] dark:text-emerald-400" />
             </Link>
         </div>
 
         <div
-            class="w-full overflow-hidden bg-white px-8 py-6 shadow-xl border border-slate-200/80 rounded-asymmetric sm:max-w-md dark:bg-slate-800 dark:border-slate-700"
+            class="w-full overflow-hidden bg-white px-8 py-6 shadow-xl border border-slate-200/80 rounded-xl sm:max-w-md dark:bg-slate-800 dark:border-slate-700"
         >
             <slot />
         </div>

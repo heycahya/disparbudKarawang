@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Cloudinary\Api\Upload\UploadApi;
+use App\Services\CloudinaryService;
 
 class NewsController extends Controller
 {
@@ -62,7 +63,7 @@ class NewsController extends Controller
             $response = $this->uploadApi->upload($request->file('thumbnail')->getRealPath(), [
                 'folder' => 'disparbud_karawang/news'
             ]);
-            $validated['thumbnail'] = $response['secure_url'];
+            $validated['thumbnail'] = CloudinaryService::getUrl($response['secure_url'] ?? null, 'news');
         } catch (\Exception $e) {
             return back()->withErrors(['thumbnail' => 'Gagal mengunggah gambar. Silakan coba lagi.'])->withInput();
         }

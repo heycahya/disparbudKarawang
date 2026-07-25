@@ -61,7 +61,7 @@ const submit = () => {
                 </h2>
                 <Link
                     :href="route('dashboard')"
-                    class="px-4 py-2 text-xs font-bold text-[#0F5E3D] bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 rounded-lg transition"
+                    class="px-4 py-2 text-xs font-bold text-[#004b23] bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 rounded-lg transition"
                 >
                     &larr; Kembali ke Dashboard
                 </Link>
@@ -70,7 +70,7 @@ const submit = () => {
 
         <div class="py-12 bg-slate-50 min-h-[calc(100vh-8rem)] dark:bg-slate-950 font-sans">
             <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-xl rounded-3xl dark:bg-slate-900 p-8 border-t-4 border-[#0F5E3D]">
+                <div class="overflow-hidden bg-white shadow-xl rounded-xl dark:bg-slate-900 p-8 border-t-4 border-[#004b23]">
                     <div class="mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
                         <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Buat Laporan Pengaduan Baru</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sampaikan kendala fasilitas pariwisata atau cagar budaya Karawang secara resmi.</p>
@@ -175,7 +175,7 @@ const submit = () => {
                             </Link>
                             <button
                                 type="submit"
-                                class="bg-[#0F5E3D] hover:bg-emerald-800 text-white font-bold text-xs py-3 px-8 rounded-xl transition duration-200 disabled:opacity-50 shadow-md"
+                                class="bg-[#004b23] hover:bg-[#003d1d] text-white font-bold text-xs py-3 px-8 rounded-lg transition duration-200 disabled:opacity-50 shadow-md"
                                 :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing || !!fileError"
                             >

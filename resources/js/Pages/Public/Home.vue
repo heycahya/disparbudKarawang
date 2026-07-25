@@ -126,74 +126,36 @@ onMounted(() => {
     <PublicLayout>
 
         <!-- 1. HERO SECTION & PROFIL DISPARBUD -->
-        <section id="section-hero" class="relative text-white overflow-hidden py-24 sm:py-36 pb-36 sm:pb-44 scroll-mt-20" style="background-image: linear-gradient(to bottom, rgba(15, 94, 61, 0.90), rgba(12, 78, 91, 0.95)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+        <section id="section-hero" class="relative bg-[#004b23] text-white overflow-hidden py-24 sm:py-36 pb-36 sm:pb-44 scroll-mt-20" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+            <!-- Soft Dark Backdrop Overlay for High Readability -->
+            <div class="absolute inset-0 bg-[#004b23]/80 backdrop-brightness-75"></div>
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
 
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    <!-- Text Content -->
-                    <div class="lg:col-span-7 space-y-6">
-                        <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase border border-white/20 text-amber-300">
-                            <span>🌾 Pesona Karawang Pangkal Perjuangan</span>
-                        </div>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                            Jelajahi Pesona <br />
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-emerald-200 to-teal-100">
-                                Wisata & Kebudayaan
-                            </span>
-                        </h1>
-                        <p class="text-lg text-emerald-100/90 max-w-2xl font-normal leading-relaxed">
-                            Selamat datang di Portal Resmi Dinas Pariwisata dan Kebudayaan Kabupaten Karawang. Pusat katalog pariwisata, sejarah cagar budaya, ragam ekonomi kreatif, dan layanan mandiri masyarakat.
-                        </p>
-                        <div class="flex flex-wrap gap-4 pt-4">
-                            <a 
-                                href="#section-wisata" 
-                                class="px-8 py-4 bg-[#D97706] hover:bg-amber-600 text-white font-bold rounded-lg shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
-                            >
-                                Jelajahi Wisata
-                            </a>
-                            <a 
-                                href="#section-profil" 
-                                class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold backdrop-blur-md rounded-lg border border-white/30 transition-all duration-300"
-                            >
-                                Profil Dinas
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Glassmorphism Featured Card -->
-                    <div class="lg:col-span-5">
-                        <div class="bg-white/15 dark:bg-black/30 backdrop-blur-xl p-8 rounded-2xl border border-white/20 shadow-2xl relative">
-                            <div class="absolute -top-3 -right-3 w-12 h-12 bg-[#D97706] rounded-full flex items-center justify-center shadow-lg">
-                                <span class="material-symbols-outlined text-white text-xl animate-pulse">auto_awesome</span>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-3 text-white">Vibe Karawang Portal</h3>
-                            <p class="text-sm text-emerald-100/90 mb-6 leading-relaxed">
-                                Portal Informasi Terpadu Dinas Pariwisata & Kebudayaan Kabupaten Karawang. Melayani masyarakat dengan transparan, responsif, dan akuntabel.
-                            </p>
-
-                            <div class="space-y-3">
-                                <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/30 flex items-center justify-center shrink-0">
-                                        <span class="material-symbols-outlined text-emerald-300 text-lg">account_balance</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-white">Situs Candi Batujaya</h4>
-                                        <p class="text-[11px] text-emerald-100/70">Cagar budaya tertua abad ke 2-6 Masehi</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                                    <div class="w-8 h-8 rounded-lg bg-amber-500/30 flex items-center justify-center shrink-0">
-                                        <span class="material-symbols-outlined text-amber-300 text-lg">landscape</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-white">Destinasi Bahari & Pegunungan</h4>
-                                        <p class="text-[11px] text-emerald-100/70">Pantai Tangkolak, Pakis & Puncak Sanggabuana</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Clean Single Column Hero Text Content -->
+                <div class="max-w-3xl space-y-6">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Jelajahi Pesona <br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-emerald-200 to-teal-100">
+                            Wisata & Kebudayaan
+                        </span>
+                    </h1>
+                    <p class="text-lg text-emerald-100/90 max-w-2xl font-normal leading-relaxed">
+                        Selamat datang di Portal Resmi Dinas Pariwisata dan Kebudayaan Kabupaten Karawang. Pusat katalog pariwisata, sejarah cagar budaya, ragam ekonomi kreatif, dan layanan mandiri masyarakat.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a 
+                            href="#section-wisata" 
+                            class="px-8 py-4 bg-[#F59E0B] hover:bg-amber-600 text-white font-bold rounded-lg shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
+                        >
+                            Jelajahi Wisata
+                        </a>
+                        <a 
+                            href="#section-profil" 
+                            class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold backdrop-blur-md rounded-lg border border-white/30 transition-all duration-300"
+                        >
+                            Profil Dinas
+                        </a>
                     </div>
                 </div>
 
@@ -256,7 +218,7 @@ onMounted(() => {
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white dark:bg-gray-850 p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
-                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center">
                             <span class="material-symbols-outlined text-2xl">flag</span>
                         </div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-base">Visi Pembangunan</h3>
@@ -266,7 +228,7 @@ onMounted(() => {
                     </div>
 
                     <div class="bg-white dark:bg-gray-850 p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
-                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center">
                             <span class="material-symbols-outlined text-2xl">museum</span>
                         </div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-base">Pelestarian Cagar Budaya</h3>
@@ -276,7 +238,7 @@ onMounted(() => {
                     </div>
 
                     <div class="bg-white dark:bg-gray-850 p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm space-y-4">
-                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center">
                             <span class="material-symbols-outlined text-2xl">storefront</span>
                         </div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-base">Ekonomi Kreatif &amp; UMKM</h3>
@@ -615,11 +577,11 @@ onMounted(() => {
                             </a>
                             <div class="p-5 space-y-2.5">
                                 <div v-if="item.category" class="flex items-center">
-                                    <span class="inline-block text-[11px] font-bold text-[#005F4A] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
+                                    <span class="inline-block text-[11px] font-bold text-[#004b23] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
                                         {{ item.category.name }}
                                     </span>
                                 </div>
-                                <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-[#0F5E3D] transition">
+                                <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-[#004b23] transition">
                                     <a :href="route('public.news.show', item.slug)" rel="external">{{ item.title }}</a>
                                 </h3>
                                 <div class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed" v-html="item.content"></div>
@@ -630,7 +592,7 @@ onMounted(() => {
                             <a 
                                 :href="route('public.news.show', item.slug)" 
                                 rel="external"
-                                class="text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:underline"
+                                class="text-xs font-bold text-[#004b23] dark:text-emerald-400 hover:underline"
                             >
                                 Baca Selengkapnya &rarr;
                             </a>
@@ -640,7 +602,7 @@ onMounted(() => {
             </section>
 
             <!-- 7. SEKSI FORM LAYANAN MASYARAKAT / SERVICE RAKYAT -->
-            <section id="section-layanan" class="space-y-8 scroll-mt-28 bg-gradient-to-br from-emerald-900/10 via-teal-900/5 to-transparent p-8 sm:p-12 rounded-3xl border border-emerald-900/20">
+            <section id="section-layanan" class="space-y-8 scroll-mt-28 bg-gradient-to-br from-emerald-900/10 via-teal-900/5 to-transparent p-8 sm:p-12 rounded-xl border border-emerald-900/20">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Aspirasi & Layanan Masyarakat</h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -651,10 +613,10 @@ onMounted(() => {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div 
                         @click="handleServiceClick($event, 'layanan-masyarakat.complaints.create')"
-                        class="bg-white dark:bg-gray-850 p-6 rounded-2xl shadow-sm border-t-4 border-[#005F4A] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
+                        class="bg-white dark:bg-gray-850 p-6 rounded-xl shadow-sm border-t-4 border-[#004b23] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
                     >
                         <div class="space-y-3">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <span class="material-symbols-outlined text-2xl">campaign</span>
                             </div>
                             <h3 class="font-bold text-gray-900 dark:text-white text-lg">Form Pengaduan Publik</h3>
@@ -662,15 +624,15 @@ onMounted(() => {
                                 Sampaikan keluhan terkait kerusakan fasilitas pariwisata atau cagar budaya Karawang.
                             </p>
                         </div>
-                        <span class="text-xs font-bold text-[#005F4A] dark:text-emerald-400 group-hover:underline">Buat Pengaduan &rarr;</span>
+                        <span class="text-xs font-bold text-[#004b23] dark:text-emerald-400 group-hover:underline">Buat Pengaduan &rarr;</span>
                     </div>
 
                     <div 
                         @click="handleServiceClick($event, 'layanan-masyarakat.tourism-submissions.create')"
-                        class="bg-white dark:bg-gray-850 p-6 rounded-2xl shadow-sm border-t-4 border-[#005F4A] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
+                        class="bg-white dark:bg-gray-850 p-6 rounded-xl shadow-sm border-t-4 border-[#004b23] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
                     >
                         <div class="space-y-3">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <span class="material-symbols-outlined text-2xl">add_location_alt</span>
                             </div>
                             <h3 class="font-bold text-gray-900 dark:text-white text-lg">Usul Destinasi Baru</h3>
@@ -678,15 +640,15 @@ onMounted(() => {
                                 Daftarkan potensi objek wisata baru di daerah Anda agar dapat diverifikasi oleh admin dinas.
                             </p>
                         </div>
-                        <span class="text-xs font-bold text-[#005F4A] dark:text-emerald-400 group-hover:underline">Ajukan Objek Wisata &rarr;</span>
+                        <span class="text-xs font-bold text-[#004b23] dark:text-emerald-400 group-hover:underline">Ajukan Objek Wisata &rarr;</span>
                     </div>
 
                     <div 
                         @click="handleServiceClick($event, 'layanan-masyarakat.event-broadcasts.create')"
-                        class="bg-white dark:bg-gray-850 p-6 rounded-2xl shadow-sm border-t-4 border-[#005F4A] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
+                        class="bg-white dark:bg-gray-850 p-6 rounded-xl shadow-sm border-t-4 border-[#004b23] border-x border-b border-gray-100 dark:border-gray-800 hover:shadow-lg transition duration-300 cursor-pointer group flex flex-col justify-between space-y-4"
                     >
                         <div class="space-y-3">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <span class="material-symbols-outlined text-2xl">event_available</span>
                             </div>
                             <h3 class="font-bold text-gray-900 dark:text-white text-lg">Pengajuan Agenda Event</h3>
@@ -694,14 +656,13 @@ onMounted(() => {
                                 Publikasikan event kebudayaan, festival kriya, atau pameran komunitas Anda di agenda resmi.
                             </p>
                         </div>
-                        <span class="text-xs font-bold text-[#005F4A] dark:text-emerald-400 group-hover:underline">Daftarkan Event &rarr;</span>
+                        <span class="text-xs font-bold text-[#004b23] dark:text-emerald-400 group-hover:underline">Daftarkan Event &rarr;</span>
                     </div>
                 </div>
             </section>
 
             <!-- 8. SEKSI GALERI FOTO DOKUMENTASI & PETA INTERAKTIF LEAFLET -->
             <section id="section-galeri-peta" class="space-y-12 scroll-mt-28">
-                <!-- Galeri Preview -->
                 <div v-if="galleries?.length" class="space-y-6">
                     <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4">
                         <div>
@@ -710,7 +671,7 @@ onMounted(() => {
                         <button 
                             v-if="galleries.length > 6"
                             @click="showAllGaleri = !showAllGaleri" 
-                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F5E3D] dark:text-emerald-400 hover:text-emerald-700 hover:underline transition whitespace-nowrap group"
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#004b23] dark:text-emerald-400 hover:text-emerald-700 hover:underline transition whitespace-nowrap group"
                         >
                             {{ showAllGaleri ? 'Sembunyikan' : 'Lihat Semua Foto' }}
                             <svg 
@@ -762,13 +723,13 @@ onMounted(() => {
                         href="https://www.karawangkab.go.id" 
                         target="_blank" 
                         rel="noopener"
-                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#005F4A] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
+                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#004b23] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
                     >
-                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl">account_balance</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#005F4A] transition">Pemkab Karawang</span>
+                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#004b23] transition">Pemkab Karawang</span>
                             <span class="text-[10px] text-gray-400 block mt-0.5">karawangkab.go.id</span>
                         </div>
                     </a>
@@ -777,13 +738,13 @@ onMounted(() => {
                         href="https://jabarprov.go.id" 
                         target="_blank" 
                         rel="noopener"
-                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#005F4A] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
+                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#004b23] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
                     >
-                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl">domain</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#005F4A] transition">Disparbud Jabar</span>
+                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#004b23] transition">Disparbud Jabar</span>
                             <span class="text-[10px] text-gray-400 block mt-0.5">jabarprov.go.id</span>
                         </div>
                     </a>
@@ -792,13 +753,13 @@ onMounted(() => {
                         href="https://kemenparekraf.go.id" 
                         target="_blank" 
                         rel="noopener"
-                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#005F4A] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
+                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#004b23] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
                     >
-                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl">assured_workload</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#005F4A] transition">Kemenparekraf RI</span>
+                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#004b23] transition">Kemenparekraf RI</span>
                             <span class="text-[10px] text-gray-400 block mt-0.5">kemenparekraf.go.id</span>
                         </div>
                     </a>
@@ -807,13 +768,13 @@ onMounted(() => {
                         href="https://www.indonesia.travel" 
                         target="_blank" 
                         rel="noopener"
-                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#005F4A] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
+                        class="p-4 bg-white dark:bg-gray-850 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-[#004b23] transition-all duration-300 flex flex-col items-center text-center space-y-2 group"
                     >
-                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[#004b23] dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl">travel_explore</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#005F4A] transition">Wonderful Indonesia</span>
+                            <span class="text-xs font-bold text-gray-900 dark:text-white block group-hover:text-[#004b23] transition">Wonderful Indonesia</span>
                             <span class="text-[10px] text-gray-400 block mt-0.5">indonesia.travel</span>
                         </div>
                     </a>

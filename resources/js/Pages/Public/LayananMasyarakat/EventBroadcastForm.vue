@@ -64,7 +64,7 @@ const submit = () => {
                 </h2>
                 <Link
                     :href="route('dashboard')"
-                    class="px-4 py-2 text-xs font-bold text-[#0F5E3D] bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 rounded-lg transition"
+                    class="px-4 py-2 text-xs font-bold text-[#004b23] bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 rounded-lg transition"
                 >
                     &larr; Kembali ke Dashboard
                 </Link>

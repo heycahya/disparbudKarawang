@@ -162,17 +162,9 @@ function handleSelectSearchItem(item) {
                 <div class="flex justify-between h-16 items-center gap-4">
                     
                     <!-- Branding (Left) -->
-                    <div class="flex items-center space-x-3 shrink-0">
-                        <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm">
-                            <ApplicationLogo class="w-8 h-8" />
-                        </div>
-                        <div>
-                            <a :href="route('public.home')" rel="external" class="text-xl font-extrabold tracking-tight text-white hover:text-emerald-100 transition">
-                                Vibe Karawang
-                            </a>
-                            <p class="text-[10px] uppercase font-bold tracking-wider text-white">Pariwisata &amp; Kebudayaan</p>
-                        </div>
-                    </div>
+                    <a :href="route('public.home')" rel="external" class="flex items-center shrink-0 hover:opacity-90 transition">
+                        <ApplicationLogo class="h-10 w-auto text-white" />
+                    </a>
 
                     <!-- Right Side: Live Search Input & Dropdown -->
                     <div class="relative flex-1 max-w-md">
@@ -221,10 +213,10 @@ function handleSelectSearchItem(item) {
                                     class="flex items-center justify-between p-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/40 cursor-pointer transition group"
                                 >
                                     <div class="flex items-center space-x-2.5 min-w-0">
-                                        <span class="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-[#005F4A] dark:text-emerald-300 flex items-center justify-center shrink-0">
+                                        <span class="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-[#004b23] dark:text-emerald-300 flex items-center justify-center shrink-0">
                                             <span class="material-symbols-outlined text-base">{{ item.icon }}</span>
                                         </span>
-                                        <span class="text-xs font-bold text-gray-800 dark:text-gray-200 group-hover:text-[#005F4A] dark:group-hover:text-emerald-300 truncate">
+                                        <span class="text-xs font-bold text-gray-800 dark:text-gray-200 group-hover:text-[#004b23] dark:group-hover:text-emerald-300 truncate">
                                             {{ item.name }}
                                         </span>
                                     </div>
@@ -266,7 +258,7 @@ function handleSelectSearchItem(item) {
                             v-for="item in navItems"
                             :key="item.hash"
                             @click="scrollTo(item.hash)"
-                            class="text-xs font-bold transition duration-150 px-2.5 py-1 rounded-md text-gray-700 dark:text-gray-300 hover:text-[#005F4A] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 whitespace-nowrap shrink-0"
+                            class="text-xs font-bold transition duration-150 px-2.5 py-1 rounded-md text-gray-700 dark:text-gray-300 hover:text-[#004b23] dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 whitespace-nowrap shrink-0"
                         >
                             {{ item.label }}
                         </button>
@@ -275,15 +267,15 @@ function handleSelectSearchItem(item) {
                     <!-- Auth Actions (Right) -->
                     <div class="flex items-center space-x-2 shrink-0 w-full sm:w-auto justify-end">
                         <template v-if="page.props.auth?.user">
-                            <a :href="page.props.auth?.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" rel="external" class="px-4 py-1.5 text-xs font-bold text-white bg-[#005F4A] hover:bg-[#004D3C] rounded-lg shadow-sm transition whitespace-nowrap">
+                            <a :href="page.props.auth?.user?.role === 'admin' ? route('admin.dashboard') : route('dashboard')" rel="external" class="px-4 py-1.5 text-xs font-bold text-white bg-[#004b23] hover:bg-[#003d1d] rounded-lg shadow-sm transition whitespace-nowrap">
                                 Dashboard
                             </a>
                         </template>
                         <template v-else>
-                            <a :href="route('login')" rel="external" class="px-3.5 py-1.5 text-xs font-bold text-[#005F4A] dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-gray-800 rounded-lg transition border border-emerald-600/30 whitespace-nowrap">
+                            <a :href="route('login')" rel="external" class="px-3.5 py-1.5 text-xs font-bold text-[#004b23] dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-gray-800 rounded-lg transition border border-emerald-600/30 whitespace-nowrap">
                                 Masuk
                             </a>
-                            <a :href="route('register')" rel="external" class="px-4 py-1.5 text-xs font-bold text-white bg-[#005F4A] hover:bg-[#004D3C] rounded-lg shadow-sm transition whitespace-nowrap">
+                            <a :href="route('register')" rel="external" class="px-4 py-1.5 text-xs font-bold text-white bg-[#004b23] hover:bg-[#003d1d] rounded-lg shadow-sm transition whitespace-nowrap">
                                 Daftar
                             </a>
                         </template>

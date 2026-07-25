@@ -11,16 +11,8 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
                 <!-- Branding & About -->
                 <div class="md:col-span-2 space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm">
-                            <ApplicationLogo class="w-8 h-8" />
-                        </div>
-                        <div>
-                            <span class="text-xl font-extrabold tracking-tight text-white">
-                                Vibe Karawang
-                            </span>
-                            <p class="text-[10px] uppercase font-bold tracking-wider text-white">Pariwisata &amp; Kebudayaan</p>
-                        </div>
+                    <div class="flex items-center">
+                        <ApplicationLogo class="h-12 w-auto text-white" />
                     </div>
                     <p class="text-xs text-teal-100/80 leading-relaxed max-w-sm">
                         Portal Resmi Dinas Pariwisata dan Kebudayaan Kabupaten Karawang. Melayani informasi pariwisata, cagar budaya, ekonomi kreatif, dan layanan mandiri masyarakat.
@@ -127,7 +119,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             <!-- Bottom Bar -->
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-teal-200/50">
                 <p>&copy; 2026 Pemerintah Kabupaten Karawang — Dinas Pariwisata dan Kebudayaan.</p>
-                <p class="text-[10px]">Dikembangkan oleh Tim IT Disparbud Karawang</p>
+                <p class="text-[10px]">Dikembangkan oleh Kelompok 1 Mata Kuliah Web Programming Universitas Bina Sarana Informatika Cikampek</p>
             </div>
         </div>
     </footer>

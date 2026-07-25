@@ -7,17 +7,31 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Gallery;
 use App\Services\CloudinaryService;
+use App\Http\Requests\StoreGalleryRequest;
+use App\Http\Requests\UpdateGalleryRequest;
 
 class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $galleries = Gallery::with('user')->latest()->paginate(10);
+        $query = Gallery::with('user');
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        $galleries = $query->latest()->paginate(10)->withQueryString();
+
         return Inertia::render('Admin/Galleries/Index', [
-            'galleries' => $galleries
+            'galleries' => $galleries,
+            'filters' => $request->only(['search', 'category']),
         ]);
     }
 
@@ -32,21 +46,17 @@ class GalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, CloudinaryService $cloudinary)
+    public function store(StoreGalleryRequest $request, CloudinaryService $cloudinary)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|in:wisata,budaya,ekraf,event,lainnya',
-            'media' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
-
+        $validated = $request->validated();
         $fileUrl = null;
 
         if ($request->hasFile('media')) {
             try {
-                $fileUrl = $cloudinary->upload($request->file('media')->getRealPath(), 'galleries');
+                $rawUrl = $cloudinary->upload($request->file('media')->getRealPath(), 'galleries');
+                $fileUrl = CloudinaryService::getUrl($rawUrl, 'gallery');
             } catch (\Exception $e) {
-                return back()->withErrors(['media' => 'Gagal mengunggah file ke cloud storage: ' . $e->getMessage()]);
+                return back()->withErrors(['media' => 'Gagal mengunggah file ke cloud storage: ' . $e->getMessage()])->withInput();
             }
         }
 
@@ -58,14 +68,6 @@ class GalleryController extends Controller
         ]);
 
         return redirect()->route('admin.galleries.index')->with('success', 'Galeri berhasil ditambahkan.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -81,20 +83,16 @@ class GalleryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gallery $gallery, CloudinaryService $cloudinary)
+    public function update(UpdateGalleryRequest $request, Gallery $gallery, CloudinaryService $cloudinary)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|in:wisata,budaya,ekraf,event,lainnya',
-            'media' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('media')) {
             try {
-                $fileUrl = $cloudinary->upload($request->file('media')->getRealPath(), 'galleries');
-                $gallery->photo = $fileUrl;
+                $rawUrl = $cloudinary->upload($request->file('media')->getRealPath(), 'galleries');
+                $gallery->photo = CloudinaryService::getUrl($rawUrl, 'gallery');
             } catch (\Exception $e) {
-                return back()->withErrors(['media' => 'Gagal mengunggah file ke cloud storage: ' . $e->getMessage()]);
+                return back()->withErrors(['media' => 'Gagal mengunggah file ke cloud storage: ' . $e->getMessage()])->withInput();
             }
         }
 
